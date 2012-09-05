@@ -1,12 +1,15 @@
 package ants;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class MainData {
 
-  public static int [] [] pheromonData;
+  private static ArrayList<ArrayList<Integer>> pheromonData;
 
-  public static int [] [] distanceData;
+  private static ArrayList<ArrayList<Integer>> distanceData;
 
-  public static City [] cityList;
+  private static ArrayList<City> cityList = new ArrayList();
 
   public static double pheromon;
 
@@ -17,11 +20,12 @@ public class MainData {
   public static double initialPheromon;
 
   public static double pheromonUpdate;
+  
+  private static double maxX = 0;
+  
+  private static double maxY = 0;
 
   public static void loadFromFile(String path) {
-  }
-
-  public static void addCity() {
   }
 
   public static void saveToFile() {
@@ -33,4 +37,51 @@ public class MainData {
   public static void getParameters() {
   }
 
+    /**
+     * @return the pheromonData
+     */
+    public static Integer getPheromonData(int from, int to) {
+        return pheromonData.get(from).get(to);
+    }
+
+    /**
+     * @return the distanceData
+     */
+    public static Integer getDistanceData(int from, int to) {
+        return distanceData.get(from).get(to);
+    }
+
+    /**
+     * @return the cityList
+     */
+    public static City getCityList(int number) {
+        return cityList.get(number);
+    }
+    
+    public static int getCityListLength() {
+        return cityList.size();
+    }
+    
+    public static void addCity(double x, double y) {
+        if (x > maxX) {
+            maxX = x;
+        }
+        if (y > maxY) {
+            maxY = y;
+        }
+        cityList.add(new City(x,y, cityList.size()));
+        
+        //TODO LÄNGE
+        //TODO PHEROMON
+    }
+    
+    public static double getMaxX() {
+        return maxX;
+    }
+    
+    public static double getMaxY() {
+        return maxY;
+    }
+
+  
 }

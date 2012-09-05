@@ -15,8 +15,10 @@ public class PaintPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        for (int i = 0; i < MainData.cityList.length; i++) {
-            g.drawOval(MainData.cityList[i].getXPos(), MainData.cityList[i].getYPos(), 2, 2);
+        for (int i = 0; i < MainData.getCityListLength(); i++) {
+            this.getHeight();
+            this.getWidth();
+            g.fillOval(MainData.getCityList(i).getXPos(), MainData.getCityList(i).getYPos(), 8, 8);
         }
     }
     
