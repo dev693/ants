@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+    <Menu class="javax.swing.JMenuBar" name="mainMenuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
@@ -39,7 +39,7 @@
     <Property name="title" type="java.lang.String" value="Ant Colony Optimization"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="mainMenuBar"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <AuxValues>
@@ -60,16 +60,16 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel4" max="32767" attributes="0"/>
-                  <Component id="jPanel2" max="32767" attributes="0"/>
-                  <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="progressPanel" max="32767" attributes="0"/>
+                  <Component id="paintPanel" max="32767" attributes="0"/>
+                  <Component id="resultPanel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="parameterPanel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
+                      <Component id="startButton" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -82,23 +82,23 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <Component id="paintPanel" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="resultPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="parameterPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="progressPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="startButton" min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="parameterPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -113,35 +113,35 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="InitialPheromonSlider" pref="210" max="32767" attributes="0"/>
-                      <Component id="PheromonUpdateSlider" alignment="1" max="32767" attributes="0"/>
-                      <Component id="PheromonSlider" alignment="0" max="32767" attributes="0"/>
+                      <Component id="initialPheromonSlider" pref="210" max="32767" attributes="0"/>
+                      <Component id="pheromonUpdateSlider" alignment="1" max="32767" attributes="0"/>
+                      <Component id="pheromonSlider" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="pheromonLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="localInformationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="evaporationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="EvaporationText" pref="68" max="32767" attributes="0"/>
-                              <Component id="PheromonText" max="32767" attributes="0"/>
-                              <Component id="LocalInformationText" max="32767" attributes="0"/>
+                              <Component id="evaporationText" pref="68" max="32767" attributes="0"/>
+                              <Component id="pheromonText" max="32767" attributes="0"/>
+                              <Component id="localInformationText" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="initialPheromonLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="pheromonUpdateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="PheromonUpdateText" pref="67" max="32767" attributes="0"/>
-                              <Component id="InitialPheromonText" max="32767" attributes="0"/>
+                              <Component id="pheromonUpdateText" pref="67" max="32767" attributes="0"/>
+                              <Component id="initialPheromonText" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="localInformationSlider" alignment="0" max="32767" attributes="0"/>
-                      <Component id="EvaporationSlider" alignment="1" max="32767" attributes="0"/>
+                      <Component id="evaporationSlider" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -152,124 +152,124 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="PheromonText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pheromonLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pheromonText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PheromonSlider" min="-2" max="-2" attributes="0"/>
+                  <Component id="pheromonSlider" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="LocalInformationText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="localInformationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="localInformationText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="localInformationSlider" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="EvaporationText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="evaporationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="evaporationText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="EvaporationSlider" min="-2" max="-2" attributes="0"/>
+                  <Component id="evaporationSlider" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="InitialPheromonText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="initialPheromonLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="initialPheromonText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="InitialPheromonSlider" min="-2" max="-2" attributes="0"/>
+                  <Component id="initialPheromonSlider" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="PheromonUpdateText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pheromonUpdateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pheromonUpdateText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
+                  <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="75" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="pheromonLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pheromon:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="localInformationLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="lokale Information"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="evaporationLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Verdunstunsfaktor:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSlider" name="EvaporationSlider">
+        <Component class="javax.swing.JSlider" name="evaporationSlider">
           <Properties>
             <Property name="maximum" type="int" value="10000"/>
             <Property name="minimum" type="int" value="1"/>
             <Property name="minorTickSpacing" type="int" value="1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="initialPheromonLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="initiale Pheromone:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="pheromonUpdateLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pheromon-Update:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="EvaporationText">
+        <Component class="javax.swing.JTextField" name="evaporationText">
           <BindingProperties>
-            <BindingProperty name="text" source="EvaporationSlider" sourcePath="${value/10000}" target="EvaporationText" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="evaporationSlider" sourcePath="${value/10000}" target="evaporationText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
               <Property name="name" type="java.lang.String" value=""/>
             </BindingProperty>
           </BindingProperties>
         </Component>
-        <Component class="javax.swing.JTextField" name="PheromonText">
+        <Component class="javax.swing.JTextField" name="pheromonText">
           <BindingProperties>
-            <BindingProperty name="text" source="PheromonSlider" sourcePath="${value}" target="PheromonText" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="pheromonSlider" sourcePath="${value}" target="pheromonText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
             </BindingProperty>
           </BindingProperties>
         </Component>
-        <Component class="javax.swing.JTextField" name="LocalInformationText">
+        <Component class="javax.swing.JTextField" name="localInformationText">
           <BindingProperties>
-            <BindingProperty name="text" source="localInformationSlider" sourcePath="${value}" target="LocalInformationText" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="localInformationSlider" sourcePath="${value}" target="localInformationText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
             </BindingProperty>
           </BindingProperties>
         </Component>
-        <Component class="javax.swing.JTextField" name="InitialPheromonText">
+        <Component class="javax.swing.JTextField" name="initialPheromonText">
           <BindingProperties>
-            <BindingProperty name="text" source="InitialPheromonSlider" sourcePath="${value}" target="InitialPheromonText" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="initialPheromonSlider" sourcePath="${value}" target="initialPheromonText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
             </BindingProperty>
           </BindingProperties>
         </Component>
-        <Component class="javax.swing.JTextField" name="PheromonUpdateText">
+        <Component class="javax.swing.JTextField" name="pheromonUpdateText">
           <BindingProperties>
-            <BindingProperty name="text" source="PheromonUpdateSlider" sourcePath="${value}" target="PheromonUpdateText" targetPath="text" updateStrategy="0" immediately="false">
+            <BindingProperty name="text" source="pheromonUpdateSlider" sourcePath="${value}" target="pheromonUpdateText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
             </BindingProperty>
           </BindingProperties>
         </Component>
-        <Component class="javax.swing.JSlider" name="PheromonSlider">
+        <Component class="javax.swing.JSlider" name="pheromonSlider">
         </Component>
         <Component class="javax.swing.JSlider" name="localInformationSlider">
         </Component>
-        <Component class="javax.swing.JSlider" name="InitialPheromonSlider">
+        <Component class="javax.swing.JSlider" name="initialPheromonSlider">
         </Component>
-        <Component class="javax.swing.JSlider" name="PheromonUpdateSlider">
+        <Component class="javax.swing.JSlider" name="pheromonUpdateSlider">
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel2">
+    <Container class="javax.swing.JPanel" name="paintPanel">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -284,7 +284,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel3">
+    <Container class="javax.swing.JPanel" name="resultPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -306,14 +306,14 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel4">
+    <Container class="javax.swing.JPanel" name="progressPanel">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jProgressBar1" pref="415" max="32767" attributes="0"/>
+                  <Component id="progressBar" pref="415" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -322,14 +322,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+                  <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+        <Component class="javax.swing.JProgressBar" name="progressBar">
           <Properties>
             <Property name="value" type="int" value="35"/>
             <Property name="stringPainted" type="boolean" value="true"/>
@@ -337,7 +337,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="startButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="0"/>
