@@ -43,11 +43,11 @@ public class MainWindow extends javax.swing.JFrame {
         localInformationSlider = new javax.swing.JSlider();
         initialPheromonSlider = new javax.swing.JSlider();
         pheromonUpdateSlider = new javax.swing.JSlider();
-        paintPanel = new javax.swing.JPanel();
         resultPanel = new javax.swing.JPanel();
         progressPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         startButton = new javax.swing.JButton();
+        paintPanel = new ants.PaintPanel();
         mainMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -157,17 +157,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout paintPanelLayout = new javax.swing.GroupLayout(paintPanel);
-        paintPanel.setLayout(paintPanelLayout);
-        paintPanelLayout.setHorizontalGroup(
-            paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        paintPanelLayout.setVerticalGroup(
-            paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
 
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
@@ -204,6 +193,17 @@ public class MainWindow extends javax.swing.JFrame {
         startButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         startButton.setText("Start");
 
+        javax.swing.GroupLayout paintPanelLayout = new javax.swing.GroupLayout(paintPanel);
+        paintPanel.setLayout(paintPanelLayout);
+        paintPanelLayout.setHorizontalGroup(
+            paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        paintPanelLayout.setVerticalGroup(
+            paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         jMenu1.setText("Datei");
 
         jMenuItem1.setText("Speichern");
@@ -230,8 +230,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,11 +245,11 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,7 +303,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void drawCity(int x, int y) {
-        paintPanel.Pa
+       paintPanel.paintCity(30, 30);
         
     }
     
@@ -323,7 +323,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSlider localInformationSlider;
     private javax.swing.JTextField localInformationText;
     private javax.swing.JMenuBar mainMenuBar;
-    private javax.swing.JPanel paintPanel;
+    private ants.PaintPanel paintPanel;
     private javax.swing.JPanel parameterPanel;
     private javax.swing.JLabel pheromonLabel;
     private javax.swing.JSlider pheromonSlider;

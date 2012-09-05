@@ -2,29 +2,25 @@ package ants;
 
 public class City {
 
-  private double xPos;
+    private double xPos;
+    private double yPos;
+    private int cityNumber;
 
-  private double yPos;
+    public City(double xPos, double yPos, int number) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.cityNumber = number;
+    }
 
-  private int cityNumber;
+    public int getXPos() {
+        return (int) this.xPos;
+    }
 
-    
-  public City(double xPos, double yPos, int number) {
-      this.xPos = xPos;
-      this.yPos = yPos;
-      this.cityNumber = number;
-  }
+    public int getYPos() {
+        return (int) this.yPos;
+    }
 
-  public double getXPos() {
-  return 0.0;
-  }
-
-  public double getYPos() {
-  return 0.0;
-  }
-
-  public Integer getNumber() {
-  return null;
-  }
-
+    public Integer getNumber() {
+        return null;
+    }
 }
