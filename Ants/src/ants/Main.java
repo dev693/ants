@@ -8,7 +8,7 @@ package ants;
  *
  * @author user
  */
-public class Ants {
+public class Main{
 
     /**
      * @param args the command line arguments

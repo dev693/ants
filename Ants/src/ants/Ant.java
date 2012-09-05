@@ -1,0 +1,12 @@
+import java.util.Vector;
+
+public class Ant {
+
+  private boolean [] cityList;
+
+  private City currentCity;
+
+  public void nextCity() {
+  }
+
+}
