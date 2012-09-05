@@ -24,6 +24,10 @@ public class MainData {
   private static double maxX = 0;
   
   private static double maxY = 0;
+  
+  private static Route globalBest = null;
+  
+  private static Route localBest = null;
 
   public static void loadFromFile(String path) {
   }
@@ -54,7 +58,7 @@ public class MainData {
     /**
      * @return the cityList
      */
-    public static City getCityList(int number) {
+    public static City getCity(int number) {
         return cityList.get(number);
     }
     
@@ -82,6 +86,21 @@ public class MainData {
     public static double getMaxY() {
         return maxY;
     }
-
+    
+    public static Route getGlobalBest() {
+        return globalBest;
+    }
+    
+    public static Route getLocalBest() {
+        return localBest;
+    }
+   
+    public static void setGlobalBest(Route route) {
+        globalBest = route;
+    }
+  
+    public static void setLocalBest(Route route) {
+        localBest = route;
+    }
   
 }

@@ -23,5 +23,26 @@ public class Main{
         MainData.addCity(0.70, 0.80);
         MainWindow window = new MainWindow();
         window.setVisible(true);
+        
+        Route localRoute = new Route();
+        
+        for (int i = 0; i < MainData.getCityListLength(); i++)
+        {
+            localRoute.addCity(MainData.getCity(i));
+        }
+        
+        MainData.setGlobalBest(localRoute);
+        
+        localRoute = new Route();
+        localRoute.addCity(MainData.getCity(5));
+        localRoute.addCity(MainData.getCity(3));
+        localRoute.addCity(MainData.getCity(1));
+        localRoute.addCity(MainData.getCity(2));
+        localRoute.addCity(MainData.getCity(0));
+        localRoute.addCity(MainData.getCity(4));
+        localRoute.addCity(MainData.getCity(5));
+        
+        MainData.setLocalBest(localRoute);
+        
     }
 }

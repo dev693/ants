@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author user
  */
 public class Route {
-    private ArrayList<City> route;
+    private ArrayList<City> route = new ArrayList();
     private double length = 0;
     private City lastCity = null;
     
