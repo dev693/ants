@@ -67,17 +67,13 @@ public class MainWindow extends javax.swing.JFrame {
         evaporationLabel.setText("Verdunstunsfaktor:");
 
         evaporationSlider.setMaximum(10000);
-        evaporationSlider.setMinimum(1);
         evaporationSlider.setMinorTickSpacing(1);
 
         initialPheromonLabel.setText("initiale Pheromone:");
 
         pheromonUpdateLabel.setText("Pheromon-Update:");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${value/10000}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "");
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"));

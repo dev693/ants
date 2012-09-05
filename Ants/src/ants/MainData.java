@@ -52,6 +52,7 @@ public class MainData {
      * @return the distanceData
      */
     public static Double getDistanceData(int from, int to) {
+        
         return distanceData.get(from).get(to);
     }
 
@@ -75,7 +76,7 @@ public class MainData {
         }
         cityList.add(new City(x,y, cityList.size()));
         
-        //TODO LÄNGE
+        
         //TODO PHEROMON
     }
     

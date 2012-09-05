@@ -209,7 +209,6 @@
         <Component class="javax.swing.JSlider" name="evaporationSlider">
           <Properties>
             <Property name="maximum" type="int" value="10000"/>
-            <Property name="minimum" type="int" value="1"/>
             <Property name="minorTickSpacing" type="int" value="1"/>
           </Properties>
         </Component>
@@ -224,12 +223,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="evaporationText">
-          <BindingProperties>
-            <BindingProperty name="text" source="evaporationSlider" sourcePath="${value/10000}" target="evaporationText" targetPath="text" updateStrategy="0" immediately="false">
-              <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-              <Property name="name" type="java.lang.String" value=""/>
-            </BindingProperty>
-          </BindingProperties>
         </Component>
         <Component class="javax.swing.JTextField" name="pheromonText">
           <BindingProperties>
