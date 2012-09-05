@@ -12,12 +12,12 @@ public class City {
         this.cityNumber = number;
     }
 
-    public int getXPos() {
-        return (int) this.xPos;
+    public double getXPos() {
+        return this.xPos;
     }
 
-    public int getYPos() {
-        return (int) this.yPos;
+    public double getYPos() {
+        return this.yPos;
     }
 
     public Integer getNumber() {

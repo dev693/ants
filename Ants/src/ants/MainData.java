@@ -5,9 +5,9 @@ import java.util.Collections;
 
 public class MainData {
 
-  private static ArrayList<ArrayList<Integer>> pheromonData;
+  private static ArrayList<ArrayList<Double>> pheromonData;
 
-  private static ArrayList<ArrayList<Integer>> distanceData;
+  private static ArrayList<ArrayList<Double>> distanceData;
 
   private static ArrayList<City> cityList = new ArrayList();
 
@@ -40,14 +40,14 @@ public class MainData {
     /**
      * @return the pheromonData
      */
-    public static Integer getPheromonData(int from, int to) {
+    public static Double getPheromonData(int from, int to) {
         return pheromonData.get(from).get(to);
     }
 
     /**
      * @return the distanceData
      */
-    public static Integer getDistanceData(int from, int to) {
+    public static Double getDistanceData(int from, int to) {
         return distanceData.get(from).get(to);
     }
 

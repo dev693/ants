@@ -193,6 +193,8 @@ public class MainWindow extends javax.swing.JFrame {
         startButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         startButton.setText("Start");
 
+        paintPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout paintPanelLayout = new javax.swing.GroupLayout(paintPanel);
         paintPanel.setLayout(paintPanelLayout);
         paintPanelLayout.setHorizontalGroup(
