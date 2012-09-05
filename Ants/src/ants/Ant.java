@@ -1,4 +1,4 @@
-import java.util.Vector;
+package ants;
 
 public class Ant {
 

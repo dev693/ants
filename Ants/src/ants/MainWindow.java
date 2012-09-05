@@ -296,6 +296,17 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void drawTSP() {
+        
+        
+    }
+    
+    public void drawCity(int x, int y) {
+        paintPanel.Pa
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel evaporationLabel;
     private javax.swing.JSlider evaporationSlider;

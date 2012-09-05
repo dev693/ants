@@ -1,3 +1,4 @@
+package ants;
 
 public class MainData {
 

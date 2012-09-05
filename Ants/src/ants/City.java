@@ -1,13 +1,18 @@
+package ants;
+
 public class City {
 
   private double xPos;
 
   private double yPos;
 
-  private Integer cityNumber;
+  private int cityNumber;
 
     
-  public void City(Integer xPos, Integer yPos, Integer number) {
+  public City(double xPos, double yPos, int number) {
+      this.xPos = xPos;
+      this.yPos = yPos;
+      this.cityNumber = number;
   }
 
   public double getXPos() {
