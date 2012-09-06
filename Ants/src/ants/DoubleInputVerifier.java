@@ -4,6 +4,7 @@
  */
 package ants;
 
+import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
@@ -29,13 +30,17 @@ public class DoubleInputVerifier extends javax.swing.InputVerifier{
     public boolean verify(JComponent input) {
         JTextField field = (JTextField) input;
         try {
-            double value = Double.parseDouble(field.getText());
+            double value = Double.parseDouble(field.getText().replace(',', '.'));
             if (value > lBound && value < uBound) {
+                field.setForeground(Color.black);
                 return true;
+                
             } else {
+                field.setForeground(Color.red);
                 return false;
             }
         } catch (Exception e) {
+            field.setForeground(Color.red);
             return false;
         }
     }

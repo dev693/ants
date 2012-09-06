@@ -76,7 +76,7 @@ public class MainData {
         }
         cityList.add(new City(x,y, cityList.size()));
         
-        
+        //TODO Länge
         //TODO PHEROMON
     }
     
