@@ -68,22 +68,46 @@ public class MainWindow extends javax.swing.JFrame {
 
         evaporationSlider.setMaximum(10000);
         evaporationSlider.setMinorTickSpacing(1);
+        evaporationSlider.setToolTipText("");
+        evaporationSlider.setValue(1000);
 
         initialPheromonLabel.setText("initiale Pheromone:");
 
         pheromonUpdateLabel.setText("Pheromon-Update:");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "evaporationBinding");
+        binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        pheromonText.setInputVerifier(new DoubleInputVerifier(0));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonBinding");
+        binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "localInformationBinding");
+        binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "initialPheromonBinding");
+        binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonUpdateBinding");
+        binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+
+        pheromonSlider.setMaximum(100000);
+        pheromonSlider.setValue(50000);
+
+        localInformationSlider.setMaximum(100000);
+        localInformationSlider.setValue(50000);
+
+        initialPheromonSlider.setMaximum(100000);
+        initialPheromonSlider.setValue(50000);
+
+        pheromonUpdateSlider.setMaximum(100000);
+        pheromonUpdateSlider.setValue(50000);
 
         javax.swing.GroupLayout parameterPanelLayout = new javax.swing.GroupLayout(parameterPanel);
         parameterPanel.setLayout(parameterPanelLayout);
@@ -327,3 +351,4 @@ public class MainWindow extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
+
