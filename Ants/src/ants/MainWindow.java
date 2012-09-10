@@ -75,6 +75,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         pheromonUpdateLabel.setText("Pheromon-Update:");
 
+        evaporationText.setInputVerifier(new DoubleInputVerifier(0,1));
+
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "evaporationBinding");
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
@@ -85,13 +87,19 @@ public class MainWindow extends javax.swing.JFrame {
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
 
+        localInformationText.setInputVerifier(new DoubleInputVerifier(0));
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "localInformationBinding");
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
 
+        initialPheromonText.setInputVerifier(new DoubleInputVerifier(0));
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "initialPheromonBinding");
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
+
+        pheromonUpdateText.setInputVerifier(new DoubleInputVerifier(0));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonUpdateBinding");
         binding.setConverter(new DoubleConverter());

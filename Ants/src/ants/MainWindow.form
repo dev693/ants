@@ -225,6 +225,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="evaporationText">
+          <Properties>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DoubleInputVerifier(0,1)" type="code"/>
+            </Property>
+          </Properties>
           <BindingProperties>
             <BindingProperty name="text" source="evaporationSlider" sourcePath="${value}" target="evaporationText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
@@ -252,6 +257,11 @@
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JTextField" name="localInformationText">
+          <Properties>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DoubleInputVerifier(0)" type="code"/>
+            </Property>
+          </Properties>
           <BindingProperties>
             <BindingProperty name="text" source="localInformationSlider" sourcePath="${value}" target="localInformationText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
@@ -263,6 +273,11 @@
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JTextField" name="initialPheromonText">
+          <Properties>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DoubleInputVerifier(0)" type="code"/>
+            </Property>
+          </Properties>
           <BindingProperties>
             <BindingProperty name="text" source="initialPheromonSlider" sourcePath="${value}" target="initialPheromonText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
@@ -274,6 +289,11 @@
           </BindingProperties>
         </Component>
         <Component class="javax.swing.JTextField" name="pheromonUpdateText">
+          <Properties>
+            <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DoubleInputVerifier(0)" type="code"/>
+            </Property>
+          </Properties>
           <BindingProperties>
             <BindingProperty name="text" source="pheromonUpdateSlider" sourcePath="${value}" target="pheromonUpdateText" targetPath="text" updateStrategy="0" immediately="false">
               <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
