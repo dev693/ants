@@ -18,10 +18,8 @@ public class DoubleConverter extends org.jdesktop.beansbinding.Converter<Integer
 
     @Override
     public Integer convertReverse(String value) {
-        value = value.replace(',', '.');
-        double dValue = Double.parseDouble(value);
-        Integer iValue = (int) (dValue * 10000);
-        return iValue;
+        double dValue = Double.parseDouble(value.replace(',', '.'));
+        return (int) (dValue * 10000);
     }
     
 }
