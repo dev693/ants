@@ -9,7 +9,8 @@ package ants;
  * @author user
  */
 public class Main{
-    public static MainData data = new MainData() ;
+    public static TSP data = new TSP();
+    public static MainWindow window = new MainWindow();
     /**
      * @param args the command line arguments
      */
@@ -21,7 +22,6 @@ public class Main{
         Main.data.addCity(4, 5);
         Main.data.addCity(6, 2);
         Main.data.addCity(7, 8);
-        MainWindow window = new MainWindow();
         window.setVisible(true);
         
         Route localRoute = new Route();
@@ -43,6 +43,6 @@ public class Main{
         localRoute.addCity(Main.data.getCity(5));
         
         Main.data.setLocalBest(localRoute);
-        
+
     }
 }
