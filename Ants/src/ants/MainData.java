@@ -21,13 +21,18 @@ public class MainData {
 
   public static double pheromonUpdate;
   
-  private static double maxX = 0;
+  private static double maxX = Double.MIN_VALUE;
   
-  private static double maxY = 0;
+  private static double maxY = Double.MIN_VALUE;
+  
+  private static double minX = Double.MAX_VALUE;
+  
+  private static double minY = Double.MAX_VALUE;
   
   private static Route globalBest = null;
   
   private static Route localBest = null;
+    
 
   public static void loadFromFile(String path) {
   }
@@ -74,6 +79,12 @@ public class MainData {
         if (y > maxY) {
             maxY = y;
         }
+        if (x < minX) {
+            minX = x;
+        }
+        if (y < minY) {
+            minY = y;
+        }
         cityList.add(new City(x,y, cityList.size()));
         
         //TODO Länge
@@ -86,6 +97,14 @@ public class MainData {
     
     public static double getMaxY() {
         return maxY;
+    }
+    
+    public static double getMinX() {
+        return minX;
+    }
+    
+    public static double getMinY() {
+        return minY;
     }
     
     public static Route getGlobalBest() {

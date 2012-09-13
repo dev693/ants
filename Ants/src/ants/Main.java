@@ -15,12 +15,12 @@ public class Main{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainData.addCity(0.4,0.30);
-        MainData.addCity(0.20,0.20);
-        MainData.addCity(0.20, 0.10);
-        MainData.addCity(0.40, 0.50);
-        MainData.addCity(0.60, 0.20);
-        MainData.addCity(0.70, 0.80);
+        MainData.addCity(4,3);
+        MainData.addCity(2,2);
+        MainData.addCity(2, 1);
+        MainData.addCity(4, 5);
+        MainData.addCity(6, 2);
+        MainData.addCity(7, 8);
         MainWindow window = new MainWindow();
         window.setVisible(true);
         
