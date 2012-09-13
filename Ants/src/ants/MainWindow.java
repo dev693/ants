@@ -304,7 +304,7 @@ public class MainWindow extends javax.swing.JFrame {
         FileDialog dialog = new FileDialog(this);
         
         dialog.setVisible(true);
-        MainData.loadFromFile(dialog.getDirectory()+dialog.getFile());
+        Main.data.loadFromFile(dialog.getDirectory()+dialog.getFile());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**

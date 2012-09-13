@@ -9,22 +9,26 @@ import javax.swing.JOptionPane;
 
 public class MainData {
 
-    private static ArrayList<ArrayList<Double>> pheromonData;
-    private static ArrayList<ArrayList<Double>> distanceData;
-    private static ArrayList<City> cityList = new ArrayList();
-    public static double pheromon;
-    public static double localInformation;
-    public static double evaporation;
-    public static double initialPheromon;
-    public static double pheromonUpdate;
-    private static double maxX = Double.MIN_VALUE;
-    private static double maxY = Double.MIN_VALUE;
-    private static double minX = Double.MAX_VALUE;
-    private static double minY = Double.MAX_VALUE;
-    private static Route globalBest = null;
-    private static Route localBest = null;
+    private  ArrayList<ArrayList<Double>> pheromonData;
+    private  ArrayList<ArrayList<Double>> distanceData;
+    private  ArrayList<City> cityList = new ArrayList();
+    public  double pheromon;
+    public  double localInformation;
+    public  double evaporation;
+    public  double initialPheromon;
+    public  double pheromonUpdate;
+    private  double maxX = Double.MIN_VALUE;
+    private  double maxY = Double.MIN_VALUE;
+    private  double minX = Double.MAX_VALUE;
+    private  double minY = Double.MAX_VALUE;
+    private  Route globalBest = null;
+    private  Route localBest = null;
 
-    public static void loadFromFile(String path) {
+    public MainData() {
+        
+    }
+    
+    public  void loadFromFile(String path) {
 
         if (path != null) {
             try {
@@ -40,7 +44,7 @@ public class MainData {
                                 if (!coordLine.equals("EOF")) {
                                     String lineParts[] = coordLine.split(" +");
                                     if (lineParts.length == 3) {
-                                        MainData.addCity(Double.parseDouble(lineParts[1]), Double.parseDouble(lineParts[2]));
+                                        Main.data.addCity(Double.parseDouble(lineParts[1]), Double.parseDouble(lineParts[2]));
                                     }
                                 }
                             } 
@@ -55,26 +59,26 @@ public class MainData {
         }
     }
 
-    public static void saveToFile() {
+    public  void saveToFile() {
     }
 
-    public static void solveTSP(Integer antCount, Integer iterationCount) {
+    public  void solveTSP(Integer antCount, Integer iterationCount) {
     }
 
-    public static void getParameters() {
+    public  void getParameters() {
     }
 
     /**
      * @return the pheromonData
      */
-    public static Double getPheromonData(int from, int to) {
+    public  Double getPheromonData(int from, int to) {
         return pheromonData.get(from).get(to);
     }
 
     /**
      * @return the distanceData
      */
-    public static Double getDistanceData(int from, int to) {
+    public  Double getDistanceData(int from, int to) {
 
         return distanceData.get(from).get(to);
     }
@@ -82,15 +86,15 @@ public class MainData {
     /**
      * @return the cityList
      */
-    public static City getCity(int number) {
+    public  City getCity(int number) {
         return cityList.get(number);
     }
 
-    public static int getCityListLength() {
+    public  int getCityListLength() {
         return cityList.size();
     }
 
-    public static void addCity(double x, double y) {
+    public  void addCity(double x, double y) {
         if (x > maxX) {
             maxX = x;
         }
@@ -109,35 +113,35 @@ public class MainData {
         //TODO PHEROMON
     }
 
-    public static double getMaxX() {
+    public  double getMaxX() {
         return maxX;
     }
 
-    public static double getMaxY() {
+    public  double getMaxY() {
         return maxY;
     }
 
-    public static double getMinX() {
+    public  double getMinX() {
         return minX;
     }
 
-    public static double getMinY() {
+    public  double getMinY() {
         return minY;
     }
 
-    public static Route getGlobalBest() {
+    public  Route getGlobalBest() {
         return globalBest;
     }
 
-    public static Route getLocalBest() {
+    public  Route getLocalBest() {
         return localBest;
     }
 
-    public static void setGlobalBest(Route route) {
+    public  void setGlobalBest(Route route) {
         globalBest = route;
     }
 
-    public static void setLocalBest(Route route) {
+    public  void setLocalBest(Route route) {
         localBest = route;
     }
 }

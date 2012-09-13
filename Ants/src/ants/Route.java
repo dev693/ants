@@ -25,7 +25,7 @@ public class Route {
     
     public void addCity(City city) {
         if (lastCity != null) {
-            length += MainData.getDistanceData(lastCity.getNumber(), city.getNumber());
+            length += Main.data.getDistanceData(lastCity.getNumber(), city.getNumber());
         }
         route.add(city);
     }

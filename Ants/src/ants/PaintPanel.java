@@ -29,16 +29,16 @@ public class PaintPanel extends JPanel {
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         g.setColor(Color.red);
-        drawRoute(g, MainData.getGlobalBest());
+        drawRoute(g, Main.data.getGlobalBest());
         
         g.setColor(Color.blue);
-        drawRoute(g, MainData.getLocalBest());
+        drawRoute(g, Main.data.getLocalBest());
         
         
         //Städte Anzeigen
         g.setColor(Color.black);
-        for (int i = 0; i < MainData.getCityListLength(); i++) {
-            drawCity(g, MainData.getCity(i));
+        for (int i = 0; i < Main.data.getCityListLength(); i++) {
+            drawCity(g, Main.data.getCity(i));
         }
         
     }
@@ -50,16 +50,16 @@ public class PaintPanel extends JPanel {
     public void calcRelation() {
         
                
-        double width = MainData.getMaxX() - MainData.getMinX();
+        double width = Main.data.getMaxX() - Main.data.getMinX();
         
-        double height = MainData.getMaxY() - MainData.getMinY();
+        double height = Main.data.getMaxY() - Main.data.getMinY();
         
         double relationY = (this.getHeight() - 2 * borderOffset) / height;
         double relationX = (this.getWidth() - 2 * borderOffset) / width;
         relation = Math.min(relationX, relationY);
         
-        xOffset = (int) (MainData.getMinX()*relation);
-        yOffset = (int) (MainData.getMinY()*relation);
+        xOffset = (int) (Main.data.getMinX()*relation);
+        yOffset = (int) (Main.data.getMinY()*relation);
     }
 
     public void drawCity(Graphics g, City city) {

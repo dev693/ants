@@ -9,40 +9,40 @@ package ants;
  * @author user
  */
 public class Main{
-
+    public static MainData data = new MainData() ;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainData.addCity(4,3);
-        MainData.addCity(2,2);
-        MainData.addCity(2, 1);
-        MainData.addCity(4, 5);
-        MainData.addCity(6, 2);
-        MainData.addCity(7, 8);
+        Main.data.addCity(4,3);
+        Main.data.addCity(2,2);
+        Main.data.addCity(2, 1);
+        Main.data.addCity(4, 5);
+        Main.data.addCity(6, 2);
+        Main.data.addCity(7, 8);
         MainWindow window = new MainWindow();
         window.setVisible(true);
         
         Route localRoute = new Route();
         
-        for (int i = 0; i < MainData.getCityListLength(); i++)
+        for (int i = 0; i < Main.data.getCityListLength(); i++)
         {
-            localRoute.addCity(MainData.getCity(i));
+            localRoute.addCity(Main.data.getCity(i));
         }
         
-        MainData.setGlobalBest(localRoute);
+        Main.data.setGlobalBest(localRoute);
         
         localRoute = new Route();
-        localRoute.addCity(MainData.getCity(5));
-        localRoute.addCity(MainData.getCity(3));
-        localRoute.addCity(MainData.getCity(1));
-        localRoute.addCity(MainData.getCity(2));
-        localRoute.addCity(MainData.getCity(0));
-        localRoute.addCity(MainData.getCity(4));
-        localRoute.addCity(MainData.getCity(5));
+        localRoute.addCity(Main.data.getCity(5));
+        localRoute.addCity(Main.data.getCity(3));
+        localRoute.addCity(Main.data.getCity(1));
+        localRoute.addCity(Main.data.getCity(2));
+        localRoute.addCity(Main.data.getCity(0));
+        localRoute.addCity(Main.data.getCity(4));
+        localRoute.addCity(Main.data.getCity(5));
         
-        MainData.setLocalBest(localRoute);
+        Main.data.setLocalBest(localRoute);
         
     }
 }
