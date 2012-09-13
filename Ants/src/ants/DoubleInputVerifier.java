@@ -31,7 +31,7 @@ public class DoubleInputVerifier extends javax.swing.InputVerifier{
         JTextField field = (JTextField) input;
         try {
             double value = Double.parseDouble(field.getText().replace(',', '.'));
-            if (value > lBound && value < uBound) {
+            if (value > lBound && value <= uBound) {
                 field.setForeground(Color.black);
                 return true;
                 

@@ -40,53 +40,49 @@ public class TSP {
                 int localDimension = 0;
                 while (reader.ready()) {
                     String line = reader.readLine();
-             
-                    
-                    if (line.equals("NODE_COORD_SECTION")){
+
+
+                    if (line.equals("NODE_COORD_SECTION")) {
                         while (reader.ready()) {
                             String coordLine = reader.readLine();
                             if (!coordLine.equals("EOF")) {
                                 String lineParts[] = coordLine.split(" +");
                                 if (lineParts.length == 3) {
                                     Main.data.addCity(Double.parseDouble(lineParts[1]), Double.parseDouble(lineParts[2]));
-                                }                               
-                                } else {
-                                if (localDimension != Main.data.getCityListLength()) {
-                                    throw new Exception("Fehlerhafte Dimension in TSP-Datei.");
                                 }
                             }
-                            
+
+                        }
+                        if (localDimension != Main.data.getCityListLength()) {
+                            throw new Exception("Fehlerhafte Dimension in TSP-Datei.");
                         }
                     }
-                    
+
                     if (line.startsWith("COMMENT:")) {
                         String lineParts[] = line.split(":");
                         Main.data.setComment(lineParts[1].trim());
                     }
-                    
+
                     if (line.startsWith("NAME:")) {
                         String lineParts[] = line.split(":");
                         Main.data.setName(lineParts[1].trim());
                     }
-                    
+
                     if (line.startsWith("DIMENSION:")) {
                         String lineParts[] = line.split(":");
                         localDimension = Integer.parseInt(lineParts[1].trim());
                     }
-                    
+
                     Main.window.repaint();
 
                 }
 
-            } 
-            catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "Die gewählte Datei wurde nicht gefunden \n" + e, path, JOptionPane.ERROR_MESSAGE);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei \n" + e, path, JOptionPane.ERROR_MESSAGE);
-            }
-            catch (Exception e) { //TODO mehr catchblöcke
-                JOptionPane.showMessageDialog(null, e, path, JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) { //TODO mehr catchblöcke
+                JOptionPane.showMessageDialog(null, e.getMessage(), path, JOptionPane.ERROR_MESSAGE);
             }
         }
     }
