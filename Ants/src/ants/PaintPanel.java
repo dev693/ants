@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class PaintPanel extends JPanel {
 
     private double relation;
-    private int thickness = 8;
+    private int thickness = 2;
     private int borderOffset = 10;
     private int xOffset = 0;
     private int yOffset = 0;

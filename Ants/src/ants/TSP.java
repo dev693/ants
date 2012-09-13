@@ -46,7 +46,7 @@ public class TSP {
                         while (reader.ready()) {
                             String coordLine = reader.readLine();
                             if (!coordLine.equals("EOF")) {
-                                String lineParts[] = coordLine.split(" +");
+                                String lineParts[] = coordLine.trim().split(" +");
                                 if (lineParts.length == 3) {
                                     Main.data.addCity(Double.parseDouble(lineParts[1]), Double.parseDouble(lineParts[2]));
                                 }
@@ -58,17 +58,17 @@ public class TSP {
                         }
                     }
 
-                    if (line.startsWith("COMMENT:")) {
+                    if (line.startsWith("COMMENT")) {
                         String lineParts[] = line.split(":");
                         Main.data.setComment(lineParts[1].trim());
                     }
 
-                    if (line.startsWith("NAME:")) {
+                    if (line.startsWith("NAME")) {
                         String lineParts[] = line.split(":");
                         Main.data.setName(lineParts[1].trim());
                     }
 
-                    if (line.startsWith("DIMENSION:")) {
+                    if (line.startsWith("DIMENSION")) {
                         String lineParts[] = line.split(":");
                         localDimension = Integer.parseInt(lineParts[1].trim());
                     }
