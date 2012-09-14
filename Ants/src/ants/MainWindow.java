@@ -18,6 +18,9 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
     }
+    private int pressedX = 0;
+    private int pressedY = 0;
+    private boolean mousePressed = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
         zoomLabel2 = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -230,8 +234,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         paintPanel.setBackground(new java.awt.Color(255, 255, 255));
         paintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                paintPanelMouseReleased(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 paintPanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                paintPanelMousePressed(evt);
+            }
+        });
+        paintPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                paintPanelMouseDragged(evt);
             }
         });
 
@@ -307,10 +322,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("Datei");
 
+        jMenuItem4.setText("Neu");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
         jMenuItem1.setText("Speichern");
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Laden");
+        jMenuItem2.setText("Laden...");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -372,17 +395,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         FileDialog dialog = new FileDialog(this);
-
         dialog.setVisible(true);
         TSP.loadFromFile(dialog.getDirectory() + dialog.getFile());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void paintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseClicked
-        System.out.println("CLICK: " + evt.getX() + " " + evt.getY());
-        System.out.println(Main.data.getCityListLength());
         Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
         paintPanel.refresh();
-        System.out.println(Main.data.getCityListLength() + "\n");
     }//GEN-LAST:event_paintPanelMouseClicked
 
     private void zoomChangedHandler(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_zoomChangedHandler
@@ -392,8 +411,45 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void autoscaleChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoscaleChanged
         paintPanel.setAutoscale(autoscaleSwitch.isSelected());
+        if (!autoscaleSwitch.isSelected()) {
+            paintPanel.setxOffset(0);
+            paintPanel.setyOffset(0);
+        }
         paintPanel.refresh();
     }//GEN-LAST:event_autoscaleChanged
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+        autoscaleSwitch.setSelected(false);
+        paintPanel.setAutoscale(false);
+        zoomSlider.setValue(100);
+        paintPanel.setxOffset(0);
+        paintPanel.setyOffset(0);
+        Main.data = new TSP();
+        paintPanel.refresh();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void paintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMousePressed
+        if (!autoscaleSwitch.isSelected()) {
+            mousePressed = true;
+            pressedX = evt.getX();
+            pressedY = evt.getY();
+        }
+    }//GEN-LAST:event_paintPanelMousePressed
+
+    private void paintPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseReleased
+        mousePressed = false;
+    }//GEN-LAST:event_paintPanelMouseReleased
+
+    private void paintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseDragged
+        if (mousePressed) {
+            paintPanel.addxOffset(pressedX - evt.getX());
+            paintPanel.addyOffset(pressedY - evt.getY());
+            pressedX = evt.getX();
+            pressedY = evt.getY();
+            paintPanel.refresh();
+        }
+    }//GEN-LAST:event_paintPanelMouseDragged
 
     public int getZoom() {
         return zoomSlider.getValue();
@@ -450,6 +506,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel localInformationLabel;
     private javax.swing.JSlider localInformationSlider;

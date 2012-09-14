@@ -21,11 +21,13 @@ public class PaintPanel extends JPanel {
     private int yOffset = 0;
     private int zoom = 100;    
     private boolean autoscale = true;
-
+    
     @Override
     protected void paintComponent(Graphics g) {
         
         calcRelation();
+        
+        System.out.println("relation: " + relation + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; yOffset: " + getyOffset());
         g.setColor(Color.white);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -49,11 +51,11 @@ public class PaintPanel extends JPanel {
     }
 
     public double XPixel2Coord(int x) {
-        return (x + xOffset - borderOffset) / relation;
+        return (x + getxOffset() - borderOffset) / relation;
     }
     
     public double YPixel2Coord(int y) {
-        return (y + yOffset - borderOffset) / relation;
+        return (y + getyOffset() - borderOffset) / relation;
     }
     
     
@@ -69,19 +71,17 @@ public class PaintPanel extends JPanel {
             double relationX = (this.getWidth() - 2 * borderOffset) / width;
             System.out.println(zoom);
             relation = Math.min(relationX, relationY) * ((double) zoom / 100);
-            xOffset = (int) (Main.data.getMinX()*relation);
-            yOffset = (int) (Main.data.getMinY()*relation);
+            setxOffset((int) (Main.data.getMinX()*relation));
+            setyOffset((int) (Main.data.getMinY()*relation));
         } else {
-            relation = 1;
-            xOffset = 0;
-            yOffset = 0;
+            relation = (double) zoom / 100;
         }
     }
 
     public void drawCity(Graphics g, City city) {
         int x = (int) (city.getXPos() * relation);
         int y = (int) (city.getYPos() * relation);
-        g.fillOval(x - xOffset + borderOffset-thickness/2, y - yOffset + borderOffset-thickness/2, thickness, thickness);
+        g.fillOval(x - getxOffset() + borderOffset-thickness/2, y - getyOffset() + borderOffset-thickness/2, thickness, thickness);
     }
 
     public void drawRoute(Graphics g, Route route) {
@@ -89,10 +89,10 @@ public class PaintPanel extends JPanel {
         if (route != null) {
             for (City city : route.getRoute()) {
                 if (lastCity != null) {
-                    g.drawLine((borderOffset) - xOffset + (int) (lastCity.getXPos() * relation),
-                            (borderOffset) - yOffset + (int) (lastCity.getYPos() * relation),
-                            (borderOffset) - xOffset + (int) (city.getXPos() * relation),
-                            (borderOffset) - yOffset + (int) (city.getYPos() * relation));
+                    g.drawLine((borderOffset) - getxOffset() + (int) (lastCity.getXPos() * relation),
+                            (borderOffset) - getyOffset() + (int) (lastCity.getYPos() * relation),
+                            (borderOffset) - getxOffset() + (int) (city.getXPos() * relation),
+                            (borderOffset) - getyOffset() + (int) (city.getYPos() * relation));
                 }
                 lastCity = city;
             }
@@ -111,5 +111,41 @@ public class PaintPanel extends JPanel {
      */
     public void setAutoscale(boolean autoscale) {
         this.autoscale = autoscale;
+    }
+
+    /**
+     * @return the xOffset
+     */
+    public int getxOffset() {
+        return xOffset;
+    }
+
+    /**
+     * @param xOffset the xOffset to set
+     */
+    public void setxOffset(int xOffset) {
+        this.xOffset = xOffset;
+    }
+
+    /**
+     * @return the yOffset
+     */
+    public int getyOffset() {
+        return yOffset;
+    }
+
+    public void addyOffset(int dy) {
+        yOffset += dy;
+    }
+    
+    public void addxOffset(int dx) {
+        xOffset += dx;
+    }
+    
+    /**
+     * @param yOffset the yOffset to set
+     */
+    public void setyOffset(int yOffset) {
+        this.yOffset = yOffset;
     }
 }
