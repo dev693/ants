@@ -16,12 +16,12 @@ public class Main{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Main.data.addCity(4,3);
-        Main.data.addCity(2,2);
-        Main.data.addCity(2, 1);
-        Main.data.addCity(4, 5);
-        Main.data.addCity(6, 2);
-        Main.data.addCity(7, 8);
+        Main.data.addCity(40,30);
+        Main.data.addCity(20,20);
+        Main.data.addCity(20, 10);
+        Main.data.addCity(40, 50);
+        Main.data.addCity(60, 20);
+        Main.data.addCity(70, 80);
         window.setVisible(true);
         
         Route localRoute = new Route();

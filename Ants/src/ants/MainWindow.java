@@ -18,8 +18,6 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
     }
-    
-             
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +50,11 @@ public class MainWindow extends javax.swing.JFrame {
         progressBar = new javax.swing.JProgressBar();
         startButton = new javax.swing.JButton();
         paintPanel = new ants.PaintPanel();
+        jPanel1 = new javax.swing.JPanel();
+        autoscaleSwitch = new javax.swing.JToggleButton();
+        zoomSlider = new javax.swing.JSlider();
+        zoomLabel = new javax.swing.JLabel();
+        zoomLabel2 = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -138,8 +141,8 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(evaporationLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(evaporationText, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                            .addComponent(pheromonText)
+                            .addComponent(evaporationText)
+                            .addComponent(pheromonText, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                             .addComponent(localInformationText)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parameterPanelLayout.createSequentialGroup()
                         .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +189,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
@@ -195,11 +198,11 @@ public class MainWindow extends javax.swing.JFrame {
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 87, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         progressBar.setValue(35);
@@ -211,7 +214,7 @@ public class MainWindow extends javax.swing.JFrame {
             progressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         progressPanelLayout.setVerticalGroup(
@@ -226,6 +229,11 @@ public class MainWindow extends javax.swing.JFrame {
         startButton.setText("Start");
 
         paintPanel.setBackground(new java.awt.Color(255, 255, 255));
+        paintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paintPanelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout paintPanelLayout = new javax.swing.GroupLayout(paintPanel);
         paintPanel.setLayout(paintPanelLayout);
@@ -236,6 +244,65 @@ public class MainWindow extends javax.swing.JFrame {
         paintPanelLayout.setVerticalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ansicht"));
+
+        autoscaleSwitch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        autoscaleSwitch.setSelected(true);
+        autoscaleSwitch.setText("Autoskalierung");
+        autoscaleSwitch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autoscaleChanged(evt);
+            }
+        });
+
+        zoomSlider.setMajorTickSpacing(10);
+        zoomSlider.setMaximum(150);
+        zoomSlider.setMinimum(50);
+        zoomSlider.setMinorTickSpacing(10);
+        zoomSlider.setSnapToTicks(true);
+        zoomSlider.setValue(100);
+        zoomSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        zoomSlider.setFocusable(false);
+        zoomSlider.setValueIsAdjusting(true);
+        zoomSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                zoomChangedHandler(evt);
+            }
+        });
+
+        zoomLabel.setText("Zoom:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, zoomSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), zoomLabel2, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zoomSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(autoscaleSwitch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(zoomLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zoomLabel2)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(autoscaleSwitch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(zoomLabel)
+                    .addComponent(zoomLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(zoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("Datei");
@@ -273,10 +340,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(startButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -284,11 +350,15 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,11 +372,36 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         FileDialog dialog = new FileDialog(this);
-        
+
         dialog.setVisible(true);
-        TSP.loadFromFile(dialog.getDirectory()+dialog.getFile());
+        TSP.loadFromFile(dialog.getDirectory() + dialog.getFile());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void paintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseClicked
+        System.out.println("CLICK: " + evt.getX() + " " + evt.getY());
+        System.out.println(Main.data.getCityListLength());
+        Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
+        paintPanel.refresh();
+        System.out.println(Main.data.getCityListLength() + "\n");
+    }//GEN-LAST:event_paintPanelMouseClicked
+
+    private void zoomChangedHandler(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_zoomChangedHandler
+        paintPanel.setZoom(zoomSlider.getValue());
+        paintPanel.refresh();
+    }//GEN-LAST:event_zoomChangedHandler
+
+    private void autoscaleChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoscaleChanged
+        paintPanel.setAutoscale(autoscaleSwitch.isSelected());
+        paintPanel.refresh();
+    }//GEN-LAST:event_autoscaleChanged
+
+    public int getZoom() {
+        return zoomSlider.getValue();
+    }
+
+    public boolean getAutoscale() {
+        return autoscaleSwitch.isSelected();
+    }
     /**
      * @param args the command line arguments
      */
@@ -342,9 +437,8 @@ public class MainWindow extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton autoscaleSwitch;
     private javax.swing.JLabel evaporationLabel;
     private javax.swing.JSlider evaporationSlider;
     private javax.swing.JTextField evaporationText;
@@ -356,6 +450,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel localInformationLabel;
     private javax.swing.JSlider localInformationSlider;
     private javax.swing.JTextField localInformationText;
@@ -372,7 +467,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel progressPanel;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JButton startButton;
+    private javax.swing.JLabel zoomLabel;
+    private javax.swing.JLabel zoomLabel2;
+    private javax.swing.JSlider zoomSlider;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
-

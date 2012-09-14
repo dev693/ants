@@ -14,12 +14,13 @@ import javax.swing.JPanel;
  */
 public class PaintPanel extends JPanel {
 
-    private double relation;
-    private int thickness = 2;
+    private double relation = 1;
+    private int thickness = 8;
     private int borderOffset = 10;
     private int xOffset = 0;
     private int yOffset = 0;
-        
+    private int zoom = 100;    
+    private boolean autoscale = true;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -47,19 +48,34 @@ public class PaintPanel extends JPanel {
         this.paintComponent(this.getGraphics());
     }
 
+    public double XPixel2Coord(int x) {
+        return (x + xOffset - borderOffset) / relation;
+    }
+    
+    public double YPixel2Coord(int y) {
+        return (y + yOffset - borderOffset) / relation;
+    }
+    
+    
+        
     public void calcRelation() {
         
-               
-        double width = Main.data.getMaxX() - Main.data.getMinX();
-        
-        double height = Main.data.getMaxY() - Main.data.getMinY();
-        
-        double relationY = (this.getHeight() - 2 * borderOffset) / height;
-        double relationX = (this.getWidth() - 2 * borderOffset) / width;
-        relation = Math.min(relationX, relationY);
-        
-        xOffset = (int) (Main.data.getMinX()*relation);
-        yOffset = (int) (Main.data.getMinY()*relation);
+        if (autoscale) {       
+            double width = Main.data.getMaxX() - Main.data.getMinX();
+
+            double height = Main.data.getMaxY() - Main.data.getMinY();
+
+            double relationY = (this.getHeight() - 2 * borderOffset) / height;
+            double relationX = (this.getWidth() - 2 * borderOffset) / width;
+            System.out.println(zoom);
+            relation = Math.min(relationX, relationY) * ((double) zoom / 100);
+            xOffset = (int) (Main.data.getMinX()*relation);
+            yOffset = (int) (Main.data.getMinY()*relation);
+        } else {
+            relation = 1;
+            xOffset = 0;
+            yOffset = 0;
+        }
     }
 
     public void drawCity(Graphics g, City city) {
@@ -81,5 +97,19 @@ public class PaintPanel extends JPanel {
                 lastCity = city;
             }
         }
+    }
+
+    /**
+     * @param zoom the zoom to set
+     */
+    public void setZoom(int zoom) {
+        this.zoom = zoom;
+    }
+
+    /**
+     * @param autoscale the autoscale to set
+     */
+    public void setAutoscale(boolean autoscale) {
+        this.autoscale = autoscale;
     }
 }
