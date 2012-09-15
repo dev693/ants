@@ -273,8 +273,8 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         zoomSlider.setMajorTickSpacing(10);
-        zoomSlider.setMaximum(150);
-        zoomSlider.setMinimum(50);
+        zoomSlider.setMaximum(1000);
+        zoomSlider.setMinimum(10);
         zoomSlider.setMinorTickSpacing(10);
         zoomSlider.setSnapToTicks(true);
         zoomSlider.setValue(100);
