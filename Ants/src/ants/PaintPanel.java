@@ -25,25 +25,26 @@ public class PaintPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         
-        calcRelation();
-        
-        System.out.println("relation: " + relation + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; yOffset: " + getyOffset());
-        g.setColor(Color.white);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        if (!java.beans.Beans.isDesignTime()) {
+            calcRelation();
 
-        g.setColor(Color.red);
-        drawRoute(g, Main.data.getGlobalBest());
-        
-        g.setColor(Color.blue);
-        drawRoute(g, Main.data.getLocalBest());
-        
-        
-        //Städte Anzeigen
-        g.setColor(Color.black);
-        for (int i = 0; i < Main.data.getCityListLength(); i++) {
-            drawCity(g, Main.data.getCity(i));
+            System.out.println("relation: " + relation + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; yOffset: " + getyOffset());
+            g.setColor(Color.white);
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+            g.setColor(Color.red);
+            drawRoute(g, Main.data.getGlobalBest());
+
+            g.setColor(Color.blue);
+            drawRoute(g, Main.data.getLocalBest());
+
+
+            //Städte Anzeigen
+            g.setColor(Color.black);
+            for (int i = 0; i < Main.data.getCityListLength(); i++) {
+                drawCity(g, Main.data.getCity(i));
+            }
         }
-        
     }
 
     public void refresh() {
