@@ -22,6 +22,8 @@ public class PaintPanel extends JPanel {
     private int zoom = 100;    
     private boolean autoscale = true;
     
+    
+    
     @Override
     protected void paintComponent(Graphics g) {
         
@@ -148,5 +150,12 @@ public class PaintPanel extends JPanel {
      */
     public void setyOffset(int yOffset) {
         this.yOffset = yOffset;
+    }
+
+    /**
+     * @param thickness the thickness to set
+     */
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 }

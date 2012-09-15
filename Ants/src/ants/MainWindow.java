@@ -4,7 +4,9 @@
  */
 package ants;
 
+import java.awt.Cursor;
 import java.awt.FileDialog;
+import javax.swing.ButtonGroup;
 
 /**
  *
@@ -21,7 +23,8 @@ public class MainWindow extends javax.swing.JFrame {
     private int pressedX = 0;
     private int pressedY = 0;
     private boolean mousePressed = false;
-
+    private ButtonGroup thicknessButtons = new ButtonGroup();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,6 +52,10 @@ public class MainWindow extends javax.swing.JFrame {
         initialPheromonSlider = new javax.swing.JSlider();
         pheromonUpdateSlider = new javax.swing.JSlider();
         resultPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         progressPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         startButton = new javax.swing.JButton();
@@ -65,9 +72,16 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
+        setName("MainFrame"); // NOI18N
 
         parameterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Parameter"));
 
@@ -198,15 +212,44 @@ public class MainWindow extends javax.swing.JFrame {
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
 
+        jLabel1.setText("Beste Route (Gesamt):");
+
+        jLabel2.setText("Beste Route (Iteration):");
+        jLabel2.setToolTipText("");
+
+        jLabel3.setText("15000 km");
+
+        jLabel4.setText("20000 km");
+
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 441, Short.MAX_VALUE)
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(resultPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3))
+                    .addGroup(resultPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         progressBar.setValue(35);
@@ -218,7 +261,7 @@ public class MainWindow extends javax.swing.JFrame {
             progressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addContainerGap())
         );
         progressPanelLayout.setVerticalGroup(
@@ -346,7 +389,63 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainMenuBar.add(jMenu1);
 
-        jMenu2.setText("Hilfe");
+        jMenu2.setText("Anzeige");
+
+        jMenu3.setText("Stadtgröße:");
+
+        this.thicknessButtons.add(jRadioButtonMenuItem1);
+        jRadioButtonMenuItem1.setText("2 Pixel");
+        jRadioButtonMenuItem1.setActionCommand("2");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThicknessChanged(evt);
+            }
+        });
+        jMenu3.add(jRadioButtonMenuItem1);
+
+        this.thicknessButtons.add(jRadioButtonMenuItem2);
+        jRadioButtonMenuItem2.setText("4 Pixel");
+        jRadioButtonMenuItem2.setActionCommand("4");
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThicknessChanged(evt);
+            }
+        });
+        jMenu3.add(jRadioButtonMenuItem2);
+
+        this.thicknessButtons.add(jRadioButtonMenuItem3);
+        jRadioButtonMenuItem3.setText("6 Pixel");
+        jRadioButtonMenuItem3.setActionCommand("6");
+        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThicknessChanged(evt);
+            }
+        });
+        jMenu3.add(jRadioButtonMenuItem3);
+
+        this.thicknessButtons.add(jRadioButtonMenuItem4);
+        jRadioButtonMenuItem4.setSelected(true);
+        jRadioButtonMenuItem4.setText("8 Pixel");
+        jRadioButtonMenuItem4.setActionCommand("8");
+        jRadioButtonMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThicknessChanged(evt);
+            }
+        });
+        jMenu3.add(jRadioButtonMenuItem4);
+
+        this.thicknessButtons.add(jRadioButtonMenuItem5);
+        jRadioButtonMenuItem5.setText("10 Pixel");
+        jRadioButtonMenuItem5.setActionCommand("10");
+        jRadioButtonMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThicknessChanged(evt);
+            }
+        });
+        jMenu3.add(jRadioButtonMenuItem5);
+
+        jMenu2.add(jMenu3);
+
         mainMenuBar.add(jMenu2);
 
         setJMenuBar(mainMenuBar);
@@ -375,11 +474,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 3, Short.MAX_VALUE))
+                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -439,10 +537,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void paintPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseReleased
         mousePressed = false;
+        paintPanel.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_paintPanelMouseReleased
 
     private void paintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseDragged
         if (mousePressed) {
+            paintPanel.setCursor( new Cursor(Cursor.HAND_CURSOR));
             paintPanel.addxOffset(pressedX - evt.getX());
             paintPanel.addyOffset(pressedY - evt.getY());
             pressedX = evt.getX();
@@ -450,6 +550,17 @@ public class MainWindow extends javax.swing.JFrame {
             paintPanel.refresh();
         }
     }//GEN-LAST:event_paintPanelMouseDragged
+
+    private void ThicknessChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThicknessChanged
+        int newThickness;
+        try {
+            newThickness = Integer.parseInt(evt.getActionCommand());
+        } catch (Exception e) {
+            newThickness = 8;
+        }
+        paintPanel.setThickness(newThickness);
+        paintPanel.refresh();
+    }//GEN-LAST:event_ThicknessChanged
 
     public int getZoom() {
         return zoomSlider.getValue();
@@ -501,13 +612,23 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel initialPheromonLabel;
     private javax.swing.JSlider initialPheromonSlider;
     private javax.swing.JTextField initialPheromonText;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
     private javax.swing.JLabel localInformationLabel;
     private javax.swing.JSlider localInformationSlider;
     private javax.swing.JTextField localInformationText;
