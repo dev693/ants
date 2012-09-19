@@ -6,7 +6,9 @@ package ants;
 
 import java.awt.Cursor;
 import java.awt.FileDialog;
+import javax.swing.Action;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +26,6 @@ public class MainWindow extends javax.swing.JFrame {
     private int pressedY = 0;
     private boolean mousePressed = false;
     private ButtonGroup thicknessButtons = new ButtonGroup();
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,32 +53,48 @@ public class MainWindow extends javax.swing.JFrame {
         initialPheromonSlider = new javax.swing.JSlider();
         pheromonUpdateSlider = new javax.swing.JSlider();
         resultPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        globalBestCaptionLabel = new javax.swing.JLabel();
+        gloabBestLabel = new javax.swing.JLabel();
+        localBestLabel = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        localBestCaptionLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         progressPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         startButton = new javax.swing.JButton();
         paintPanel = new ants.PaintPanel();
-        jPanel1 = new javax.swing.JPanel();
+        viewPanel = new javax.swing.JPanel();
         autoscaleSwitch = new javax.swing.JToggleButton();
         zoomSlider = new javax.swing.JSlider();
         zoomLabel = new javax.swing.JLabel();
         zoomLabel2 = new javax.swing.JLabel();
+        thicknessSlider = new javax.swing.JSlider();
+        thicknessLabel = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
+        fileMenu = new javax.swing.JMenu();
+        newMenuItem = new javax.swing.JMenuItem();
+        saveMenuItem = new javax.swing.JMenuItem();
+        loadMenuItem = new javax.swing.JMenuItem();
+        exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
@@ -91,7 +108,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         evaporationLabel.setText("Verdunstunsfaktor:");
 
-        evaporationSlider.setMaximum(10000);
+        evaporationSlider.setMaximum(10001);
+        evaporationSlider.setMinimum(1);
         evaporationSlider.setMinorTickSpacing(1);
         evaporationSlider.setToolTipText("");
         evaporationSlider.setValue(1000);
@@ -211,46 +229,177 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
+        resultPanel.setLayout(new java.awt.GridLayout(0, 1));
 
-        jLabel1.setText("Beste Route (Gesamt):");
+        jPanel2.setPreferredSize(new java.awt.Dimension(2484, 10));
 
-        jLabel2.setText("Beste Route (Iteration):");
-        jLabel2.setToolTipText("");
+        jLabel4.setText("Name:");
+        jLabel4.setToolTipText("");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel3.setText("15000 km");
+        nameLabel.setText("Berlin52");
+        nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel4.setText("20000 km");
+        jLabel5.setText("Anzahl der Städte:");
+        jLabel5.setMaximumSize(new java.awt.Dimension(100, 14));
 
-        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
-        resultPanel.setLayout(resultPanelLayout);
-        resultPanelLayout.setHorizontalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resultPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(resultPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3))
-                    .addGroup(resultPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jLabel2.setText("52");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jLabel2)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
-        resultPanelLayout.setVerticalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resultPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(nameLabel)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)))
         );
+
+        resultPanel.add(jPanel2);
+        resultPanel.add(filler4);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Beste Route:");
+        resultPanel.add(jLabel7);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Durchschnittliche Route:");
+        resultPanel.add(jLabel1);
+        resultPanel.add(filler3);
+
+        globalBestCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        globalBestCaptionLabel.setText("Gesamt:");
+        resultPanel.add(globalBestCaptionLabel);
+
+        gloabBestLabel.setText("15000 km");
+        resultPanel.add(gloabBestLabel);
+
+        localBestLabel.setText("20000 km");
+        resultPanel.add(localBestLabel);
+        resultPanel.add(filler1);
+
+        localBestCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        localBestCaptionLabel.setText("Iteration:");
+        localBestCaptionLabel.setToolTipText("");
+        resultPanel.add(localBestCaptionLabel);
+
+        jLabel6.setText("16000 km");
+        resultPanel.add(jLabel6);
+
+        jLabel10.setText("16000 km");
+        resultPanel.add(jLabel10);
+        resultPanel.add(filler2);
+
+        jLabel3.setText("benötigte Zeit:");
+        resultPanel.add(jLabel3);
+
+        jLabel8.setText("5 s");
+        resultPanel.add(jLabel8);
+
+        jPanel8.setPreferredSize(new java.awt.Dimension(2484, 10));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 547, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 14, Short.MAX_VALUE)
+        );
+
+        resultPanel.add(jPanel8);
+
+        jPanel7.setPreferredSize(new java.awt.Dimension(2484, 10));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 547, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 14, Short.MAX_VALUE)
+        );
+
+        resultPanel.add(jPanel7);
+
+        jPanel6.setPreferredSize(new java.awt.Dimension(2484, 10));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 547, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 14, Short.MAX_VALUE)
+        );
+
+        resultPanel.add(jPanel6);
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(2484, 10));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 547, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 14, Short.MAX_VALUE)
+        );
+
+        resultPanel.add(jPanel5);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(2484, 10));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 547, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 14, Short.MAX_VALUE)
+        );
+
+        resultPanel.add(jPanel4);
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(2484, 10));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 547, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 14, Short.MAX_VALUE)
+        );
+
+        resultPanel.add(jPanel3);
 
         progressBar.setValue(35);
         progressBar.setStringPainted(true);
@@ -261,7 +410,7 @@ public class MainWindow extends javax.swing.JFrame {
             progressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
                 .addContainerGap())
         );
         progressPanelLayout.setVerticalGroup(
@@ -274,6 +423,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         startButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         startButton.setText("Start");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startButtonActionPerformed(evt);
+            }
+        });
 
         paintPanel.setBackground(new java.awt.Color(255, 255, 255));
         paintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,10 +455,10 @@ public class MainWindow extends javax.swing.JFrame {
         );
         paintPanelLayout.setVerticalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 370, Short.MAX_VALUE)
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ansicht"));
+        viewPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ansicht"));
 
         autoscaleSwitch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         autoscaleSwitch.setSelected(true);
@@ -335,118 +489,83 @@ public class MainWindow extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, zoomSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), zoomLabel2, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        thicknessSlider.setMajorTickSpacing(2);
+        thicknessSlider.setMaximum(14);
+        thicknessSlider.setMinimum(2);
+        thicknessSlider.setMinorTickSpacing(2);
+        thicknessSlider.setToolTipText("");
+        thicknessSlider.setValue(8);
+        thicknessSlider.setValueIsAdjusting(true);
+        thicknessSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ThicknessChanged(evt);
+            }
+        });
+
+        thicknessLabel.setText("Stadtgröße:");
+
+        javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
+        viewPanel.setLayout(viewPanelLayout);
+        viewPanelLayout.setHorizontalGroup(
+            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(zoomSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(autoscaleSwitch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(viewPanelLayout.createSequentialGroup()
                         .addComponent(zoomLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zoomLabel2)))
+                        .addComponent(zoomLabel2))
+                    .addComponent(thicknessSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(viewPanelLayout.createSequentialGroup()
+                        .addComponent(thicknessLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        viewPanelLayout.setVerticalGroup(
+            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(autoscaleSwitch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zoomLabel)
                     .addComponent(zoomLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(zoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(thicknessLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(thicknessSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Datei");
+        fileMenu.setText("Datei");
 
-        jMenuItem4.setText("Neu");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        newMenuItem.setText("Neu");
+        newMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                newMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        fileMenu.add(newMenuItem);
 
-        jMenuItem1.setText("Speichern");
-        jMenu1.add(jMenuItem1);
+        saveMenuItem.setText("Speichern");
+        fileMenu.add(saveMenuItem);
 
-        jMenuItem2.setText("Laden...");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        loadMenuItem.setText("Laden...");
+        loadMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                loadMenuItemActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        fileMenu.add(loadMenuItem);
 
-        jMenuItem3.setText("Beenden");
-        jMenu1.add(jMenuItem3);
+        exitMenuItem.setText("Beenden");
+        fileMenu.add(exitMenuItem);
 
-        mainMenuBar.add(jMenu1);
-
-        jMenu2.setText("Anzeige");
-
-        jMenu3.setText("Stadtgröße:");
-
-        this.thicknessButtons.add(jRadioButtonMenuItem1);
-        jRadioButtonMenuItem1.setText("2 Pixel");
-        jRadioButtonMenuItem1.setActionCommand("2");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThicknessChanged(evt);
-            }
-        });
-        jMenu3.add(jRadioButtonMenuItem1);
-
-        this.thicknessButtons.add(jRadioButtonMenuItem2);
-        jRadioButtonMenuItem2.setText("4 Pixel");
-        jRadioButtonMenuItem2.setActionCommand("4");
-        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThicknessChanged(evt);
-            }
-        });
-        jMenu3.add(jRadioButtonMenuItem2);
-
-        this.thicknessButtons.add(jRadioButtonMenuItem3);
-        jRadioButtonMenuItem3.setText("6 Pixel");
-        jRadioButtonMenuItem3.setActionCommand("6");
-        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThicknessChanged(evt);
-            }
-        });
-        jMenu3.add(jRadioButtonMenuItem3);
-
-        this.thicknessButtons.add(jRadioButtonMenuItem4);
-        jRadioButtonMenuItem4.setSelected(true);
-        jRadioButtonMenuItem4.setText("8 Pixel");
-        jRadioButtonMenuItem4.setActionCommand("8");
-        jRadioButtonMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThicknessChanged(evt);
-            }
-        });
-        jMenu3.add(jRadioButtonMenuItem4);
-
-        this.thicknessButtons.add(jRadioButtonMenuItem5);
-        jRadioButtonMenuItem5.setText("10 Pixel");
-        jRadioButtonMenuItem5.setActionCommand("10");
-        jRadioButtonMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThicknessChanged(evt);
-            }
-        });
-        jMenu3.add(jRadioButtonMenuItem5);
-
-        jMenu2.add(jMenu3);
-
-        mainMenuBar.add(jMenu2);
+        mainMenuBar.add(fileMenu);
 
         setJMenuBar(mainMenuBar);
 
@@ -458,13 +577,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(startButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -472,14 +591,12 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE))
+                    .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(viewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,32 +608,18 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadMenuItemActionPerformed
         FileDialog dialog = new FileDialog(this);
         dialog.setVisible(true);
         TSP.loadFromFile(dialog.getDirectory() + dialog.getFile());
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_loadMenuItemActionPerformed
 
     private void paintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseClicked
         Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
         paintPanel.refresh();
     }//GEN-LAST:event_paintPanelMouseClicked
 
-    private void zoomChangedHandler(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_zoomChangedHandler
-        paintPanel.setZoom(zoomSlider.getValue());
-        paintPanel.refresh();
-    }//GEN-LAST:event_zoomChangedHandler
-
-    private void autoscaleChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoscaleChanged
-        paintPanel.setAutoscale(autoscaleSwitch.isSelected());
-        if (!autoscaleSwitch.isSelected()) {
-            paintPanel.setxOffset(0);
-            paintPanel.setyOffset(0);
-        }
-        paintPanel.refresh();
-    }//GEN-LAST:event_autoscaleChanged
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
 
         autoscaleSwitch.setSelected(false);
         paintPanel.setAutoscale(false);
@@ -525,7 +628,7 @@ public class MainWindow extends javax.swing.JFrame {
         paintPanel.setyOffset(0);
         Main.data = new TSP();
         paintPanel.refresh();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_newMenuItemActionPerformed
 
     private void paintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMousePressed
         if (!autoscaleSwitch.isSelected()) {
@@ -551,16 +654,37 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_paintPanelMouseDragged
 
-    private void ThicknessChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThicknessChanged
-        int newThickness;
-        try {
-            newThickness = Integer.parseInt(evt.getActionCommand());
-        } catch (Exception e) {
-            newThickness = 8;
-        }
-        paintPanel.setThickness(newThickness);
+    private void ThicknessChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ThicknessChanged
+        paintPanel.setThickness(thicknessSlider.getValue());
         paintPanel.refresh();
     }//GEN-LAST:event_ThicknessChanged
+
+    private void zoomChangedHandler(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_zoomChangedHandler
+        paintPanel.setZoom(zoomSlider.getValue());
+        paintPanel.refresh();
+    }//GEN-LAST:event_zoomChangedHandler
+
+    private void autoscaleChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoscaleChanged
+        paintPanel.setAutoscale(autoscaleSwitch.isSelected());
+        if (!autoscaleSwitch.isSelected()) {
+            paintPanel.setxOffset(0);
+            paintPanel.setyOffset(0);
+        }
+        paintPanel.refresh();
+    }//GEN-LAST:event_autoscaleChanged
+
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        try {
+            Main.data.setPheromon(Double.parseDouble(pheromonText.getText()));
+            Main.data.setLocalInformation(Double.parseDouble(localInformationText.getText()));
+            Main.data.setEvaporation(Double.parseDouble(evaporationText.getText()));
+            Main.data.setInitialPheromon(Double.parseDouble(initialPheromonText.getText()));
+            Main.data.setPheromonUpdate(Double.parseDouble(pheromonUpdateText.getText()));
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Fehlerhafter Parameter:\n" + e.getMessage(), "Fehlerhafter Parameter", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_startButtonActionPerformed
 
     public int getZoom() {
         return zoomSlider.getValue();
@@ -569,7 +693,7 @@ public class MainWindow extends javax.swing.JFrame {
     public boolean getAutoscale() {
         return autoscaleSwitch.isSelected();
     }
-    /**
+    /** 
      * @param args the command line arguments
      */
 //    public static void main(String args[]) {
@@ -609,30 +733,42 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel evaporationLabel;
     private javax.swing.JSlider evaporationSlider;
     private javax.swing.JTextField evaporationText;
+    private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.JLabel gloabBestLabel;
+    private javax.swing.JLabel globalBestCaptionLabel;
     private javax.swing.JLabel initialPheromonLabel;
     private javax.swing.JSlider initialPheromonSlider;
     private javax.swing.JTextField initialPheromonText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JMenuItem loadMenuItem;
+    private javax.swing.JLabel localBestCaptionLabel;
+    private javax.swing.JLabel localBestLabel;
     private javax.swing.JLabel localInformationLabel;
     private javax.swing.JSlider localInformationSlider;
     private javax.swing.JTextField localInformationText;
     private javax.swing.JMenuBar mainMenuBar;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JMenuItem newMenuItem;
     private ants.PaintPanel paintPanel;
     private javax.swing.JPanel parameterPanel;
     private javax.swing.JLabel pheromonLabel;
@@ -644,7 +780,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel progressPanel;
     private javax.swing.JPanel resultPanel;
+    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JButton startButton;
+    private javax.swing.JLabel thicknessLabel;
+    private javax.swing.JSlider thicknessSlider;
+    private javax.swing.JPanel viewPanel;
     private javax.swing.JLabel zoomLabel;
     private javax.swing.JLabel zoomLabel2;
     private javax.swing.JSlider zoomSlider;

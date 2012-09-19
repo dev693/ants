@@ -15,11 +15,11 @@ public class TSP {
     private ArrayList<ArrayList<Double>> pheromonData;
     private ArrayList<ArrayList<Double>> distanceData;
     private ArrayList<City> cityList = new ArrayList();
-    public double pheromon;
-    public double localInformation;
-    public double evaporation;
-    public double initialPheromon;
-    public double pheromonUpdate;
+    private double pheromon;
+    private double localInformation;
+    private double evaporation;
+    private double initialPheromon;
+    private double pheromonUpdate;
     private double maxX = Double.MIN_VALUE;
     private double maxY = Double.MIN_VALUE;
     private double minX = Double.MAX_VALUE;
@@ -199,5 +199,40 @@ public class TSP {
      */
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    /**
+     * @param pheromon the pheromon to set
+     */
+    public void setPheromon(double pheromon) {
+        this.pheromon = pheromon;
+    }
+
+    /**
+     * @param localInformation the localInformation to set
+     */
+    public void setLocalInformation(double localInformation) {
+        this.localInformation = localInformation;
+    }
+
+    /**
+     * @param evaporation the evaporation to set
+     */
+    public void setEvaporation(double evaporation) {
+        this.evaporation = evaporation;
+    }
+
+    /**
+     * @param initialPheromon the initialPheromon to set
+     */
+    public void setInitialPheromon(double initialPheromon) {
+        this.initialPheromon = initialPheromon;
+    }
+
+    /**
+     * @param pheromonUpdate the pheromonUpdate to set
+     */
+    public void setPheromonUpdate(double pheromonUpdate) {
+        this.pheromonUpdate = pheromonUpdate;
     }
 }

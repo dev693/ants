@@ -32,15 +32,18 @@ public class DoubleInputVerifier extends javax.swing.InputVerifier{
         try {
             double value = Double.parseDouble(field.getText().replace(',', '.'));
             if (value > lBound && value <= uBound) {
-                field.setForeground(Color.black);
+                //field.setForeground(Color.black);
+                field.setBackground(Color.white);
                 return true;
                 
             } else {
-                field.setForeground(Color.red);
+                //field.setForeground(Color.red);
+                field.setBackground(Color.orange);
                 return false;
             }
         } catch (Exception e) {
-            field.setForeground(Color.red);
+            //field.setForeground(Color.red);
+            field.setBackground(Color.orange);
             return false;
         }
     }
