@@ -53,31 +53,27 @@ public class MainWindow extends javax.swing.JFrame {
         initialPheromonSlider = new javax.swing.JSlider();
         pheromonUpdateSlider = new javax.swing.JSlider();
         resultPanel = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        infoPanel = new javax.swing.JPanel();
+        nameCaptionLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        globalBestCaptionLabel = new javax.swing.JLabel();
-        gloabBestLabel = new javax.swing.JLabel();
-        localBestLabel = new javax.swing.JLabel();
+        cityCountCaptionLabel = new javax.swing.JLabel();
+        cityCountLabel = new javax.swing.JLabel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        timeCaptionLabel = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jLabel3 = new javax.swing.JLabel();
+        scorePanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        localBestCaptionLabel = new javax.swing.JLabel();
+        bestRouteCaptionLabel = new javax.swing.JLabel();
+        averageRouteCaptionLabel = new javax.swing.JLabel();
+        globalCaptionLabel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        localCaptionLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         progressPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         startButton = new javax.swing.JButton();
@@ -229,177 +225,94 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
-        resultPanel.setLayout(new java.awt.GridLayout(0, 1));
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(2484, 10));
+        infoPanel.setLayout(new java.awt.GridLayout(0, 3));
 
-        jLabel4.setText("Name:");
-        jLabel4.setToolTipText("");
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        nameCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        nameCaptionLabel.setText("Name:");
+        nameCaptionLabel.setToolTipText("");
+        nameCaptionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        infoPanel.add(nameCaptionLabel);
 
         nameLabel.setText("Berlin52");
         nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        infoPanel.add(nameLabel);
+        infoPanel.add(filler4);
 
-        jLabel5.setText("Anzahl der Städte:");
-        jLabel5.setMaximumSize(new java.awt.Dimension(100, 14));
+        cityCountCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cityCountCaptionLabel.setText("Anzahl der Städte:");
+        cityCountCaptionLabel.setMaximumSize(new java.awt.Dimension(100, 14));
+        infoPanel.add(cityCountCaptionLabel);
 
-        jLabel2.setText("52");
+        cityCountLabel.setText("52");
+        infoPanel.add(cityCountLabel);
+        infoPanel.add(filler5);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jLabel2)
-                .addContainerGap(149, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(nameLabel)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)))
-        );
+        timeCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        timeCaptionLabel.setText("benötigte Zeit:");
+        infoPanel.add(timeCaptionLabel);
 
-        resultPanel.add(jPanel2);
-        resultPanel.add(filler4);
+        timeLabel.setText("5 s");
+        infoPanel.add(timeLabel);
+        infoPanel.add(filler6);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Beste Route:");
-        resultPanel.add(jLabel7);
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Kommentar:");
+        infoPanel.add(jLabel3);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Durchschnittliche Route:");
-        resultPanel.add(jLabel1);
-        resultPanel.add(filler3);
+        scorePanel.setPreferredSize(new java.awt.Dimension(2484, 30));
+        scorePanel.setLayout(new java.awt.GridLayout(0, 3, 0, 2));
+        scorePanel.add(filler1);
 
-        globalBestCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        globalBestCaptionLabel.setText("Gesamt:");
-        resultPanel.add(globalBestCaptionLabel);
+        bestRouteCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bestRouteCaptionLabel.setText("Beste Route:");
+        scorePanel.add(bestRouteCaptionLabel);
 
-        gloabBestLabel.setText("15000 km");
-        resultPanel.add(gloabBestLabel);
+        averageRouteCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        averageRouteCaptionLabel.setText("Durchschnittliche Route:");
+        scorePanel.add(averageRouteCaptionLabel);
 
-        localBestLabel.setText("20000 km");
-        resultPanel.add(localBestLabel);
-        resultPanel.add(filler1);
-
-        localBestCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        localBestCaptionLabel.setText("Iteration:");
-        localBestCaptionLabel.setToolTipText("");
-        resultPanel.add(localBestCaptionLabel);
+        globalCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        globalCaptionLabel.setText("Gesamt:");
+        scorePanel.add(globalCaptionLabel);
 
         jLabel6.setText("16000 km");
-        resultPanel.add(jLabel6);
+        scorePanel.add(jLabel6);
 
         jLabel10.setText("16000 km");
-        resultPanel.add(jLabel10);
-        resultPanel.add(filler2);
+        scorePanel.add(jLabel10);
 
-        jLabel3.setText("benötigte Zeit:");
-        resultPanel.add(jLabel3);
+        localCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        localCaptionLabel.setText("Iteration:");
+        localCaptionLabel.setToolTipText("");
+        localCaptionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        scorePanel.add(localCaptionLabel);
 
-        jLabel8.setText("5 s");
-        resultPanel.add(jLabel8);
+        jLabel1.setText("18000 km");
+        scorePanel.add(jLabel1);
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(2484, 10));
+        jLabel2.setText("20000 km");
+        scorePanel.add(jLabel2);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
+        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
+        resultPanel.setLayout(resultPanelLayout);
+        resultPanelLayout.setHorizontalGroup(
+            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(scorePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
+        resultPanelLayout.setVerticalGroup(
+            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        resultPanel.add(jPanel8);
-
-        jPanel7.setPreferredSize(new java.awt.Dimension(2484, 10));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
-        resultPanel.add(jPanel7);
-
-        jPanel6.setPreferredSize(new java.awt.Dimension(2484, 10));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
-        resultPanel.add(jPanel6);
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(2484, 10));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
-        resultPanel.add(jPanel5);
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(2484, 10));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
-        resultPanel.add(jPanel4);
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(2484, 10));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 547, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 14, Short.MAX_VALUE)
-        );
-
-        resultPanel.add(jPanel3);
 
         progressBar.setValue(35);
         progressBar.setStringPainted(true);
@@ -410,7 +323,7 @@ public class MainWindow extends javax.swing.JFrame {
             progressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         progressPanelLayout.setVerticalGroup(
@@ -455,7 +368,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         paintPanelLayout.setVerticalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 345, Short.MAX_VALUE)
         );
 
         viewPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ansicht"));
@@ -578,7 +491,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -594,9 +509,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(viewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -730,17 +645,21 @@ public class MainWindow extends javax.swing.JFrame {
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton autoscaleSwitch;
+    private javax.swing.JLabel averageRouteCaptionLabel;
+    private javax.swing.JLabel bestRouteCaptionLabel;
+    private javax.swing.JLabel cityCountCaptionLabel;
+    private javax.swing.JLabel cityCountLabel;
     private javax.swing.JLabel evaporationLabel;
     private javax.swing.JSlider evaporationSlider;
     private javax.swing.JTextField evaporationText;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
-    private javax.swing.JLabel gloabBestLabel;
-    private javax.swing.JLabel globalBestCaptionLabel;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.JLabel globalCaptionLabel;
+    private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel initialPheromonLabel;
     private javax.swing.JSlider initialPheromonSlider;
     private javax.swing.JTextField initialPheromonText;
@@ -748,25 +667,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JMenuItem loadMenuItem;
-    private javax.swing.JLabel localBestCaptionLabel;
-    private javax.swing.JLabel localBestLabel;
+    private javax.swing.JLabel localCaptionLabel;
     private javax.swing.JLabel localInformationLabel;
     private javax.swing.JSlider localInformationSlider;
     private javax.swing.JTextField localInformationText;
     private javax.swing.JMenuBar mainMenuBar;
+    private javax.swing.JLabel nameCaptionLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JMenuItem newMenuItem;
     private ants.PaintPanel paintPanel;
@@ -781,9 +689,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel progressPanel;
     private javax.swing.JPanel resultPanel;
     private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JPanel scorePanel;
     private javax.swing.JButton startButton;
     private javax.swing.JLabel thicknessLabel;
     private javax.swing.JSlider thicknessSlider;
+    private javax.swing.JLabel timeCaptionLabel;
+    private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel viewPanel;
     private javax.swing.JLabel zoomLabel;
     private javax.swing.JLabel zoomLabel2;
