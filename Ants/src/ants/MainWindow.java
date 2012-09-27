@@ -4,18 +4,20 @@
  */
 package ants;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FileDialog;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
+import java.io.File;
+import java.io.FilenameFilter;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author user
  */
 public class MainWindow extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form NewJFrame
      */
@@ -25,7 +27,8 @@ public class MainWindow extends javax.swing.JFrame {
     private int pressedX = 0;
     private int pressedY = 0;
     private boolean mousePressed = false;
-    private ButtonGroup thicknessButtons = new ButtonGroup();
+    private City selectedCity = null; 
+    private boolean moveCity = false;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,22 +39,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        parameterPanel = new javax.swing.JPanel();
-        pheromonLabel = new javax.swing.JLabel();
-        localInformationLabel = new javax.swing.JLabel();
-        evaporationLabel = new javax.swing.JLabel();
-        evaporationSlider = new javax.swing.JSlider();
-        initialPheromonLabel = new javax.swing.JLabel();
-        pheromonUpdateLabel = new javax.swing.JLabel();
-        evaporationText = new javax.swing.JTextField();
-        pheromonText = new javax.swing.JTextField();
-        localInformationText = new javax.swing.JTextField();
-        initialPheromonText = new javax.swing.JTextField();
-        pheromonUpdateText = new javax.swing.JTextField();
-        pheromonSlider = new javax.swing.JSlider();
-        localInformationSlider = new javax.swing.JSlider();
-        initialPheromonSlider = new javax.swing.JSlider();
-        pheromonUpdateSlider = new javax.swing.JSlider();
         resultPanel = new javax.swing.JPanel();
         infoPanel = new javax.swing.JPanel();
         nameCaptionLabel = new javax.swing.JLabel();
@@ -60,10 +47,11 @@ public class MainWindow extends javax.swing.JFrame {
         cityCountCaptionLabel = new javax.swing.JLabel();
         cityCountLabel = new javax.swing.JLabel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        commentCaptionLabel = new javax.swing.JLabel();
+        commentLabel = new javax.swing.JLabel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         timeCaptionLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jLabel3 = new javax.swing.JLabel();
         scorePanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         bestRouteCaptionLabel = new javax.swing.JLabel();
@@ -85,6 +73,29 @@ public class MainWindow extends javax.swing.JFrame {
         zoomLabel2 = new javax.swing.JLabel();
         thicknessSlider = new javax.swing.JSlider();
         thicknessLabel = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        parameterPanel = new javax.swing.JPanel();
+        pheromonLabel = new javax.swing.JLabel();
+        localInformationLabel = new javax.swing.JLabel();
+        evaporationLabel = new javax.swing.JLabel();
+        evaporationSlider = new javax.swing.JSlider();
+        initialPheromonLabel = new javax.swing.JLabel();
+        pheromonUpdateLabel = new javax.swing.JLabel();
+        evaporationText = new javax.swing.JTextField();
+        pheromonText = new javax.swing.JTextField();
+        localInformationText = new javax.swing.JTextField();
+        initialPheromonText = new javax.swing.JTextField();
+        pheromonUpdateText = new javax.swing.JTextField();
+        pheromonSlider = new javax.swing.JSlider();
+        localInformationSlider = new javax.swing.JSlider();
+        initialPheromonSlider = new javax.swing.JSlider();
+        pheromonUpdateSlider = new javax.swing.JSlider();
+        iterationPanel = new javax.swing.JPanel();
+        iterationCaptionLabel = new javax.swing.JLabel();
+        antsCaptionLabel = new javax.swing.JLabel();
+        iterationsText = new javax.swing.JTextField();
+        antsText = new javax.swing.JTextField();
+        stopPanel = new javax.swing.JPanel();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newMenuItem = new javax.swing.JMenuItem();
@@ -95,134 +106,6 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
         setName("MainFrame"); // NOI18N
-
-        parameterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Parameter"));
-
-        pheromonLabel.setText("Pheromon:");
-
-        localInformationLabel.setText("lokale Information");
-
-        evaporationLabel.setText("Verdunstunsfaktor:");
-
-        evaporationSlider.setMaximum(10001);
-        evaporationSlider.setMinimum(1);
-        evaporationSlider.setMinorTickSpacing(1);
-        evaporationSlider.setToolTipText("");
-        evaporationSlider.setValue(1000);
-
-        initialPheromonLabel.setText("initiale Pheromone:");
-
-        pheromonUpdateLabel.setText("Pheromon-Update:");
-
-        evaporationText.setInputVerifier(new DoubleInputVerifier(0,1));
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "evaporationBinding");
-        binding.setConverter(new DoubleConverter());
-        bindingGroup.addBinding(binding);
-
-        pheromonText.setInputVerifier(new DoubleInputVerifier(0));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonBinding");
-        binding.setConverter(new DoubleConverter());
-        bindingGroup.addBinding(binding);
-
-        localInformationText.setInputVerifier(new DoubleInputVerifier(0));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "localInformationBinding");
-        binding.setConverter(new DoubleConverter());
-        bindingGroup.addBinding(binding);
-
-        initialPheromonText.setInputVerifier(new DoubleInputVerifier(0));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "initialPheromonBinding");
-        binding.setConverter(new DoubleConverter());
-        bindingGroup.addBinding(binding);
-
-        pheromonUpdateText.setInputVerifier(new DoubleInputVerifier(0));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonUpdateBinding");
-        binding.setConverter(new DoubleConverter());
-        bindingGroup.addBinding(binding);
-
-        pheromonSlider.setMaximum(100000);
-        pheromonSlider.setValue(50000);
-
-        localInformationSlider.setMaximum(100000);
-        localInformationSlider.setValue(50000);
-
-        initialPheromonSlider.setMaximum(100000);
-        initialPheromonSlider.setValue(50000);
-
-        pheromonUpdateSlider.setMaximum(100000);
-        pheromonUpdateSlider.setValue(50000);
-
-        javax.swing.GroupLayout parameterPanelLayout = new javax.swing.GroupLayout(parameterPanel);
-        parameterPanel.setLayout(parameterPanelLayout);
-        parameterPanelLayout.setHorizontalGroup(
-            parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(parameterPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(initialPheromonSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pheromonSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parameterPanelLayout.createSequentialGroup()
-                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pheromonLabel)
-                            .addComponent(localInformationLabel)
-                            .addComponent(evaporationLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(evaporationText)
-                            .addComponent(pheromonText, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                            .addComponent(localInformationText)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parameterPanelLayout.createSequentialGroup()
-                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(initialPheromonLabel)
-                            .addComponent(pheromonUpdateLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pheromonUpdateText, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                            .addComponent(initialPheromonText)))
-                    .addComponent(localInformationSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(evaporationSlider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        parameterPanelLayout.setVerticalGroup(
-            parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(parameterPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pheromonLabel)
-                    .addComponent(pheromonText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pheromonSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(localInformationLabel)
-                    .addComponent(localInformationText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(localInformationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(evaporationLabel)
-                    .addComponent(evaporationText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(evaporationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(initialPheromonLabel)
-                    .addComponent(initialPheromonText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(initialPheromonSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pheromonUpdateLabel)
-                    .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
 
@@ -248,17 +131,20 @@ public class MainWindow extends javax.swing.JFrame {
         infoPanel.add(cityCountLabel);
         infoPanel.add(filler5);
 
+        commentCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        commentCaptionLabel.setText("Kommentar:");
+        infoPanel.add(commentCaptionLabel);
+
+        commentLabel.setText("blab lbalbalblabla");
+        infoPanel.add(commentLabel);
+        infoPanel.add(filler6);
+
         timeCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         timeCaptionLabel.setText("benötigte Zeit:");
         infoPanel.add(timeCaptionLabel);
 
         timeLabel.setText("5 s");
         infoPanel.add(timeLabel);
-        infoPanel.add(filler6);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("Kommentar:");
-        infoPanel.add(jLabel3);
 
         scorePanel.setPreferredSize(new java.awt.Dimension(2484, 30));
         scorePanel.setLayout(new java.awt.GridLayout(0, 3, 0, 2));
@@ -368,7 +254,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         paintPanelLayout.setVerticalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 345, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         viewPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ansicht"));
@@ -399,7 +285,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         zoomLabel.setText("Zoom:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, zoomSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), zoomLabel2, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, zoomSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), zoomLabel2, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         thicknessSlider.setMajorTickSpacing(2);
@@ -454,6 +340,188 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pheromonLabel.setText("Pheromon:");
+
+        localInformationLabel.setText("lokale Information");
+
+        evaporationLabel.setText("Verdunstunsfaktor:");
+
+        evaporationSlider.setMaximum(10001);
+        evaporationSlider.setMinimum(1);
+        evaporationSlider.setMinorTickSpacing(1);
+        evaporationSlider.setToolTipText("");
+        evaporationSlider.setValue(1000);
+
+        initialPheromonLabel.setText("initiale Pheromone:");
+
+        pheromonUpdateLabel.setText("Pheromon-Update:");
+
+        evaporationText.setInputVerifier(new DoubleInputVerifier(0,1));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "evaporationBinding");
+        binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+
+        pheromonText.setInputVerifier(new DoubleInputVerifier(0));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonBinding");
+        binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+
+        localInformationText.setInputVerifier(new DoubleInputVerifier(0));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "localInformationBinding");
+        binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+
+        initialPheromonText.setInputVerifier(new DoubleInputVerifier(0));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "initialPheromonBinding");
+        binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+
+        pheromonUpdateText.setInputVerifier(new DoubleInputVerifier(0));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonUpdateBinding");
+        binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+
+        pheromonSlider.setMaximum(100000);
+        pheromonSlider.setValue(50000);
+
+        localInformationSlider.setMaximum(100000);
+        localInformationSlider.setValue(50000);
+
+        initialPheromonSlider.setMaximum(100000);
+        initialPheromonSlider.setValue(50000);
+
+        pheromonUpdateSlider.setMaximum(100000);
+        pheromonUpdateSlider.setValue(50000);
+
+        javax.swing.GroupLayout parameterPanelLayout = new javax.swing.GroupLayout(parameterPanel);
+        parameterPanel.setLayout(parameterPanelLayout);
+        parameterPanelLayout.setHorizontalGroup(
+            parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(parameterPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(initialPheromonSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                    .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pheromonSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parameterPanelLayout.createSequentialGroup()
+                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pheromonLabel)
+                            .addComponent(localInformationLabel)
+                            .addComponent(evaporationLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(evaporationText)
+                            .addComponent(pheromonText, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                            .addComponent(localInformationText)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parameterPanelLayout.createSequentialGroup()
+                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(initialPheromonLabel)
+                            .addComponent(pheromonUpdateLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pheromonUpdateText, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                            .addComponent(initialPheromonText)))
+                    .addComponent(localInformationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(evaporationSlider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        parameterPanelLayout.setVerticalGroup(
+            parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(parameterPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pheromonLabel)
+                    .addComponent(pheromonText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pheromonSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(localInformationLabel)
+                    .addComponent(localInformationText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(localInformationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(evaporationLabel)
+                    .addComponent(evaporationText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(evaporationSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(initialPheromonLabel)
+                    .addComponent(initialPheromonText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(initialPheromonSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(parameterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pheromonUpdateLabel)
+                    .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Parameter", parameterPanel);
+
+        iterationCaptionLabel.setText("Anzahl der Iterationen:");
+
+        antsCaptionLabel.setText("Anzahl der Ameisen:");
+
+        iterationsText.setText("100");
+        iterationsText.setInputVerifier(new IntegerInputVerifier());
+
+        antsText.setText("100");
+        antsText.setInputVerifier(new IntegerInputVerifier());
+
+        javax.swing.GroupLayout iterationPanelLayout = new javax.swing.GroupLayout(iterationPanel);
+        iterationPanel.setLayout(iterationPanelLayout);
+        iterationPanelLayout.setHorizontalGroup(
+            iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iterationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iterationCaptionLabel)
+                    .addComponent(antsCaptionLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(antsText, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(iterationsText))
+                .addContainerGap())
+        );
+        iterationPanelLayout.setVerticalGroup(
+            iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(iterationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iterationCaptionLabel)
+                    .addComponent(iterationsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(antsCaptionLabel)
+                    .addComponent(antsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(359, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Iterationen", iterationPanel);
+
+        javax.swing.GroupLayout stopPanelLayout = new javax.swing.GroupLayout(stopPanel);
+        stopPanel.setLayout(stopPanelLayout);
+        stopPanelLayout.setHorizontalGroup(
+            stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 237, Short.MAX_VALUE)
+        );
+        stopPanelLayout.setVerticalGroup(
+            stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 416, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Abbruch", stopPanel);
+
         fileMenu.setText("Datei");
 
         newMenuItem.setText("Neu");
@@ -465,6 +533,11 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu.add(newMenuItem);
 
         saveMenuItem.setText("Speichern");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveMenuItem);
 
         loadMenuItem.setText("Laden...");
@@ -491,23 +564,19 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(parameterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(startButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jTabbedPane1)
+                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(parameterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,14 +593,45 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadMenuItemActionPerformed
-        FileDialog dialog = new FileDialog(this);
-        dialog.setVisible(true);
-        TSP.loadFromFile(dialog.getDirectory() + dialog.getFile());
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("TSP Laden");
+        chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        chooser.setFileFilter(new FileNameExtensionFilter("TSP-Datei", "tsp"));
+        chooser.showOpenDialog(this);
+        if (chooser.getSelectedFile() != null) {
+            TSP.loadFromFile(chooser.getSelectedFile().getPath());
+        }
     }//GEN-LAST:event_loadMenuItemActionPerformed
 
     private void paintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseClicked
-        Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
-        paintPanel.refresh();
+        City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()),
+                                                    paintPanel.YPixel2Coord(evt.getY()), 
+                                                    10 / paintPanel.getRelation(), 
+                                                    10 / paintPanel.getRelation());
+        if (nearestCity != null) {
+            if (selectedCity != null) {
+                selectedCity.setColor(Color.BLACK);
+                
+            }
+            if (selectedCity == nearestCity) {
+                selectedCity = null;
+                paintPanel.refresh();
+            } else {
+                nearestCity.setColor(Color.red);
+                selectedCity = nearestCity;
+                paintPanel.refresh();
+            }
+            
+        } else {
+            if (selectedCity != null) {
+                selectedCity.setColor(Color.BLACK);
+                selectedCity = null;
+                paintPanel.refresh();
+            } else {
+                Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
+                paintPanel.refresh();
+            }
+        }
     }//GEN-LAST:event_paintPanelMouseClicked
 
     private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
@@ -546,6 +646,16 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_newMenuItemActionPerformed
 
     private void paintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMousePressed
+        if (selectedCity != null) {
+            City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()),
+                                                    paintPanel.YPixel2Coord(evt.getY()), 
+                                                    10 / paintPanel.getRelation(), 
+                                                    10 / paintPanel.getRelation());
+            if (nearestCity == selectedCity) {
+                moveCity = true;
+            }
+        }
+        
         if (!autoscaleSwitch.isSelected()) {
             mousePressed = true;
             pressedX = evt.getX();
@@ -555,10 +665,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void paintPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseReleased
         mousePressed = false;
+        moveCity = false;
         paintPanel.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_paintPanelMouseReleased
 
     private void paintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseDragged
+        if (moveCity) {
+            selectedCity.moveCity( paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
+            paintPanel.refresh();
+        }
+        
         if (mousePressed) {
             paintPanel.setCursor( new Cursor(Cursor.HAND_CURSOR));
             paintPanel.addxOffset(pressedX - evt.getX());
@@ -595,11 +711,22 @@ public class MainWindow extends javax.swing.JFrame {
             Main.data.setEvaporation(Double.parseDouble(evaporationText.getText()));
             Main.data.setInitialPheromon(Double.parseDouble(initialPheromonText.getText()));
             Main.data.setPheromonUpdate(Double.parseDouble(pheromonUpdateText.getText()));
+            Main.data.setIterations(Integer.parseInt(iterationsText.getText()));
+            Main.data.setAnts(Integer.parseInt(antsText.getText()));
+            Main.data.solveTSP();
             
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Fehlerhafter Parameter:\n" + e.getMessage(), "Fehlerhafter Parameter", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_startButtonActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("TSP-Speicherm");
+        chooser.setFileFilter(new FileNameExtensionFilter("TSP-Datei", "tsp"));
+        chooser.showSaveDialog(this);
+        
+    }//GEN-LAST:event_saveMenuItemActionPerformed
 
     public int getZoom() {
         return zoomSlider.getValue();
@@ -644,11 +771,15 @@ public class MainWindow extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel antsCaptionLabel;
+    private javax.swing.JTextField antsText;
     private javax.swing.JToggleButton autoscaleSwitch;
     private javax.swing.JLabel averageRouteCaptionLabel;
     private javax.swing.JLabel bestRouteCaptionLabel;
     private javax.swing.JLabel cityCountCaptionLabel;
     private javax.swing.JLabel cityCountLabel;
+    private javax.swing.JLabel commentCaptionLabel;
+    private javax.swing.JLabel commentLabel;
     private javax.swing.JLabel evaporationLabel;
     private javax.swing.JSlider evaporationSlider;
     private javax.swing.JTextField evaporationText;
@@ -663,11 +794,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel initialPheromonLabel;
     private javax.swing.JSlider initialPheromonSlider;
     private javax.swing.JTextField initialPheromonText;
+    private javax.swing.JLabel iterationCaptionLabel;
+    private javax.swing.JPanel iterationPanel;
+    private javax.swing.JTextField iterationsText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem loadMenuItem;
     private javax.swing.JLabel localCaptionLabel;
     private javax.swing.JLabel localInformationLabel;
@@ -691,6 +825,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JPanel scorePanel;
     private javax.swing.JButton startButton;
+    private javax.swing.JPanel stopPanel;
     private javax.swing.JLabel thicknessLabel;
     private javax.swing.JSlider thicknessSlider;
     private javax.swing.JLabel timeCaptionLabel;

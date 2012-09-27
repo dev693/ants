@@ -20,6 +20,8 @@ public class TSP {
     private double evaporation;
     private double initialPheromon;
     private double pheromonUpdate;
+    private int iterations;
+    private int ants;
     private double maxX = Double.MIN_VALUE;
     private double maxY = Double.MIN_VALUE;
     private double minX = Double.MAX_VALUE;
@@ -31,7 +33,7 @@ public class TSP {
     }
 
     public static void loadFromFile(String path) {
-
+        System.out.println(path);
         Main.data = new TSP();
 
         if (path != null) {
@@ -60,7 +62,7 @@ public class TSP {
 
                     if (line.startsWith("COMMENT")) {
                         String lineParts[] = line.split(":");
-                        Main.data.setComment(lineParts[1].trim());
+                        Main.data.addComment(lineParts[1].trim());
                     }
 
                     if (line.startsWith("NAME")) {
@@ -87,10 +89,11 @@ public class TSP {
         }
     }
 
-    public void saveToFile() {
+    public void saveToFile(String file) {
+        
     }
 
-    public void solveTSP(Integer antCount, Integer iterationCount) {
+    public void solveTSP() {
     }
 
     public void getParameters() {
@@ -139,6 +142,16 @@ public class TSP {
 
         //TODO Länge
         //TODO PHEROMON
+    }
+    
+    public City getCityNearby(double x, double y, double rangeX, double rangeY) {
+        for(City city : cityList) {
+            if((x-rangeX) < city.getXPos() && city.getXPos() < (x+rangeX) 
+                    && (y-rangeY) < city.getYPos() &&  city.getYPos() < (y+rangeY)) {
+                return city;
+            }
+        }
+        return null;
     }
 
     public double getMaxX() {
@@ -200,6 +213,10 @@ public class TSP {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+    public void addComment(String comment) {
+        this.comment += comment + " ";
+    }
 
     /**
      * @param pheromon the pheromon to set
@@ -234,5 +251,19 @@ public class TSP {
      */
     public void setPheromonUpdate(double pheromonUpdate) {
         this.pheromonUpdate = pheromonUpdate;
+    }
+
+    /**
+     * @param iterations the iterations to set
+     */
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
+    }
+
+    /**
+     * @param ants the ants to set
+     */
+    public void setAnts(int ants) {
+        this.ants = ants;
     }
 }
