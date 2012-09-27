@@ -1,8 +1,11 @@
 package ants;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +14,7 @@ import javax.swing.JOptionPane;
 public class TSP {
 
     private String name;
-    private String comment;
+    private String comment = "";
     private ArrayList<ArrayList<Double>> pheromonData;
     private ArrayList<ArrayList<Double>> distanceData;
     private ArrayList<City> cityList = new ArrayList();
@@ -41,7 +44,7 @@ public class TSP {
                 BufferedReader reader = new BufferedReader(new FileReader(path));
                 int localDimension = 0;
                 while (reader.ready()) {
-                    String line = reader.readLine();
+                    String line = reader.readLine().trim();
 
 
                     if (line.equals("NODE_COORD_SECTION")) {
@@ -89,8 +92,34 @@ public class TSP {
         }
     }
 
-    public void saveToFile(String file) {
-        
+    public void saveToFile(File file) {
+        if (this.comment == null) {
+            this.comment = JOptionPane.showInputDialog(Main.window, "Bitte geben Sie einen Kommentar ein: ", "Kommentar", JOptionPane.QUESTION_MESSAGE);
+        }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
+            writer.write("NAME: " + file.getName().subSequence(0, file.getName().lastIndexOf(".")));
+            writer.newLine();
+            writer.write("TYPE: TSP");
+            writer.newLine();
+            writer.write("COMMENT: " + this.comment);
+            writer.newLine();
+            writer.write("DIMENSION: " + this.getCityListLength());
+            writer.newLine();
+            writer.write("EDGE_WEIGHT_TYPE: EUC_2D");
+            writer.newLine();
+            writer.write("NODE_COORD_SECTION");
+            writer.newLine();
+            int number = 0;
+            for (City city : cityList) {
+                writer.write(++number + " " + city.getXPos() + " " + city.getYPos());
+                writer.newLine();
+            }
+            writer.write("EOF");
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void solveTSP() {

@@ -723,8 +723,17 @@ public class MainWindow extends javax.swing.JFrame {
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("TSP-Speicherm");
+        chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        if (Main.data.getName() != null) {
+            chooser.setSelectedFile(new File(System.getProperty("user.dir") + "/" + Main.data.getName() + ".tsp"));
+        } else {
+            chooser.setSelectedFile(new File(System.getProperty("user.dir") + "/Neu.tsp"));    
+        }     
         chooser.setFileFilter(new FileNameExtensionFilter("TSP-Datei", "tsp"));
         chooser.showSaveDialog(this);
+        if (chooser.getSelectedFile() != null) {
+            Main.data.saveToFile(chooser.getSelectedFile());
+        }
         
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
