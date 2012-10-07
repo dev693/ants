@@ -19,6 +19,8 @@ public class PaintPanel extends JPanel {
     private int borderOffset = 10;
     private int xOffset = 0;
     private int yOffset = 0;
+    private int xBaseOffset = 0;
+    private int yBaseOffset = 0;
     private int zoom = 100;    
     private boolean autoscale = true;
     
@@ -30,7 +32,7 @@ public class PaintPanel extends JPanel {
         if (!java.beans.Beans.isDesignTime()) {
             calcRelation();
 
-            System.out.println("relation: " + getRelation() + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; yOffset: " + getyOffset());
+            System.out.println("relation: " + getRelation() + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; xBaseOffset: " + xBaseOffset + "; yOffset: " + getyOffset() + "; yBaseOffset: " + yBaseOffset);
             g.setColor(Color.white);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -40,9 +42,10 @@ public class PaintPanel extends JPanel {
             g.setColor(Color.blue);
             drawRoute(g, Main.data.getLocalBest());
 
+            g.setColor(Color.GRAY);
+            g.fillRect((this.getWidth() / 2) -1,this.getHeight() / 2 -1, 2, 2);
 
             //Städte Anzeigen
-            g.setColor(Color.black);
             for (int i = 0; i < Main.data.getCityListLength(); i++) {
                 drawCity(g, Main.data.getCity(i));
             }
@@ -54,11 +57,11 @@ public class PaintPanel extends JPanel {
     }
 
     public double XPixel2Coord(int x) {
-        return (x + getxOffset() - borderOffset) / getRelation();
+        return (x + xOffset - borderOffset) / getRelation();
     }
     
     public double YPixel2Coord(int y) {
-        return (y + getyOffset() - borderOffset) / getRelation();
+        return (y + yOffset - borderOffset) / getRelation();
     }
     
     
@@ -74,10 +77,12 @@ public class PaintPanel extends JPanel {
             double relationX = (this.getWidth() - 2 * borderOffset) / width;
             System.out.println(zoom);
             relation = Math.min(relationX, relationY) * ((double) zoom / 100);
-            setxOffset((int) (Main.data.getMinX()*getRelation()));
-            setyOffset((int) (Main.data.getMinY()*getRelation()));
+            xOffset = (int) (((Main.data.getMinX()*getRelation()) + (this.getWidth() / 2) - borderOffset) * ( (double) zoom / 100)) - (this.getWidth() / 2) + borderOffset;
+            yOffset = (int) (((Main.data.getMinY()*getRelation()) + (this.getHeight() / 2) - borderOffset) * ( (double) zoom / 100)) - (this.getHeight() / 2) + borderOffset;
         } else {
             relation = (double) zoom / 100;
+            xOffset = (int) ((xBaseOffset + (this.getWidth() / 2) - borderOffset) * ( (double) zoom / 100)) - (this.getWidth() / 2) + borderOffset;
+            yOffset = (int) ((yBaseOffset + (this.getHeight() / 2) - borderOffset) * ( (double) zoom / 100)) - (this.getHeight() / 2) + borderOffset;
         }
     }
 
@@ -125,32 +130,23 @@ public class PaintPanel extends JPanel {
     }
 
     /**
-     * @param xOffset the xOffset to set
-     */
-    public void setxOffset(int xOffset) {
-        this.xOffset = xOffset;
-    }
-
-    /**
      * @return the yOffset
      */
     public int getyOffset() {
         return yOffset;
     }
 
-    public void addyOffset(int dy) {
-        yOffset += dy;
+    public void shiftX(int dx) {
+        //this.xBaseOffset = ((xOffset - borderOffset + this.getWidth() / 2) * 100) / zoom - this.getWidth() / 2 + borderOffset;
+        System.out.println("dx / relation: " + (dx / relation));
+        this.xBaseOffset += (int) (dx / relation);
     }
     
-    public void addxOffset(int dx) {
-        xOffset += dx;
-    }
-    
-    /**
-     * @param yOffset the yOffset to set
-     */
-    public void setyOffset(int yOffset) {
-        this.yOffset = yOffset;
+    public void shiftY(int dy) {
+        //System.out.println(  (yOffset - borderOffset + this.getHeight() /(double) 2) / ( zoom /(double) 100 ) - this.getHeight() / 2 + borderOffset);
+        //this. yBaseOffset = ((yOffset - borderOffset + this.getHeight() / 2) * 100) / zoom - this.getHeight() / 2 + borderOffset;
+        System.out.println("dy / relation: " + (dy / relation));
+        this.yBaseOffset += (int) (dy / relation);
     }
 
     /**
@@ -160,10 +156,27 @@ public class PaintPanel extends JPanel {
         this.thickness = thickness;
     }
 
+    public int getThickness() {
+        return this.thickness;
+    }
     /**
      * @return the relation
      */
     public double getRelation() {
         return relation;
+    }
+
+    void resetOffset() {
+        xOffset = 0;
+        yOffset = 0;
+        xBaseOffset = 0;
+        yBaseOffset = 0;
+    }
+    
+    void setBestOffset() {
+        xBaseOffset = (int) (Main.data.getMinX() / relation);
+        yBaseOffset = (int) (Main.data.getMinY() / relation);
+        xOffset = 0;
+        yOffset = 0;
     }
 }

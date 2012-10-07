@@ -7,6 +7,7 @@ package ants;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FileDialog;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FilenameFilter;
 import javax.swing.JFileChooser;
@@ -284,6 +285,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         zoomLabel.setText("Zoom:");
+        zoomLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                zoomLabelMouseClicked(evt);
+            }
+        });
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, zoomSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), zoomLabel2, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
@@ -600,38 +606,41 @@ public class MainWindow extends javax.swing.JFrame {
         chooser.showOpenDialog(this);
         if (chooser.getSelectedFile() != null) {
             TSP.loadFromFile(chooser.getSelectedFile().getPath());
+            refreshTSPInfos();
         }
     }//GEN-LAST:event_loadMenuItemActionPerformed
 
+    
     private void paintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseClicked
-        City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()),
-                                                    paintPanel.YPixel2Coord(evt.getY()), 
-                                                    10 / paintPanel.getRelation(), 
-                                                    10 / paintPanel.getRelation());
-        if (nearestCity != null) {
-            if (selectedCity != null) {
-                selectedCity.setColor(Color.BLACK);
-                
-            }
-            if (selectedCity == nearestCity) {
-                selectedCity = null;
-                paintPanel.refresh();
+        if (evt.getButton() == MouseEvent.BUTTON1) { // LEFT CLICK
+            Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
+            paintPanel.refresh();
+        }
+        if (evt.getButton() == MouseEvent.BUTTON3) { // RIGHT CLICK
+            City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()),paintPanel.getThickness() / paintPanel.getRelation(),paintPanel.getThickness() / paintPanel.getRelation());
+            if (nearestCity != null) {
+                if (selectedCity != null) {
+                    selectedCity.setColor(Color.BLACK);
+
+                }
+                if (selectedCity == nearestCity) {
+                    selectedCity = null;
+                    paintPanel.refresh();
+                } else {
+                    nearestCity.setColor(Color.red);
+                    selectedCity = nearestCity;
+                    paintPanel.refresh();
+                }
+
             } else {
-                nearestCity.setColor(Color.red);
-                selectedCity = nearestCity;
-                paintPanel.refresh();
-            }
-            
-        } else {
-            if (selectedCity != null) {
                 selectedCity.setColor(Color.BLACK);
                 selectedCity = null;
-                paintPanel.refresh();
-            } else {
-                Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
                 paintPanel.refresh();
             }
         }
+       
+            
+        refreshTSPInfos();
     }//GEN-LAST:event_paintPanelMouseClicked
 
     private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
@@ -639,28 +648,30 @@ public class MainWindow extends javax.swing.JFrame {
         autoscaleSwitch.setSelected(false);
         paintPanel.setAutoscale(false);
         zoomSlider.setValue(100);
-        paintPanel.setxOffset(0);
-        paintPanel.setyOffset(0);
+        paintPanel.resetOffset();
         Main.data = new TSP();
         paintPanel.refresh();
+        refreshTSPInfos();
     }//GEN-LAST:event_newMenuItemActionPerformed
 
     private void paintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMousePressed
-        if (selectedCity != null) {
-            City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()),
-                                                    paintPanel.YPixel2Coord(evt.getY()), 
-                                                    10 / paintPanel.getRelation(), 
-                                                    10 / paintPanel.getRelation());
-            if (nearestCity == selectedCity) {
-                moveCity = true;
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            if (selectedCity != null) {
+                City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()), 10 / paintPanel.getRelation(), 10 / paintPanel.getRelation());
+                if (nearestCity == selectedCity) {
+                    moveCity = true;
+                }
+            }
+        }
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            if (!autoscaleSwitch.isSelected()) {
+                mousePressed = true;
+                pressedX = evt.getX();
+                pressedY = evt.getY();
             }
         }
         
-        if (!autoscaleSwitch.isSelected()) {
-            mousePressed = true;
-            pressedX = evt.getX();
-            pressedY = evt.getY();
-        }
+        
     }//GEN-LAST:event_paintPanelMousePressed
 
     private void paintPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseReleased
@@ -677,8 +688,8 @@ public class MainWindow extends javax.swing.JFrame {
         
         if (mousePressed) {
             paintPanel.setCursor( new Cursor(Cursor.HAND_CURSOR));
-            paintPanel.addxOffset(pressedX - evt.getX());
-            paintPanel.addyOffset(pressedY - evt.getY());
+            paintPanel.shiftX(pressedX - evt.getX());
+            paintPanel.shiftY(pressedY - evt.getY());
             pressedX = evt.getX();
             pressedY = evt.getY();
             paintPanel.refresh();
@@ -698,8 +709,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void autoscaleChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoscaleChanged
         paintPanel.setAutoscale(autoscaleSwitch.isSelected());
         if (!autoscaleSwitch.isSelected()) {
-            paintPanel.setxOffset(0);
-            paintPanel.setyOffset(0);
+            paintPanel.setBestOffset();
         }
         paintPanel.refresh();
     }//GEN-LAST:event_autoscaleChanged
@@ -733,10 +743,21 @@ public class MainWindow extends javax.swing.JFrame {
         chooser.showSaveDialog(this);
         if (chooser.getSelectedFile() != null) {
             Main.data.saveToFile(chooser.getSelectedFile());
+            refreshTSPInfos();
         }
         
     }//GEN-LAST:event_saveMenuItemActionPerformed
 
+    private void zoomLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoomLabelMouseClicked
+        zoomSlider.setValue(100);
+    }//GEN-LAST:event_zoomLabelMouseClicked
+
+    private void refreshTSPInfos() {
+        this.nameLabel.setText(Main.data.getName());
+        this.commentLabel.setText(Main.data.getComment());
+        this.cityCountLabel.setText(Main.data.getCityListLength() + "");
+    }
+    
     public int getZoom() {
         return zoomSlider.getValue();
     }

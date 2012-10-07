@@ -25,10 +25,6 @@ public class TSP {
     private double pheromonUpdate;
     private int iterations;
     private int ants;
-    private double maxX = Double.MIN_VALUE;
-    private double maxY = Double.MIN_VALUE;
-    private double minX = Double.MAX_VALUE;
-    private double minY = Double.MAX_VALUE;
     private Route globalBest = null;
     private Route localBest = null;
 
@@ -65,22 +61,29 @@ public class TSP {
 
                     if (line.startsWith("COMMENT")) {
                         String lineParts[] = line.split(":");
-                        Main.data.addComment(lineParts[1].trim());
+                        if (lineParts.length > 1) { 
+                            Main.data.addComment(lineParts[1].trim());
+                        }
                     }
 
                     if (line.startsWith("NAME")) {
                         String lineParts[] = line.split(":");
-                        Main.data.setName(lineParts[1].trim());
+                        if (lineParts.length > 1) { 
+                            Main.data.setName(lineParts[1].trim());
+                        }
                     }
 
                     if (line.startsWith("DIMENSION")) {
                         String lineParts[] = line.split(":");
-                        localDimension = Integer.parseInt(lineParts[1].trim());
+                        if (lineParts.length > 1) { 
+                            localDimension = Integer.parseInt(lineParts[1].trim());
+                        }
                     }
 
-                    Main.window.repaint();
+                    
 
                 }
+                Main.window.repaint();
 
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "Die gewählte Datei wurde nicht gefunden \n" + e, path, JOptionPane.ERROR_MESSAGE);
@@ -125,9 +128,6 @@ public class TSP {
     public void solveTSP() {
     }
 
-    public void getParameters() {
-    }
-
     /**
      * @return the pheromonData
      */
@@ -155,18 +155,6 @@ public class TSP {
     }
 
     public void addCity(double x, double y) {
-        if (x > maxX) {
-            maxX = x;
-        }
-        if (y > maxY) {
-            maxY = y;
-        }
-        if (x < minX) {
-            minX = x;
-        }
-        if (y < minY) {
-            minY = y;
-        }
         cityList.add(new City(x, y, cityList.size()));
 
         //TODO Länge
@@ -175,8 +163,8 @@ public class TSP {
     
     public City getCityNearby(double x, double y, double rangeX, double rangeY) {
         for(City city : cityList) {
-            if((x-rangeX) < city.getXPos() && city.getXPos() < (x+rangeX) 
-                    && (y-rangeY) < city.getYPos() &&  city.getYPos() < (y+rangeY)) {
+            if((x-(rangeX/2)) < city.getXPos() && city.getXPos() < (x+(rangeX/2)) 
+                    && (y-(rangeY/2)) < city.getYPos() &&  city.getYPos() < (y+(rangeY/2))) {
                 return city;
             }
         }
@@ -184,19 +172,43 @@ public class TSP {
     }
 
     public double getMaxX() {
-        return maxX;
+        double max = Double.MIN_VALUE;
+        for (City city : cityList) {
+            if (max < city.getXPos()) {
+                max = city.getXPos();
+            }
+        }
+        return max;
     }
 
     public double getMaxY() {
-        return maxY;
+        double max = Double.MIN_VALUE;
+        for (City city : cityList) {
+            if (max < city.getYPos()) {
+                max = city.getYPos();
+            }
+        }
+        return max;
     }
 
     public double getMinX() {
-        return minX;
+        double min = Double.MAX_VALUE;
+        for (City city : cityList) {
+            if (min > city.getXPos()) {
+                min = city.getXPos();
+            }
+        }
+        return min;
     }
 
     public double getMinY() {
-        return minY;
+        double min = Double.MAX_VALUE;
+        for (City city : cityList) {
+            if (min > city.getYPos()) {
+                min = city.getYPos();
+            }
+        }
+        return min;
     }
 
     public Route getGlobalBest() {

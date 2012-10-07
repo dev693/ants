@@ -29,7 +29,7 @@ public class City {
     }
     
     public Integer getNumber() {
-        return null;
+        return this.cityNumber;
     }
 
     /**
