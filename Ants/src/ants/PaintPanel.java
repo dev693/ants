@@ -35,7 +35,6 @@ public class PaintPanel extends JPanel {
             System.out.println("relation: " + getRelation() + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; xBaseOffset: " + xBaseOffset + "; yOffset: " + getyOffset() + "; yBaseOffset: " + yBaseOffset);
             g.setColor(Color.white);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
-            System.out.println("width height" + this.getWidth() +" "+ this.getHeight());
 
             g.setColor(Color.red);
             drawRoute(g, Main.data.getGlobalBest());
