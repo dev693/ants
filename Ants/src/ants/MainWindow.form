@@ -117,11 +117,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="scorePanel" alignment="0" min="-2" pref="537" max="-2" attributes="0"/>
-                      <Component id="infoPanel" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="scorePanel" pref="0" max="32767" attributes="0"/>
+                      <Component id="infoPanel" pref="484" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -131,7 +131,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="infoPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="scorePanel" min="-2" pref="42" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -141,99 +141,149 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="infoPanel">
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="3"/>
-            <Property name="rows" type="int" value="0"/>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="nameCaptionLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Name:"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="horizontalTextPosition" type="int" value="2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="nameLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Berlin52"/>
-                <Property name="horizontalTextPosition" type="int" value="2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.Box$Filler" name="filler4">
+            <Container class="javax.swing.JPanel" name="jPanel1">
               <Properties>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[32767, 0]"/>
+                  <Dimension value="[200, 56]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="null"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[200, 100]"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalGlue"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="cityCountCaptionLabel">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="1"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="nameCaptionLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Name:"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="horizontalTextPosition" type="int" value="2"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="cityCountCaptionLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Anzahl der St&#xe4;dte:"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="commentCaptionLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Kommentar:"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="timeCaptionLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="11" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="ben&#xf6;tigte Zeit:"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel2">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Anzahl der St&#xe4;dte:"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[100, 14]"/>
+                  <Dimension value="null"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="null"/>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="cityCountLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="52"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.Box$Filler" name="filler5">
-              <Properties>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[32767, 0]"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalGlue"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="commentCaptionLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Kommentar:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="commentLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="blab lbalbalblabla"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.Box$Filler" name="filler6">
-              <Properties>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[32767, 0]"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalGlue"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="timeCaptionLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="ben&#xf6;tigte Zeit:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="timeLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="5 s"/>
-              </Properties>
-            </Component>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="1"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="nameLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Berlin52"/>
+                    <Property name="horizontalTextPosition" type="int" value="2"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="cityCountLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="52"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="commentLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="blab lbalbalblabla"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                  <AccessibilityProperties>
+                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="blab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblabla"/>
+                  </AccessibilityProperties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="timeLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="5 s"/>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="scorePanel">
@@ -594,7 +644,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                      <EmptySpace pref="106" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -780,7 +830,7 @@
                           <Component id="antsCaptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="antsText" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="359" max="32767" attributes="0"/>
+                      <EmptySpace pref="330" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -831,7 +881,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="416" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="387" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
