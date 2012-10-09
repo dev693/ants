@@ -42,16 +42,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         resultPanel = new javax.swing.JPanel();
         infoPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         nameCaptionLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         cityCountCaptionLabel = new javax.swing.JLabel();
-        cityCountLabel = new javax.swing.JLabel();
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         commentCaptionLabel = new javax.swing.JLabel();
-        commentLabel = new javax.swing.JLabel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         timeCaptionLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        cityCountLabel = new javax.swing.JLabel();
+        commentLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         scorePanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -110,42 +109,68 @@ public class MainWindow extends javax.swing.JFrame {
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
 
-        infoPanel.setLayout(new java.awt.GridLayout(0, 3));
+        infoPanel.setLayout(new javax.swing.BoxLayout(infoPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(200, 56));
+        jPanel1.setMinimumSize(null);
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 100));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
         nameCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nameCaptionLabel.setText("Name:");
         nameCaptionLabel.setToolTipText("");
         nameCaptionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        infoPanel.add(nameCaptionLabel);
-
-        nameLabel.setText("Berlin52");
-        nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        infoPanel.add(nameLabel);
-        infoPanel.add(filler4);
+        nameCaptionLabel.setMaximumSize(null);
+        nameCaptionLabel.setMinimumSize(null);
+        jPanel1.add(nameCaptionLabel);
 
         cityCountCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cityCountCaptionLabel.setText("Anzahl der Städte:");
-        cityCountCaptionLabel.setMaximumSize(new java.awt.Dimension(100, 14));
-        infoPanel.add(cityCountCaptionLabel);
-
-        cityCountLabel.setText("52");
-        infoPanel.add(cityCountLabel);
-        infoPanel.add(filler5);
+        cityCountCaptionLabel.setMaximumSize(null);
+        cityCountCaptionLabel.setMinimumSize(null);
+        jPanel1.add(cityCountCaptionLabel);
 
         commentCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         commentCaptionLabel.setText("Kommentar:");
-        infoPanel.add(commentCaptionLabel);
-
-        commentLabel.setText("blab lbalbalblabla");
-        infoPanel.add(commentLabel);
-        infoPanel.add(filler6);
+        commentCaptionLabel.setMaximumSize(null);
+        commentCaptionLabel.setMinimumSize(null);
+        jPanel1.add(commentCaptionLabel);
 
         timeCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         timeCaptionLabel.setText("benötigte Zeit:");
-        infoPanel.add(timeCaptionLabel);
+        timeCaptionLabel.setMaximumSize(null);
+        timeCaptionLabel.setMinimumSize(null);
+        jPanel1.add(timeCaptionLabel);
+
+        infoPanel.add(jPanel1);
+
+        jPanel2.setMaximumSize(null);
+        jPanel2.setMinimumSize(null);
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+
+        nameLabel.setText("Berlin52");
+        nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        nameLabel.setMaximumSize(null);
+        nameLabel.setMinimumSize(null);
+        jPanel2.add(nameLabel);
+
+        cityCountLabel.setText("52");
+        cityCountLabel.setMaximumSize(null);
+        cityCountLabel.setMinimumSize(null);
+        jPanel2.add(cityCountLabel);
+
+        commentLabel.setText("blab lbalbalblabla");
+        commentLabel.setMaximumSize(null);
+        commentLabel.setMinimumSize(null);
+        jPanel2.add(commentLabel);
+        commentLabel.getAccessibleContext().setAccessibleName("blab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblabla");
 
         timeLabel.setText("5 s");
-        infoPanel.add(timeLabel);
+        timeLabel.setMaximumSize(null);
+        timeLabel.setMinimumSize(null);
+        jPanel2.add(timeLabel);
+
+        infoPanel.add(jPanel2);
 
         scorePanel.setPreferredSize(new java.awt.Dimension(2484, 30));
         scorePanel.setLayout(new java.awt.GridLayout(0, 3, 0, 2));
@@ -185,18 +210,18 @@ public class MainWindow extends javax.swing.JFrame {
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resultPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(scorePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(infoPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
                 .addContainerGap())
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resultPanelLayout.createSequentialGroup()
                 .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -469,7 +494,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
@@ -510,7 +535,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(antsCaptionLabel)
                     .addComponent(antsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Iterationen", iterationPanel);
@@ -523,7 +548,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         stopPanelLayout.setVerticalGroup(
             stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGap(0, 387, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Abbruch", stopPanel);
@@ -816,9 +841,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler4;
-    private javax.swing.Box.Filler filler5;
-    private javax.swing.Box.Filler filler6;
     private javax.swing.JLabel globalCaptionLabel;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel initialPheromonLabel;
@@ -831,6 +853,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem loadMenuItem;
     private javax.swing.JLabel localCaptionLabel;
