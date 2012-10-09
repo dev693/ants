@@ -6,10 +6,8 @@ package ants;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FileDialog;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FilenameFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -230,20 +228,28 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         paintPanel.setBackground(new java.awt.Color(255, 255, 255));
+        paintPanel.setAutoscale(false);
+        paintPanel.setMaximumSize(new java.awt.Dimension(500, 300));
+        paintPanel.setPreferredSize(new java.awt.Dimension(500, 300));
         paintPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                paintPanelMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 paintPanelMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 paintPanelMousePressed(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                paintPanelMouseReleased(evt);
+            }
         });
         paintPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 paintPanelMouseDragged(evt);
+            }
+        });
+        paintPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                paintPanelComponentResized(evt);
             }
         });
 
@@ -469,7 +475,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
@@ -569,8 +575,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                        .addGap(0, 21, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane1)
@@ -581,7 +589,7 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -608,6 +616,8 @@ public class MainWindow extends javax.swing.JFrame {
             TSP.loadFromFile(chooser.getSelectedFile().getPath());
             refreshTSPInfos();
         }
+        
+        paintPanel.setSize(paintPanel.getHeight(), this.getWidth()-250);
     }//GEN-LAST:event_loadMenuItemActionPerformed
 
     
@@ -751,6 +761,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void zoomLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_zoomLabelMouseClicked
         zoomSlider.setValue(100);
     }//GEN-LAST:event_zoomLabelMouseClicked
+
+    private void paintPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_paintPanelComponentResized
+        System.out.println(evt.getSource());
+    }//GEN-LAST:event_paintPanelComponentResized
 
     private void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
