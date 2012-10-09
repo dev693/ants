@@ -26,23 +26,26 @@ public class Main{
         
         Route localRoute = new Route();
         
-        for (int i = 0; i < Main.data.getCityListLength(); i++)
+        for (int i = 1; i <= Main.data.getCityListLength(); i++)
         {
             localRoute.addCity(Main.data.getCity(i));
         }
-        
+        localRoute.addCity(Main.data.getCity(1));
         Main.data.setGlobalBest(localRoute);
         
         localRoute = new Route();
-        localRoute.addCity(Main.data.getCity(5));
+        localRoute.addCity(Main.data.getCity(6));
+        localRoute.addCity(Main.data.getCity(4));
+        localRoute.addCity(Main.data.getCity(2));
         localRoute.addCity(Main.data.getCity(3));
         localRoute.addCity(Main.data.getCity(1));
-        localRoute.addCity(Main.data.getCity(2));
-        localRoute.addCity(Main.data.getCity(0));
-        localRoute.addCity(Main.data.getCity(4));
         localRoute.addCity(Main.data.getCity(5));
+        localRoute.addCity(Main.data.getCity(6));
         
         Main.data.setLocalBest(localRoute);
-
+        /*
+        Main.data = TSP.loadFromFile("test/ants/berlin52.tsp");
+        Route optRoute = Main.data.getOptTour("test/ants/berlin52.opt.tour");
+*/
     }
 }

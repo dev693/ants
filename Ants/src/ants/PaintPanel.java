@@ -42,8 +42,11 @@ public class PaintPanel extends JPanel {
             g.setColor(Color.blue);
             drawRoute(g, Main.data.getLocalBest());
 
-            g.setColor(Color.GRAY);
-            g.fillRect((this.getWidth() / 2) -1,this.getHeight() / 2 -1, 2, 2);
+            g.setColor(Color.green);
+            drawRoute(g, Main.data.getOptimalRoute());
+            
+            //g.setColor(Color.GRAY);
+            //g.fillRect((this.getWidth() / 2) -1,this.getHeight() / 2 -1, 2, 2);
 
             //Städte Anzeigen
             for (City city : Main.data.getCityCollection()) {

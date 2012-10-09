@@ -28,6 +28,7 @@ public class TSP {
     private int ants;
     private Route globalBest = null;
     private Route localBest = null;
+    private Route optimalRoute = null;
     private int maxCityNumber = 1;
     
     public TSP() {
@@ -85,6 +86,11 @@ public class TSP {
                     
 
                 }
+                String tourFile = path.replace(".tsp", ".opt.tour");
+                File file = new File(tourFile);
+                if (file.exists()) {
+                    Main.data.getOptTour(file);
+                }
                 Main.window.repaint();
 
             } catch (FileNotFoundException e) {
@@ -95,6 +101,7 @@ public class TSP {
                 JOptionPane.showMessageDialog(null, e.getMessage(), path, JOptionPane.ERROR_MESSAGE);
             }      
         }
+        
         return Main.data;
     }
 
@@ -127,6 +134,74 @@ public class TSP {
         }
     }
 
+    public Route getOptTour(File file) {
+         
+         try {
+                Route optRoute = new Route();
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                while (reader.ready()) {
+                    String line = reader.readLine().trim();
+                    
+                    if (line.startsWith("TYPE")) {
+                        String lineParts[] = line.split(":");
+                        if (lineParts.length > 1) { 
+                            if (!lineParts[1].trim().equalsIgnoreCase("TOUR")) {
+                                throw new Exception("Die ausgewählte Datei enthält keine Tour");
+                            }
+                        }
+                    }
+
+                    if (line.startsWith("NAME")) {
+                        String lineParts[] = line.split(":");
+                        if (lineParts.length > 1) { 
+                            if (!lineParts[1].trim().equals(this.getName() + ".opt.tour")) {
+                                throw new Exception("Die optimale Tour passt nicht zu dem ausgewähtem TSP");
+                            }
+                        }
+                    }
+
+                    if (line.startsWith("DIMENSION")) {
+                        String lineParts[] = line.split(":");
+                        if (lineParts.length > 1) { 
+                            if(Integer.parseInt(lineParts[1].trim()) != this.getCityListLength()) {
+                                throw new Exception("Die optimale Tour passt nicht zu dem ausgewähtem TSP");
+                            }
+                        }
+                    }
+                    
+                    if (line.equals("TOUR_SECTION")) {
+                        while (reader.ready()) {
+                            String numberLine = reader.readLine();
+                            if (!numberLine.equals("EOF")) {
+                                int number = Integer.parseInt(numberLine);
+                                if (number == -1) {
+                                    optRoute.addCity(optRoute.getRoute().get(0));
+                                    break;
+                                } else {
+                                    optRoute.addCity(this.getCity(number));
+                                }
+                            }
+
+                        }
+                        
+                        if ((optRoute.getRoute().size() -1) != Main.data.getCityListLength()) {
+                            throw new Exception("Die Länge der Route stimmt nicht mit der Anzahl der Städte des TSP überein!");
+                        }
+                    }
+                }
+                this.optimalRoute = optRoute;
+                return optRoute;
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "Die gewählte Datei wurde nicht gefunden \n" + e, file.getPath(), JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei \n" + e, file.getPath(), JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) { //TODO mehr catchblöcke
+                JOptionPane.showMessageDialog(null, e.getMessage(), file.getPath(), JOptionPane.ERROR_MESSAGE);
+            }
+         return null;
+    }
+    
+    
     public void solveTSP() {
     }
 
@@ -138,16 +213,20 @@ public class TSP {
     /**
      * @return the pheromonData
      */
-    public Double getPheromonData(int from, int to) {
+    public double getPheromonData(int from, int to) {
         return pheromonData.get(from).get(to);
     }
 
     /**
      * @return the distanceData
      */
-    public Double getDistanceData(int from, int to) {
-
-        return distanceData.get(from).get(to);
+    public double getDistanceData(int from, int to) {
+        City cityFrom = this.getCity(from);
+        City cityTo = this.getCity(to);
+        double dx = cityFrom.getXPos() - cityTo.getXPos();
+        double dy = cityFrom.getYPos() - cityTo.getYPos();
+        return Math.sqrt(dx*dx+dy*dy);
+        //return distanceData.get(from).get(to);
     }
 
     /**
@@ -325,5 +404,32 @@ public class TSP {
      */
     public void setAnts(int ants) {
         this.ants = ants;
+    }
+    
+    
+    public void reCalculateDistanceData() {
+    }
+
+    /**
+     * @return the optimalRoute
+     */
+    public Route getOptimalRoute() {
+        if (this.optimalRoute != null) {
+            if ((this.optimalRoute.getRoute().size() -1) == this.getCityListLength()) {
+                return this.optimalRoute;
+            } else {
+                this.optimalRoute = null;
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param optimalRoute the optimalRoute to set
+     */
+    public void setOptimalRoute(Route optimalRoute) {
+        this.optimalRoute = optimalRoute;
     }
 }

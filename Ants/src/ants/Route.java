@@ -19,6 +19,8 @@ public class Route {
         return route;
     }
     
+    
+    
     public double getLength() {
         return length;
     }
@@ -28,5 +30,8 @@ public class Route {
             length += Main.data.getDistanceData(lastCity.getNumber(), city.getNumber());
         }
         route.add(city);
+        lastCity = city;
     }
+    
+    
 }

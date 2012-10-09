@@ -137,6 +137,7 @@ public class TSPTest {
      */
     @Test
     public void testGetMaxY() {
+        System.out.println("getMaxY");
         TSP tsp = new TSP();
         tsp.addCity(5.5, 2.4);
         tsp.addCity(0.3, 1.4);
@@ -153,6 +154,7 @@ public class TSPTest {
      */
     @Test
     public void testGetMinX() {
+        System.out.println("getMinX");
         TSP tsp = new TSP();
         tsp.addCity(5.5, 2.4);
         tsp.addCity(0.3, 1.4);
@@ -169,6 +171,7 @@ public class TSPTest {
      */
     @Test
     public void testGetMinY() {
+        System.out.println("getMinY");
         TSP tsp = new TSP();
         tsp.addCity(5.5, 2.4);
         tsp.addCity(0.3, 1.4);
@@ -182,6 +185,7 @@ public class TSPTest {
     
     @Test
     public void testGetCityListLength() {
+        System.out.println("getCityListLength");
         TSP tsp = new TSP();
         tsp.addCity(5.5, 2.4, 10);
         tsp.addCity(0.3, 1.4, 20);
@@ -189,6 +193,19 @@ public class TSPTest {
         tsp.addCity(9.4, 10.0, 40);
         tsp.addCity(-5.8, 4.3, 50);
         assertEquals(5, tsp.getCityListLength(), 0);
+    }
+    
+    @Test
+    public void testGetOptTour() {
+        System.out.println("getOptTour");
+        TSP tsp = TSP.loadFromFile("test/ants/berlin52.tsp");
+        Route optRoute = tsp.getOptTour(new File("test/ants/berlin52.opt.tour"));
+        if (optRoute != null) {
+            System.out.println("Länge: " + optRoute.getLength());
+            assertEquals(7542.00, optRoute.getLength(), 100.00);
+        } else {
+            fail("Es wirde keine Route geladen");
+        }
     }
 
 }
