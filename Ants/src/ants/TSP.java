@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 public class TSP {
@@ -18,7 +18,7 @@ public class TSP {
     private String comment = "";
     private ArrayList<ArrayList<Double>> pheromonData;
     private ArrayList<ArrayList<Double>> distanceData;
-    private HashMap<Integer, City> cityMap = new HashMap();
+    private TreeMap<Integer, City> cityMap = new TreeMap();
     private double pheromon;
     private double localInformation;
     private double evaporation;
@@ -116,9 +116,8 @@ public class TSP {
             writer.newLine();
             writer.write("NODE_COORD_SECTION");
             writer.newLine();
-            int number = 0;
             for (City city : cityMap.values()) {
-                writer.write(++number + " " + city.getXPos() + " " + city.getYPos());
+                writer.write(city.getNumber() + " " + city.getXPos() + " " + city.getYPos());
                 writer.newLine();
             }
             writer.write("EOF");
@@ -169,7 +168,7 @@ public class TSP {
     public void addCity(double x, double y) {
         
         //cityTable.put(new City(x, y, maxCityNumber++));
-        cityMap.put(maxCityNumber++, new City(x, y, maxCityNumber++));
+        cityMap.put(maxCityNumber, new City(x, y, maxCityNumber++));
         //TODO Länge
         //TODO PHEROMON
     }

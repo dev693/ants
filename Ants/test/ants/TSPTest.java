@@ -28,6 +28,7 @@ public class TSPTest {
         assertEquals(tsp.getCityListLength(), 52, 0);
         assertEquals(tsp.getName(), "berlin52");
         assertEquals(565, tsp.getCity(1).getXPos(), 0);
+        assertEquals(1740, tsp.getCity(52).getXPos(), 0);
     }
 
     /**
@@ -36,11 +37,16 @@ public class TSPTest {
     @Test
     public void testSaveToFile() {
         System.out.println("saveToFile");
-        File file = null;
-        TSP instance = new TSP();
-        instance.saveToFile(file);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        File file = new File("test/ants/test.tsp");
+        TSP tsp = new TSP();
+        tsp.addCity(20, 30, 10);
+        tsp.addCity(50, 60, 20);
+        tsp.saveToFile(file);
+        TSP tsp2 = TSP.loadFromFile(file.getPath());
+        assertEquals(tsp2.getCity(10).getXPos(),tsp.getCity(10).getXPos(),0);
+        assertEquals(tsp2.getCity(10).getYPos(),tsp.getCity(10).getYPos(),0);
+        assertEquals(tsp2.getCity(20).getXPos(),tsp.getCity(20).getXPos(),0);
+        assertEquals(tsp2.getCity(20).getYPos(),tsp.getCity(20).getYPos(),0);
     }
 
     /**
