@@ -148,9 +148,6 @@
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[200, 56]"/>
                 </Property>
-                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="null"/>
-                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[200, 100]"/>
                 </Property>
@@ -221,14 +218,6 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel2">
-              <Properties>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="null"/>
-                </Property>
-                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="null"/>
-                </Property>
-              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
                 <Property name="axis" type="int" value="1"/>
@@ -644,7 +633,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                      <EmptySpace pref="111" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -654,23 +643,32 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pheromon:"/>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="toolTipText" source="pheromonSlider" sourcePath="${toolTipText}" target="pheromonLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="localInformationLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="lokale Information"/>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="toolTipText" source="localInformationSlider" sourcePath="${toolTipText}" target="localInformationLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="evaporationLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Verdunstunsfaktor:"/>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="toolTipText" source="evaporationSlider" sourcePath="${toolTipText}" target="evaporationLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JSlider" name="evaporationSlider">
               <Properties>
                 <Property name="maximum" type="int" value="10001"/>
                 <Property name="minimum" type="int" value="1"/>
                 <Property name="minorTickSpacing" type="int" value="1"/>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Verdunstungsfaktor (&amp;#961;): &lt;br&gt;&#xa;Intervall: 0 &amp;lt; &amp;#961; &amp;le; 1"/>
                 <Property name="value" type="int" value="1000"/>
               </Properties>
             </Component>
@@ -678,11 +676,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="initiale Pheromone:"/>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="toolTipText" source="initialPheromonSlider" sourcePath="${toolTipText}" target="initialPheromonLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="pheromonUpdateLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pheromon-Update:"/>
               </Properties>
+              <BindingProperties>
+                <BindingProperty name="toolTipText" source="pheromonUpdateSlider" sourcePath="${toolTipText}" target="pheromonUpdateLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="evaporationText">
               <Properties>
@@ -698,6 +702,7 @@
                   </Property>
                   <Property name="name" type="java.lang.String" value="evaporationBinding"/>
                 </BindingProperty>
+                <BindingProperty name="toolTipText" source="evaporationSlider" sourcePath="${toolTipText}" target="evaporationText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="pheromonText">
@@ -714,6 +719,7 @@
                   </Property>
                   <Property name="name" type="java.lang.String" value="pheromonBinding"/>
                 </BindingProperty>
+                <BindingProperty name="toolTipText" source="pheromonSlider" sourcePath="${toolTipText}" target="pheromonText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="localInformationText">
@@ -730,6 +736,7 @@
                   </Property>
                   <Property name="name" type="java.lang.String" value="localInformationBinding"/>
                 </BindingProperty>
+                <BindingProperty name="toolTipText" source="localInformationSlider" sourcePath="${toolTipText}" target="localInformationText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="initialPheromonText">
@@ -746,6 +753,7 @@
                   </Property>
                   <Property name="name" type="java.lang.String" value="initialPheromonBinding"/>
                 </BindingProperty>
+                <BindingProperty name="toolTipText" source="initialPheromonSlider" sourcePath="${toolTipText}" target="initialPheromonText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="pheromonUpdateText">
@@ -762,29 +770,34 @@
                   </Property>
                   <Property name="name" type="java.lang.String" value="pheromonUpdateBinding"/>
                 </BindingProperty>
+                <BindingProperty name="toolTipText" source="pheromonUpdateSlider" sourcePath="${toolTipText}" target="pheromonUpdateText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
               </BindingProperties>
             </Component>
             <Component class="javax.swing.JSlider" name="pheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pheromonwert (&amp;#945;):&lt;br&gt;&#xa;Intervall: &amp;#945; &gt; 0&#xa;&#xa;"/>
                 <Property name="value" type="int" value="50000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="localInformationSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;heusristischer Parameter f&#xfc;r die lokale Information (&amp;#946;):&lt;br&gt;&#xa;Intervall: &amp;#946; &gt; 0"/>
                 <Property name="value" type="int" value="50000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="initialPheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Initiale Pheromonwerte (&amp;#964;&lt;sub&gt;0&lt;/sub&gt;):&lt;br&gt;&#xa;Intervall: &amp;#964;&lt;sub&gt;0&lt;/sub&gt; &amp;gt; 0&#xa;"/>
                 <Property name="value" type="int" value="50000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="pheromonUpdateSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Heuristischer Paramter f&#xfc;r Pheromonupdate (Q):&lt;br&gt;&#xa;Interval: Q &amp;gt; 0"/>
                 <Property name="value" type="int" value="50000"/>
               </Properties>
             </Component>

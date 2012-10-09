@@ -112,7 +112,6 @@ public class MainWindow extends javax.swing.JFrame {
         infoPanel.setLayout(new javax.swing.BoxLayout(infoPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setMaximumSize(new java.awt.Dimension(200, 56));
-        jPanel1.setMinimumSize(null);
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 100));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
@@ -144,8 +143,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         infoPanel.add(jPanel1);
 
-        jPanel2.setMaximumSize(null);
-        jPanel2.setMinimumSize(null);
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
         nameLabel.setText("Berlin52");
@@ -373,24 +370,41 @@ public class MainWindow extends javax.swing.JFrame {
 
         pheromonLabel.setText("Pheromon:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), pheromonLabel, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         localInformationLabel.setText("lokale Information");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), localInformationLabel, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         evaporationLabel.setText("Verdunstunsfaktor:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), evaporationLabel, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         evaporationSlider.setMaximum(10001);
         evaporationSlider.setMinimum(1);
         evaporationSlider.setMinorTickSpacing(1);
-        evaporationSlider.setToolTipText("");
+        evaporationSlider.setToolTipText("<html>Verdunstungsfaktor (&#961;): <br>\nIntervall: 0 &lt; &#961; &le; 1");
         evaporationSlider.setValue(1000);
 
         initialPheromonLabel.setText("initiale Pheromone:");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), initialPheromonLabel, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         pheromonUpdateLabel.setText("Pheromon-Update:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), pheromonUpdateLabel, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         evaporationText.setInputVerifier(new DoubleInputVerifier(0,1));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "evaporationBinding");
         binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, evaporationSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), evaporationText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
         bindingGroup.addBinding(binding);
 
         pheromonText.setInputVerifier(new DoubleInputVerifier(0));
@@ -398,11 +412,15 @@ public class MainWindow extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonBinding");
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), pheromonText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         localInformationText.setInputVerifier(new DoubleInputVerifier(0));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("text"), "localInformationBinding");
         binding.setConverter(new DoubleConverter());
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, localInformationSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), localInformationText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
         bindingGroup.addBinding(binding);
 
         initialPheromonText.setInputVerifier(new DoubleInputVerifier(0));
@@ -410,23 +428,31 @@ public class MainWindow extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("text"), "initialPheromonBinding");
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, initialPheromonSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), initialPheromonText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         pheromonUpdateText.setInputVerifier(new DoubleInputVerifier(0));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${value}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("text"), "pheromonUpdateBinding");
         binding.setConverter(new DoubleConverter());
         bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pheromonUpdateSlider, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), pheromonUpdateText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         pheromonSlider.setMaximum(100000);
+        pheromonSlider.setToolTipText("<html>Pheromonwert (&#945;):<br>\nIntervall: &#945; > 0\n\n");
         pheromonSlider.setValue(50000);
 
         localInformationSlider.setMaximum(100000);
+        localInformationSlider.setToolTipText("<html>heusristischer Parameter für die lokale Information (&#946;):<br>\nIntervall: &#946; > 0");
         localInformationSlider.setValue(50000);
 
         initialPheromonSlider.setMaximum(100000);
+        initialPheromonSlider.setToolTipText("<html>Initiale Pheromonwerte (&#964;<sub>0</sub>):<br>\nIntervall: &#964;<sub>0</sub> &gt; 0\n");
         initialPheromonSlider.setValue(50000);
 
         pheromonUpdateSlider.setMaximum(100000);
+        pheromonUpdateSlider.setToolTipText("<html>Heuristischer Paramter für Pheromonupdate (Q):<br>\nInterval: Q &gt; 0");
         pheromonUpdateSlider.setValue(50000);
 
         javax.swing.GroupLayout parameterPanelLayout = new javax.swing.GroupLayout(parameterPanel);
@@ -494,7 +520,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
