@@ -8,7 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 public class TSP {
@@ -17,7 +18,7 @@ public class TSP {
     private String comment = "";
     private ArrayList<ArrayList<Double>> pheromonData;
     private ArrayList<ArrayList<Double>> distanceData;
-    private ArrayList<City> cityList = new ArrayList();
+    private HashMap<Integer, City> cityMap = new HashMap();
     private double pheromon;
     private double localInformation;
     private double evaporation;
@@ -27,11 +28,12 @@ public class TSP {
     private int ants;
     private Route globalBest = null;
     private Route localBest = null;
-
+    private int maxCityNumber = 1;
+    
     public TSP() {
     }
 
-    public static void loadFromFile(String path) {
+    public static TSP loadFromFile(String path) {
         System.out.println(path);
         Main.data = new TSP();
 
@@ -49,7 +51,7 @@ public class TSP {
                             if (!coordLine.equals("EOF")) {
                                 String lineParts[] = coordLine.trim().split(" +");
                                 if (lineParts.length == 3) {
-                                    Main.data.addCity(Double.parseDouble(lineParts[1]), Double.parseDouble(lineParts[2]));
+                                    Main.data.addCity(Double.parseDouble(lineParts[1]), Double.parseDouble(lineParts[2]), Integer.parseInt(lineParts[0]));
                                 }
                             }
 
@@ -91,8 +93,9 @@ public class TSP {
                 JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei \n" + e, path, JOptionPane.ERROR_MESSAGE);
             } catch (Exception e) { //TODO mehr catchblöcke
                 JOptionPane.showMessageDialog(null, e.getMessage(), path, JOptionPane.ERROR_MESSAGE);
-            }
+            }      
         }
+        return Main.data;
     }
 
     public void saveToFile(File file) {
@@ -114,7 +117,7 @@ public class TSP {
             writer.write("NODE_COORD_SECTION");
             writer.newLine();
             int number = 0;
-            for (City city : cityList) {
+            for (City city : cityMap.values()) {
                 writer.write(++number + " " + city.getXPos() + " " + city.getYPos());
                 writer.newLine();
             }
@@ -128,6 +131,11 @@ public class TSP {
     public void solveTSP() {
     }
 
+    
+    public Collection<City> getCityCollection() {
+        return cityMap.values();
+    }
+    
     /**
      * @return the pheromonData
      */
@@ -146,23 +154,35 @@ public class TSP {
     /**
      * @return the cityList
      */
-    public City getCity(int number) {
-        return cityList.get(number);
+    public City getCity(int index) {
+        return cityMap.get(index);
     }
 
+    //public City getCityByNumber(int number) {
+    //    return (City) cityMap.get(number);
+    //}
+    
     public int getCityListLength() {
-        return cityList.size();
+        return cityMap.size();
     }
 
     public void addCity(double x, double y) {
-        cityList.add(new City(x, y, cityList.size()));
-
+        
+        //cityTable.put(new City(x, y, maxCityNumber++));
+        cityMap.put(maxCityNumber++, new City(x, y, maxCityNumber++));
         //TODO Länge
         //TODO PHEROMON
     }
     
+    public void addCity(double x, double y, int number) {
+        if (maxCityNumber < number) {
+            maxCityNumber = number + 1;
+        }
+        cityMap.put(number, new City(x, y, number));
+    }
+    
     public City getCityNearby(double x, double y, double rangeX, double rangeY) {
-        for(City city : cityList) {
+        for(City city : cityMap.values()) {
             if((x-(rangeX/2)) < city.getXPos() && city.getXPos() < (x+(rangeX/2)) 
                     && (y-(rangeY/2)) < city.getYPos() &&  city.getYPos() < (y+(rangeY/2))) {
                 return city;
@@ -173,7 +193,7 @@ public class TSP {
 
     public double getMaxX() {
         double max = Double.MIN_VALUE;
-        for (City city : cityList) {
+        for (City city : cityMap.values()) {
             if (max < city.getXPos()) {
                 max = city.getXPos();
             }
@@ -183,7 +203,7 @@ public class TSP {
 
     public double getMaxY() {
         double max = Double.MIN_VALUE;
-        for (City city : cityList) {
+        for (City city : cityMap.values()) {
             if (max < city.getYPos()) {
                 max = city.getYPos();
             }
@@ -193,7 +213,7 @@ public class TSP {
 
     public double getMinX() {
         double min = Double.MAX_VALUE;
-        for (City city : cityList) {
+        for (City city : cityMap.values()) {
             if (min > city.getXPos()) {
                 min = city.getXPos();
             }
@@ -203,7 +223,7 @@ public class TSP {
 
     public double getMinY() {
         double min = Double.MAX_VALUE;
-        for (City city : cityList) {
+        for (City city : cityMap.values()) {
             if (min > city.getYPos()) {
                 min = city.getYPos();
             }

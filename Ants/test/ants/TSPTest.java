@@ -9,23 +9,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author user
  */
 public class TSPTest {
-    
-    public TSPTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
 
     /**
      * Test of loadFromFile method, of class TSP.
@@ -33,10 +23,11 @@ public class TSPTest {
     @Test
     public void testLoadFromFile() {
         System.out.println("loadFromFile");
-        String path = "";
-        TSP.loadFromFile(path);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String path = "test/ants/berlin52.tsp";
+        TSP tsp = TSP.loadFromFile(path);
+        assertEquals(tsp.getCityListLength(), 52, 0);
+        assertEquals(tsp.getName(), "berlin52");
+        assertEquals(565, tsp.getCity(1).getXPos(), 0);
     }
 
     /**
@@ -56,6 +47,7 @@ public class TSPTest {
      * Test of solveTSP method, of class TSP.
      */
     @Test
+    @Ignore
     public void testSolveTSP() {
         System.out.println("solveTSP");
         TSP instance = new TSP();
@@ -73,13 +65,13 @@ public class TSPTest {
         System.out.println("getCity");
         TSP tsp = new TSP();
         for (int i = 0; i < 10; i++) {
-            tsp.addCity(i, i);
+            tsp.addCity(i, i, i);
         }
         for (int i = 0; i < 10; i++) {
             City city = tsp.getCity(i);
-            assertTrue(city.getXPos() == i);
-            assertTrue(city.getYPos() == i);
-            assertTrue(city.getNumber() == i);
+            assertEquals(city.getXPos(), i, 0);
+            assertEquals(city.getYPos(), i, 0);
+            assertEquals(city.getNumber(), i, 0);
         }
     }
 
@@ -102,16 +94,19 @@ public class TSPTest {
     @Test
     public void testGetCityNearby() {
         System.out.println("getCityNearby");
-        double x = 0.0;
-        double y = 0.0;
-        double rangeX = 0.0;
-        double rangeY = 0.0;
-        TSP instance = new TSP();
-        City expResult = null;
-        City result = instance.getCityNearby(x, y, rangeX, rangeY);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        TSP tsp = new TSP();
+        tsp.addCity(5.5, 2.4);
+        tsp.addCity(0.3, 1.4);
+        tsp.addCity(6.9, 1.3);
+        tsp.addCity(9.4, 10.0);
+        tsp.addCity(-5.8, 4.3);
+        City city = tsp.getCityNearby(0.2, 1.5, 0.3, 0.3);
+        if (city != null) {
+            assertEquals(city.getXPos(), 0.3, 0.0);
+            assertEquals(city.getYPos(), 1.4, 0.0);
+        } else {
+            fail("no city found");
+        }
     }
 
     /**
@@ -120,12 +115,15 @@ public class TSPTest {
     @Test
     public void testGetMaxX() {
         System.out.println("getMaxX");
-        TSP instance = new TSP();
-        double expResult = 0.0;
-        double result = instance.getMaxX();
+        TSP tsp = new TSP();
+        tsp.addCity(5.5, 2.4);
+        tsp.addCity(0.3, 1.4);
+        tsp.addCity(6.9, 1.3);
+        tsp.addCity(9.4, 10.0);
+        tsp.addCity(-5.8, 4.3);
+        double expResult = 9.4;
+        double result = tsp.getMaxX();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -133,13 +131,15 @@ public class TSPTest {
      */
     @Test
     public void testGetMaxY() {
-        System.out.println("getMaxY");
-        TSP instance = new TSP();
-        double expResult = 0.0;
-        double result = instance.getMaxY();
+        TSP tsp = new TSP();
+        tsp.addCity(5.5, 2.4);
+        tsp.addCity(0.3, 1.4);
+        tsp.addCity(6.9, 1.3);
+        tsp.addCity(9.4, 10.0);
+        tsp.addCity(-5.8, 4.3);
+        double expResult = 10.0;
+        double result = tsp.getMaxY();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -147,13 +147,15 @@ public class TSPTest {
      */
     @Test
     public void testGetMinX() {
-        System.out.println("getMinX");
-        TSP instance = new TSP();
-        double expResult = 0.0;
-        double result = instance.getMinX();
+        TSP tsp = new TSP();
+        tsp.addCity(5.5, 2.4);
+        tsp.addCity(0.3, 1.4);
+        tsp.addCity(6.9, 1.3);
+        tsp.addCity(9.4, 10.0);
+        tsp.addCity(-5.8, 4.3);
+        double expResult = -5.8;
+        double result = tsp.getMinX();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -161,13 +163,26 @@ public class TSPTest {
      */
     @Test
     public void testGetMinY() {
-        System.out.println("getMinY");
-        TSP instance = new TSP();
-        double expResult = 0.0;
-        double result = instance.getMinY();
+        TSP tsp = new TSP();
+        tsp.addCity(5.5, 2.4);
+        tsp.addCity(0.3, 1.4);
+        tsp.addCity(6.9, 1.3);
+        tsp.addCity(9.4, 10.0);
+        tsp.addCity(-5.8, 4.3);
+        double expResult = 1.3;
+        double result = tsp.getMinY();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testGetCityListLength() {
+        TSP tsp = new TSP();
+        tsp.addCity(5.5, 2.4, 10);
+        tsp.addCity(0.3, 1.4, 20);
+        tsp.addCity(6.9, 1.3, 30);
+        tsp.addCity(9.4, 10.0, 40);
+        tsp.addCity(-5.8, 4.3, 50);
+        assertEquals(5, tsp.getCityListLength(), 0);
     }
 
 }

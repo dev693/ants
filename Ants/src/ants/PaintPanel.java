@@ -46,8 +46,8 @@ public class PaintPanel extends JPanel {
             g.fillRect((this.getWidth() / 2) -1,this.getHeight() / 2 -1, 2, 2);
 
             //Städte Anzeigen
-            for (int i = 0; i < Main.data.getCityListLength(); i++) {
-                drawCity(g, Main.data.getCity(i));
+            for (City city : Main.data.getCityCollection()) {
+                drawCity(g, city);
             }
         }
     }
