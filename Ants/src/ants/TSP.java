@@ -16,8 +16,9 @@ public class TSP {
 
     private String name;
     private String comment = "";
-    private ArrayList<ArrayList<Double>> pheromonData;
-    private ArrayList<ArrayList<Double>> distanceData;
+    private TreeMap<Integer[], Double> pheromonData; 
+    private TreeMap<Integer[], Double> distanceData;
+    
     private TreeMap<Integer, City> cityMap = new TreeMap();
     private double pheromon;
     private double localInformation;
@@ -32,6 +33,10 @@ public class TSP {
     private int maxCityNumber = 1;
     
     public TSP() {
+        pheromonData.put(new Integer[] {1,2}, 3.6);
+        
+        pheromonData.put(new Integer[] {4,5}, 3.9);
+        
     }
 
     public static TSP loadFromFile(String path) {
@@ -214,7 +219,8 @@ public class TSP {
      * @return the pheromonData
      */
     public double getPheromonData(int from, int to) {
-        return pheromonData.get(from).get(to);
+        System.out.println(pheromonData.get(new Integer[] {1,2}));
+        return 0.0; //pheromonData.get(from).get(to);
     }
 
     /**
@@ -431,5 +437,56 @@ public class TSP {
      */
     public void setOptimalRoute(Route optimalRoute) {
         this.optimalRoute = optimalRoute;
+    }
+
+    /**
+     * @return the pheromon
+     */
+    public double getPheromon() {
+        return pheromon;
+    }
+
+    /**
+     * @return the localInformation
+     */
+    public double getLocalInformation() {
+        return localInformation;
+    }
+
+    /**
+     * @return the evaporation
+     */
+    public double getEvaporation() {
+        return evaporation;
+    }
+
+    /**
+     * @return the initialPheromon
+     */
+    public double getInitialPheromon() {
+        return initialPheromon;
+    }
+
+    /**
+     * @return the pheromonUpdate
+     */
+    public double getPheromonUpdate() {
+        return pheromonUpdate;
+    }
+    
+    
+    public void updatePheromonData(int from, int to, double update) {
+        // TODO
+    }
+    
+    
+    public void evaporatePheromon() {
+        for (City cityX : this.getCityCollection()) {
+            for (City cityY : this.getCityCollection()) {
+                if (cityX != cityY) {
+                    
+                }
+            }
+        }
     }
 }

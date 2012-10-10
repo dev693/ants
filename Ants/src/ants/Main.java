@@ -16,6 +16,7 @@ public class Main{
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Main.data.getPheromonData(1, 2);
         Main.data.addCity(40,30);
         Main.data.addCity(20,20);
         Main.data.addCity(20, 10);
