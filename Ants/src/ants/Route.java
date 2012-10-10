@@ -26,11 +26,18 @@ public class Route {
     }
     
     public void addCity(City city) {
-        if (lastCity != null) {
-            length += Main.data.getDistanceData(lastCity.getNumber(), city.getNumber());
+        if (getLastCity() != null) {
+            length += Main.data.getDistanceData(getLastCity().getNumber(), city.getNumber());
         }
         route.add(city);
         lastCity = city;
+    }
+
+    /**
+     * @return the lastCity
+     */
+    public City getLastCity() {
+        return lastCity;
     }
     
     

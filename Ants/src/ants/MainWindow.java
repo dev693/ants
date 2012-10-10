@@ -6,10 +6,8 @@ package ants;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FileDialog;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FilenameFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,6 +21,22 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public MainWindow() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         initComponents();
     }
     private int pressedX = 0;
@@ -40,28 +54,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        resultPanel = new javax.swing.JPanel();
-        infoPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        nameCaptionLabel = new javax.swing.JLabel();
-        cityCountCaptionLabel = new javax.swing.JLabel();
-        commentCaptionLabel = new javax.swing.JLabel();
-        timeCaptionLabel = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        nameLabel = new javax.swing.JLabel();
-        cityCountLabel = new javax.swing.JLabel();
-        commentLabel = new javax.swing.JLabel();
-        timeLabel = new javax.swing.JLabel();
-        scorePanel = new javax.swing.JPanel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        bestRouteCaptionLabel = new javax.swing.JLabel();
-        averageRouteCaptionLabel = new javax.swing.JLabel();
-        globalCaptionLabel = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        localCaptionLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         progressPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         startButton = new javax.swing.JButton();
@@ -96,6 +88,27 @@ public class MainWindow extends javax.swing.JFrame {
         iterationsText = new javax.swing.JTextField();
         antsText = new javax.swing.JTextField();
         stopPanel = new javax.swing.JPanel();
+        resultPanel = new javax.swing.JPanel();
+        infoPanel = new javax.swing.JPanel();
+        cityCountLabel = new javax.swing.JLabel();
+        commentCaptionLabel = new javax.swing.JLabel();
+        cityCountCaptionLabel = new javax.swing.JLabel();
+        timeCaptionLabel = new javax.swing.JLabel();
+        nameCaptionLabel = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        commentTextArea = new javax.swing.JTextArea();
+        nameLabel = new javax.swing.JLabel();
+        scorePanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        bestRouteCaptionLabel = new javax.swing.JLabel();
+        averageRouteCaptionLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         mainMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newMenuItem = new javax.swing.JMenuItem();
@@ -105,123 +118,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
+        setMinimumSize(new java.awt.Dimension(765, 605));
         setName("MainFrame"); // NOI18N
-
-        resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
-
-        infoPanel.setLayout(new javax.swing.BoxLayout(infoPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        jPanel1.setMaximumSize(new java.awt.Dimension(200, 56));
-        jPanel1.setPreferredSize(new java.awt.Dimension(200, 100));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
-
-        nameCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        nameCaptionLabel.setText("Name:");
-        nameCaptionLabel.setToolTipText("");
-        nameCaptionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        nameCaptionLabel.setMaximumSize(null);
-        nameCaptionLabel.setMinimumSize(null);
-        jPanel1.add(nameCaptionLabel);
-
-        cityCountCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        cityCountCaptionLabel.setText("Anzahl der Städte:");
-        cityCountCaptionLabel.setMaximumSize(null);
-        cityCountCaptionLabel.setMinimumSize(null);
-        jPanel1.add(cityCountCaptionLabel);
-
-        commentCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        commentCaptionLabel.setText("Kommentar:");
-        commentCaptionLabel.setMaximumSize(null);
-        commentCaptionLabel.setMinimumSize(null);
-        jPanel1.add(commentCaptionLabel);
-
-        timeCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        timeCaptionLabel.setText("benötigte Zeit:");
-        timeCaptionLabel.setMaximumSize(null);
-        timeCaptionLabel.setMinimumSize(null);
-        jPanel1.add(timeCaptionLabel);
-
-        infoPanel.add(jPanel1);
-
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
-
-        nameLabel.setText("Berlin52");
-        nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        nameLabel.setMaximumSize(null);
-        nameLabel.setMinimumSize(null);
-        jPanel2.add(nameLabel);
-
-        cityCountLabel.setText("52");
-        cityCountLabel.setMaximumSize(null);
-        cityCountLabel.setMinimumSize(null);
-        jPanel2.add(cityCountLabel);
-
-        commentLabel.setText("blab lbalbalblabla");
-        commentLabel.setMaximumSize(null);
-        commentLabel.setMinimumSize(null);
-        jPanel2.add(commentLabel);
-        commentLabel.getAccessibleContext().setAccessibleName("blab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblablablab lbalbalblabla");
-
-        timeLabel.setText("5 s");
-        timeLabel.setMaximumSize(null);
-        timeLabel.setMinimumSize(null);
-        jPanel2.add(timeLabel);
-
-        infoPanel.add(jPanel2);
-
-        scorePanel.setPreferredSize(new java.awt.Dimension(2484, 30));
-        scorePanel.setLayout(new java.awt.GridLayout(0, 3, 0, 2));
-        scorePanel.add(filler1);
-
-        bestRouteCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        bestRouteCaptionLabel.setText("Beste Route:");
-        scorePanel.add(bestRouteCaptionLabel);
-
-        averageRouteCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        averageRouteCaptionLabel.setText("Durchschnittliche Route:");
-        scorePanel.add(averageRouteCaptionLabel);
-
-        globalCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        globalCaptionLabel.setText("Gesamt:");
-        scorePanel.add(globalCaptionLabel);
-
-        jLabel6.setText("16000 km");
-        scorePanel.add(jLabel6);
-
-        jLabel10.setText("16000 km");
-        scorePanel.add(jLabel10);
-
-        localCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        localCaptionLabel.setText("Iteration:");
-        localCaptionLabel.setToolTipText("");
-        localCaptionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        scorePanel.add(localCaptionLabel);
-
-        jLabel1.setText("18000 km");
-        scorePanel.add(jLabel1);
-
-        jLabel2.setText("20000 km");
-        scorePanel.add(jLabel2);
-
-        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
-        resultPanel.setLayout(resultPanelLayout);
-        resultPanelLayout.setHorizontalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        resultPanelLayout.setVerticalGroup(
-            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(resultPanelLayout.createSequentialGroup()
-                .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        setPreferredSize(new java.awt.Dimension(765, 605));
 
         progressBar.setValue(35);
         progressBar.setStringPainted(true);
@@ -232,7 +131,7 @@ public class MainWindow extends javax.swing.JFrame {
             progressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                 .addContainerGap())
         );
         progressPanelLayout.setVerticalGroup(
@@ -520,7 +419,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
@@ -561,7 +460,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(antsCaptionLabel)
                     .addComponent(antsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Iterationen", iterationPanel);
@@ -574,10 +473,196 @@ public class MainWindow extends javax.swing.JFrame {
         );
         stopPanelLayout.setVerticalGroup(
             stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 387, Short.MAX_VALUE)
+            .addGap(0, 295, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Abbruch", stopPanel);
+
+        resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
+        resultPanel.setPreferredSize(new java.awt.Dimension(566, 180));
+
+        cityCountLabel.setText("52");
+        cityCountLabel.setMaximumSize(null);
+        cityCountLabel.setMinimumSize(null);
+
+        commentCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        commentCaptionLabel.setText("Kommentar:");
+        commentCaptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        commentCaptionLabel.setMaximumSize(null);
+        commentCaptionLabel.setMinimumSize(null);
+        commentCaptionLabel.setPreferredSize(new java.awt.Dimension(150, 14));
+        commentCaptionLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        cityCountCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cityCountCaptionLabel.setText("Anzahl der Städte:");
+        cityCountCaptionLabel.setMaximumSize(null);
+        cityCountCaptionLabel.setMinimumSize(null);
+        cityCountCaptionLabel.setPreferredSize(new java.awt.Dimension(150, 14));
+
+        timeCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        timeCaptionLabel.setText("benötigte Zeit:");
+        timeCaptionLabel.setMaximumSize(null);
+        timeCaptionLabel.setMinimumSize(null);
+
+        nameCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        nameCaptionLabel.setText("Name:");
+        nameCaptionLabel.setToolTipText("");
+        nameCaptionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        nameCaptionLabel.setMaximumSize(new java.awt.Dimension(150, 14));
+        nameCaptionLabel.setMinimumSize(new java.awt.Dimension(150, 14));
+        nameCaptionLabel.setPreferredSize(new java.awt.Dimension(150, 14));
+
+        timeLabel.setText("5 s");
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        commentTextArea.setEditable(false);
+        commentTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        commentTextArea.setColumns(20);
+        commentTextArea.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        commentTextArea.setLineWrap(true);
+        commentTextArea.setWrapStyleWord(true);
+        commentTextArea.setAutoscrolls(false);
+        commentTextArea.setBorder(null);
+        commentTextArea.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        commentTextArea.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        commentTextArea.setMaximumSize(new java.awt.Dimension(2147483647, 28));
+        commentTextArea.setMinimumSize(new java.awt.Dimension(50, 28));
+        jScrollPane2.setViewportView(commentTextArea);
+
+        nameLabel.setText("Berlin52");
+        nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
+        infoPanel.setLayout(infoPanelLayout);
+        infoPanelLayout.setHorizontalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(infoPanelLayout.createSequentialGroup()
+                        .addComponent(cityCountCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(cityCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, infoPanelLayout.createSequentialGroup()
+                        .addComponent(nameCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(nameLabel)))
+                .addContainerGap())
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addComponent(timeCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(timeLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addComponent(commentCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+        );
+        infoPanelLayout.setVerticalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cityCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityCountCaptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(commentCaptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timeCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeLabel))
+                .addGap(42, 42, 42))
+        );
+
+        scorePanel.setPreferredSize(new java.awt.Dimension(2484, 30));
+
+        jPanel1.setLayout(new java.awt.GridLayout(0, 2, 0, 2));
+
+        bestRouteCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        bestRouteCaptionLabel.setText("Beste Route:");
+        jPanel1.add(bestRouteCaptionLabel);
+
+        averageRouteCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        averageRouteCaptionLabel.setText("Durchschnittliche Route:");
+        jPanel1.add(averageRouteCaptionLabel);
+
+        jLabel6.setText("16000 km");
+        jPanel1.add(jLabel6);
+
+        jLabel1.setText("18000 km");
+        jPanel1.add(jLabel1);
+
+        jLabel2.setText("20000 km");
+        jPanel1.add(jLabel2);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Gesamt:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Iteration:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout scorePanelLayout = new javax.swing.GroupLayout(scorePanel);
+        scorePanel.setLayout(scorePanelLayout);
+        scorePanelLayout.setHorizontalGroup(
+            scorePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, scorePanelLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        scorePanelLayout.setVerticalGroup(
+            scorePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(scorePanelLayout.createSequentialGroup()
+                .addGroup(scorePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
+        resultPanel.setLayout(resultPanelLayout);
+        resultPanelLayout.setHorizontalGroup(
+            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scorePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        resultPanelLayout.setVerticalGroup(
+            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultPanelLayout.createSequentialGroup()
+                .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         fileMenu.setText("Datei");
 
@@ -621,7 +706,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(resultPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane1)
@@ -635,10 +720,13 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(progressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -805,7 +893,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
-        this.commentLabel.setText(Main.data.getComment());
+        this.commentTextArea.setText(Main.data.getComment());
         this.cityCountLabel.setText(Main.data.getCityListLength() + "");
     }
     
@@ -860,14 +948,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel cityCountCaptionLabel;
     private javax.swing.JLabel cityCountLabel;
     private javax.swing.JLabel commentCaptionLabel;
-    private javax.swing.JLabel commentLabel;
+    private javax.swing.JTextArea commentTextArea;
     private javax.swing.JLabel evaporationLabel;
     private javax.swing.JSlider evaporationSlider;
     private javax.swing.JTextField evaporationText;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel globalCaptionLabel;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel initialPheromonLabel;
     private javax.swing.JSlider initialPheromonSlider;
@@ -876,14 +962,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel iterationPanel;
     private javax.swing.JTextField iterationsText;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem loadMenuItem;
-    private javax.swing.JLabel localCaptionLabel;
     private javax.swing.JLabel localInformationLabel;
     private javax.swing.JSlider localInformationSlider;
     private javax.swing.JTextField localInformationText;
