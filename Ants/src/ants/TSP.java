@@ -16,8 +16,8 @@ public class TSP {
 
     private String name;
     private String comment = "";
-    private TreeMap<Integer[], Double> pheromonData; 
-    private TreeMap<Integer[], Double> distanceData;
+    private ArrayList<ArrayList<Double>> pheromonData = new ArrayList(); 
+    private ArrayList<ArrayList<Double>> distanceData = new ArrayList();
     
     private TreeMap<Integer, City> cityMap = new TreeMap();
     private double pheromon;
@@ -33,10 +33,6 @@ public class TSP {
     private int maxCityNumber = 1;
     
     public TSP() {
-        pheromonData.put(new Integer[] {1,2}, 3.6);
-        
-        pheromonData.put(new Integer[] {4,5}, 3.9);
-        
     }
 
     public static TSP loadFromFile(String path) {
@@ -219,7 +215,7 @@ public class TSP {
      * @return the pheromonData
      */
     public double getPheromonData(int from, int to) {
-        System.out.println(pheromonData.get(new Integer[] {1,2}));
+        //System.out.println(pheromonData.get(new Integer[] {1,2}));
         return 0.0; //pheromonData.get(from).get(to);
     }
 
@@ -475,8 +471,14 @@ public class TSP {
     }
     
     
+    /**
+     * updating the PheromonData
+     * @param from
+     * @param to
+     * @param update
+     */
     public void updatePheromonData(int from, int to, double update) {
-        // TODO
+        // TODO update PheromonData
     }
     
     

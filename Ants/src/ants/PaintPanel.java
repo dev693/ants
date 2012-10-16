@@ -6,6 +6,7 @@ package ants;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 /**
@@ -31,26 +32,27 @@ public class PaintPanel extends JPanel {
         
         if (!java.beans.Beans.isDesignTime()) {
             calcRelation();
+            Graphics2D g2D = (Graphics2D) g;
+            
+            //System.out.println("relation: " + getRelation() + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; xBaseOffset: " + xBaseOffset + "; yOffset: " + getyOffset() + "; yBaseOffset: " + yBaseOffset);
+            g2D.setColor(Color.white);
+            g2D.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-            System.out.println("relation: " + getRelation() + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; xBaseOffset: " + xBaseOffset + "; yOffset: " + getyOffset() + "; yBaseOffset: " + yBaseOffset);
-            g.setColor(Color.white);
-            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            g2D.setColor(Color.red);
+            drawRoute(g2D, Main.data.getGlobalBest());
 
-            g.setColor(Color.red);
-            drawRoute(g, Main.data.getGlobalBest());
+            g2D.setColor(Color.blue);
+            drawRoute(g2D, Main.data.getLocalBest());
 
-            g.setColor(Color.blue);
-            drawRoute(g, Main.data.getLocalBest());
-
-            g.setColor(Color.green);
-            drawRoute(g, Main.data.getOptimalRoute());
+            g2D.setColor(Color.green);
+            drawRoute(g2D, Main.data.getOptimalRoute());
             
             //g.setColor(Color.GRAY);
             //g.fillRect((this.getWidth() / 2) -1,this.getHeight() / 2 -1, 2, 2);
 
             //Städte Anzeigen
             for (City city : Main.data.getCityCollection()) {
-                drawCity(g, city);
+                drawCity(g2D, city);
             }
         }
     }
@@ -89,14 +91,14 @@ public class PaintPanel extends JPanel {
         }
     }
 
-    public void drawCity(Graphics g, City city) {
+    public void drawCity(Graphics2D g, City city) {
         g.setColor(city.getColor());
         int x = (int) (city.getXPos() * getRelation());
         int y = (int) (city.getYPos() * getRelation());
         g.fillOval(x - getxOffset() + borderOffset-thickness/2, y - getyOffset() + borderOffset-thickness/2, thickness, thickness);
     }
 
-    public void drawRoute(Graphics g, Route route) {
+    public void drawRoute(Graphics2D g, Route route) {
         City lastCity = null;
         if (route != null) {
             for (City city : route.getRoute()) {
