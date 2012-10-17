@@ -253,7 +253,7 @@ public class TSP {
      * @return the pheromonData
      */
     public double getPheromonData(int from, int to) {
-            return distanceData.get(from).get(to);     
+            return pheromonData.get(from).get(to);     
     }
 
     /**
