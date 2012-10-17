@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Random;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
@@ -202,14 +203,26 @@ public class TSP {
     }
     
     
+    public City getRandomCity() {
+        int rd;
+        do {
+            rd = new Random().nextInt(cityMap.lastKey()+1);
+        } while (!cityMap.keySet().contains(rd));
+        return cityMap.get(rd);
+    }
+    
+    
     public void solveTSP() {
+        this.localBest = null;
+        this.globalBest = null;
         this.initializePheromonData();
         
         for (int i = 0; i < this.iterations; i++ ) {
             
             for (int a = 0; a < this.ants; a++) {
                 //TODO random city übergeben
-                Ant ant = new Ant(cityMap.get(1));
+                     
+                Ant ant = new Ant(this.getRandomCity());
                 do {
                     ant.nextCity();
                 } while (!ant.isFinished());
@@ -223,10 +236,9 @@ public class TSP {
                         globalBest = localBest;
                     }
                 }
-                
-                localBest = ant.getRoute();
-                Main.window.repaint();
+                Main.window.refreshPaintPanel();            
             }
+            
             this.evaporatePheromon();
         }
         
@@ -537,7 +549,6 @@ public class TSP {
     
     public void evaporatePheromon() {
         for (City city : cityMap.values()) {
-            pheromonData.put(city.getNumber(), new TreeMap());
             for (City innerCity : cityMap.values()) {
                 if (innerCity != city) {
                     double localPhero = pheromonData.get(city.getNumber()).get(innerCity.getNumber());

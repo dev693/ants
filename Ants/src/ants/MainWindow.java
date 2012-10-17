@@ -911,12 +911,20 @@ public class MainWindow extends javax.swing.JFrame {
         this.nameLabel.setText(Main.data.getName());
         this.commentTextArea.setText(Main.data.getComment());
         this.cityCountLabel.setText(Main.data.getCityListLength() + "");
+        if (Main.data.getGlobalBest() != null) {
+            this.globalBestLabel.setText(Main.data.getGlobalBest().getLength() + "");
+        }
+        this.scorePanel.repaint();
     }
     
     public int getZoom() {
         return zoomSlider.getValue();
     }
-
+    
+    public void refreshPaintPanel() {
+        this.paintPanel.refresh();
+        this.refreshTSPInfos();
+    }
     public boolean getAutoscale() {
         return autoscaleSwitch.isSelected();
     }
