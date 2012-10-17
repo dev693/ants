@@ -17,7 +17,7 @@ public class Ant {
         if (!finished) {
             if (!cityPool.isEmpty()) {
                 City bestCity = null;
-                City currentCity = route.getLastCity();
+                City currentCity = getRoute().getLastCity();
                 double bestProbability = 0;
                 double alpha = Main.data.getPheromon();
                 double beta = Main.data.getLocalInformation();
@@ -39,10 +39,10 @@ public class Ant {
                 }
 
                 cityPool.remove(bestCity);
-                route.addCity(bestCity);
+                getRoute().addCity(bestCity);
 
             } else {
-                route.addCity(route.getRoute().get(0));
+                getRoute().addCity(getRoute().getRoute().get(0));
                 finished = true;
             }
         }
@@ -51,9 +51,9 @@ public class Ant {
     public void updatePheromon() {
         if (this.isFinished()) {
             City lastCity = null;
-            for(City city : route.getRoute()) {
+            for(City city : getRoute().getRoute()) {
                 if (lastCity != null) {
-                    double update = Main.data.getPheromonUpdate() / this.route.getLength();
+                    double update = Main.data.getPheromonUpdate() / this.getRoute().getLength();
                     Main.data.updatePheromonData(lastCity.getNumber(), city.getNumber(), update);
                 }
                 lastCity = city;
@@ -67,5 +67,12 @@ public class Ant {
      */
     public boolean isFinished() {
         return finished;
+    }
+
+    /**
+     * @return the route
+     */
+    public Route getRoute() {
+        return route;
     }
 }

@@ -413,7 +413,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                      <EmptySpace pref="175" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

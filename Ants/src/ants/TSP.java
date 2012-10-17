@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
@@ -16,8 +15,8 @@ public class TSP {
 
     private String name;
     private String comment = "";
-    private ArrayList<ArrayList<Double>> pheromonData = new ArrayList(); 
-    private ArrayList<ArrayList<Double>> distanceData = new ArrayList();
+    private TreeMap<Integer,TreeMap<Integer, Double>> pheromonData = new TreeMap() ; 
+    private TreeMap<Integer,TreeMap<Integer, Double>> distanceData = new TreeMap();
     
     private TreeMap<Integer, City> cityMap = new TreeMap();
     private double pheromon;
@@ -204,31 +203,55 @@ public class TSP {
     
     
     public void solveTSP() {
+        this.initializePheromonData();
+        
+        for (int i = 0; i < this.iterations; i++ ) {
+            
+            for (int a = 0; a < this.ants; a++) {
+                //TODO random city übergeben
+                Ant ant = new Ant(cityMap.get(1));
+                do {
+                    ant.nextCity();
+                } while (!ant.isFinished());
+                
+                ant.updatePheromon();
+                
+                if (localBest == null || ant.getRoute().getLength() < this.localBest.getLength()) {
+                    localBest = ant.getRoute();
+                    
+                    if (globalBest == null || localBest.getLength() < globalBest.getLength()) {
+                        globalBest = localBest;
+                    }
+                }
+                
+                localBest = ant.getRoute();
+                Main.window.repaint();
+            }
+            this.evaporatePheromon();
+        }
+        
     }
 
     
     public Collection<City> getCityCollection() {
-        return cityMap.values();
+        return ((TreeMap) cityMap.clone()).values();
     }
     
     /**
      * @return the pheromonData
      */
     public double getPheromonData(int from, int to) {
-        //System.out.println(pheromonData.get(new Integer[] {1,2}));
-        return 0.0; //pheromonData.get(from).get(to);
+            return distanceData.get(from).get(to);     
     }
 
     /**
      * @return the distanceData
      */
     public double getDistanceData(int from, int to) {
-        City cityFrom = this.getCity(from);
-        City cityTo = this.getCity(to);
-        double dx = cityFrom.getXPos() - cityTo.getXPos();
-        double dy = cityFrom.getYPos() - cityTo.getYPos();
-        return Math.sqrt(dx*dx+dy*dy);
-        //return distanceData.get(from).get(to);
+        if (distanceData.get(from) != null) {
+            return distanceData.get(from).get(to);     
+        }
+        return 0;
     }
 
     /**
@@ -245,13 +268,27 @@ public class TSP {
     public int getCityListLength() {
         return cityMap.size();
     }
-
+    
+    public void initializePheromonData() {
+        pheromonData = new TreeMap();
+        
+        for (City city : cityMap.values()) {
+            pheromonData.put(city.getNumber(), new TreeMap());
+            for (City innerCity : cityMap.values()) {
+                if (innerCity != city) {
+                    pheromonData.get(city.getNumber()).put(innerCity.getNumber(), this.initialPheromon);
+                }
+            }
+        }
+    }
+    
     public void addCity(double x, double y) {
         
         //cityTable.put(new City(x, y, maxCityNumber++));
         cityMap.put(maxCityNumber, new City(x, y, maxCityNumber++));
-        //TODO Länge
+        reCalculateDistanceData();
         //TODO PHEROMON
+        
     }
     
     public void addCity(double x, double y, int number) {
@@ -259,6 +296,7 @@ public class TSP {
             maxCityNumber = number + 1;
         }
         cityMap.put(number, new City(x, y, number));
+        reCalculateDistanceData();
     }
     
     public City getCityNearby(double x, double y, double rangeX, double rangeY) {
@@ -410,6 +448,18 @@ public class TSP {
     
     
     public void reCalculateDistanceData() {
+        distanceData = new TreeMap();
+        
+        for (City city : cityMap.values()) {
+            distanceData.put(city.getNumber(), new TreeMap());
+            for (City innerCity : cityMap.values()) {
+                if (innerCity != city) {
+                    double dx = city.getXPos() - innerCity.getXPos();
+                    double dy = city.getYPos() - innerCity.getYPos();
+                    distanceData.get(city.getNumber()).put(innerCity.getNumber(), Math.sqrt(dx*dx+dy*dy));
+                }
+            }
+        }
     }
 
     /**
@@ -478,15 +528,23 @@ public class TSP {
      * @param update
      */
     public void updatePheromonData(int from, int to, double update) {
-        // TODO update PheromonData
+        double localPhero = update + pheromonData.get(from).get(to);
+        
+        pheromonData.get(from).put(to, localPhero);
+        pheromonData.get(to).put(from, localPhero);
     }
     
     
     public void evaporatePheromon() {
-        for (City cityX : this.getCityCollection()) {
-            for (City cityY : this.getCityCollection()) {
-                if (cityX != cityY) {
+        for (City city : cityMap.values()) {
+            pheromonData.put(city.getNumber(), new TreeMap());
+            for (City innerCity : cityMap.values()) {
+                if (innerCity != city) {
+                    double localPhero = pheromonData.get(city.getNumber()).get(innerCity.getNumber());
+                    localPhero = (localPhero * (1-this.evaporation));
                     
+                    pheromonData.get(city.getNumber()).put(innerCity.getNumber(), localPhero);
+                    pheromonData.get(innerCity.getNumber()).put(city.getNumber(), localPhero);
                 }
             }
         }

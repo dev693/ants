@@ -429,7 +429,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
@@ -827,6 +827,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_paintPanelMousePressed
 
     private void paintPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseReleased
+        if (moveCity) {
+            Main.data.reCalculateDistanceData();
+        }        
         mousePressed = false;
         moveCity = false;
         paintPanel.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
