@@ -8,6 +8,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +27,8 @@ public class PaintPanel extends JPanel {
     private int yBaseOffset = 0;
     private int zoom = 100;    
     private boolean autoscale = true;
+    private BufferedImage buffer = null;
+    private BufferedImage backBuffer = null;
     private BasicStroke dashedline = new BasicStroke(
                                     2.0f,                      // Width
                                     BasicStroke.CAP_SQUARE,    // End cap
@@ -46,8 +50,14 @@ public class PaintPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         
         if (!java.beans.Beans.isDesignTime()) {
+            if (buffer != null) {
+                g.drawImage(buffer, 0, 0, buffer.getWidth(), buffer.getHeight(), null);
+            }
+            
+            backBuffer = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2D = (Graphics2D) backBuffer.getGraphics();
+            
             calcRelation();
-            Graphics2D g2D = (Graphics2D) g;
             
             g2D.setColor(Color.white);
             g2D.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -73,6 +83,9 @@ public class PaintPanel extends JPanel {
             for (City city : Main.data.getCityCollection()) {
                 drawCity(g2D, city);
             }
+            
+            g.drawImage(backBuffer, 0, 0, null);
+            buffer = backBuffer;
         }
     }
 

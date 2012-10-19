@@ -117,7 +117,7 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
         setBackground(new java.awt.Color(0, 255, 0));
-        setMinimumSize(new java.awt.Dimension(735, 655));
+        setMinimumSize(new java.awt.Dimension(735, 680));
         setName("MainFrame"); // NOI18N
         setPreferredSize(new java.awt.Dimension(735, 655));
 
@@ -842,7 +842,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         
         if (mousePressed) {
-            paintPanel.setCursor( new Cursor(Cursor.HAND_CURSOR));
+            paintPanel.setCursor( new Cursor(Cursor.MOVE_CURSOR));
             paintPanel.shiftX(pressedX - evt.getX());
             paintPanel.shiftY(pressedY - evt.getY());
             pressedX = evt.getX();
@@ -870,6 +870,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_autoscaleChanged
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        this.setCursor( new Cursor(Cursor.WAIT_CURSOR));
         try {
             Main.data.setPheromon(Double.parseDouble(pheromonText.getText()));
             Main.data.setLocalInformation(Double.parseDouble(localInformationText.getText()));
@@ -883,6 +884,7 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Fehlerhafter Parameter:\n" + e.getMessage(), "Fehlerhafter Parameter", JOptionPane.ERROR_MESSAGE);
         }
+        this.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed

@@ -236,9 +236,9 @@ public class TSP {
                     if (globalBest == null || localBest.getLength() < globalBest.getLength()) {
                         globalBest = localBest;
                     }
+                    
                     Main.window.refreshPaintPanel();
                 }
-                
             }
 
             this.evaporatePheromon();
