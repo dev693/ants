@@ -470,7 +470,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(antsCaptionLabel)
                     .addComponent(antsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Iterationen", iterationPanel);
@@ -483,7 +483,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         stopPanelLayout.setVerticalGroup(
             stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+            .addGap(0, 456, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Abbruch", stopPanel);
@@ -837,7 +837,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void paintPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseDragged
         if (moveCity) {
-            selectedCity.moveCity( paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
+            Main.data.moveCity(paintPanel.XPixel2Coord(evt.getX()),paintPanel.YPixel2Coord(evt.getY()), selectedCity);
             paintPanel.refresh();
         }
         

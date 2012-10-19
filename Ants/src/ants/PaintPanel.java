@@ -4,6 +4,7 @@
  */
 package ants;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,7 +25,21 @@ public class PaintPanel extends JPanel {
     private int yBaseOffset = 0;
     private int zoom = 100;    
     private boolean autoscale = true;
-    
+    private BasicStroke dashedline = new BasicStroke(
+                                    2.0f,                      // Width
+                                    BasicStroke.CAP_SQUARE,    // End cap
+                                    BasicStroke.JOIN_MITER,    // Join style
+                                    10.0f,                     // Miter limit
+                                    new float[] {4.0f,8.0f}, // Dash pattern
+                                    0.0f);                     // Dash phase
+    private BasicStroke dottedline = new BasicStroke(
+                                    2.0f,                      // Width
+                                    BasicStroke.CAP_SQUARE,    // End cap
+                                    BasicStroke.JOIN_MITER,    // Join style
+                                    10.0f,                     // Miter limit
+                                    new float[] {2.0f,4.0f}, // Dash pattern
+                                    0.0f);      
+    private BasicStroke continousline = new BasicStroke(2.0f);          
     
     
     @Override
@@ -34,18 +49,22 @@ public class PaintPanel extends JPanel {
             calcRelation();
             Graphics2D g2D = (Graphics2D) g;
             
-            //System.out.println("relation: " + getRelation() + "; autoscale: " + autoscale + "; zoom: " + zoom + "; xOffset: " + getxOffset() + "; xBaseOffset: " + xBaseOffset + "; yOffset: " + getyOffset() + "; yBaseOffset: " + yBaseOffset);
             g2D.setColor(Color.white);
             g2D.fillRect(0, 0, this.getWidth(), this.getHeight());
+            
+            g2D.setColor(Color.green);
+            g2D.setStroke(this.dashedline);
+            drawRoute(g2D, Main.data.getOptimalRoute());
 
-            g2D.setColor(Color.red);
-            drawRoute(g2D, Main.data.getGlobalBest());
 
             g2D.setColor(Color.blue);
+            g2D.setStroke(this.continousline);
             drawRoute(g2D, Main.data.getLocalBest());
 
-            g2D.setColor(Color.green);
-            drawRoute(g2D, Main.data.getOptimalRoute());
+            g2D.setColor(Color.red);
+            g2D.setStroke(this.dottedline);
+            drawRoute(g2D, Main.data.getGlobalBest());
+
             
             //g.setColor(Color.GRAY);
             //g.fillRect((this.getWidth() / 2) -1,this.getHeight() / 2 -1, 2, 2);

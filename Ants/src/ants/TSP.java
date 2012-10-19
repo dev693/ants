@@ -16,9 +16,8 @@ public class TSP {
 
     private String name;
     private String comment = "";
-    private TreeMap<Integer,TreeMap<Integer, Double>> pheromonData = new TreeMap() ; 
-    private TreeMap<Integer,TreeMap<Integer, Double>> distanceData = new TreeMap();
-    
+    private TreeMap<Integer, TreeMap<Integer, Double>> pheromonData = new TreeMap();
+    private TreeMap<Integer, TreeMap<Integer, Double>> distanceData = new TreeMap();
     private TreeMap<Integer, City> cityMap = new TreeMap();
     private double pheromon;
     private double localInformation;
@@ -31,7 +30,11 @@ public class TSP {
     private Route localBest = null;
     private Route optimalRoute = null;
     private int maxCityNumber = 1;
-    
+    private double minX = Double.MAX_VALUE;
+    private double minY = Double.MAX_VALUE;
+    private double maxX = Double.MIN_VALUE;
+    private double maxY = Double.MIN_VALUE;
+
     public TSP() {
     }
 
@@ -65,26 +68,26 @@ public class TSP {
 
                     if (line.startsWith("COMMENT")) {
                         String lineParts[] = line.split(":");
-                        if (lineParts.length > 1) { 
+                        if (lineParts.length > 1) {
                             Main.data.addComment(lineParts[1].trim());
                         }
                     }
 
                     if (line.startsWith("NAME")) {
                         String lineParts[] = line.split(":");
-                        if (lineParts.length > 1) { 
+                        if (lineParts.length > 1) {
                             Main.data.setName(lineParts[1].trim());
                         }
                     }
 
                     if (line.startsWith("DIMENSION")) {
                         String lineParts[] = line.split(":");
-                        if (lineParts.length > 1) { 
+                        if (lineParts.length > 1) {
                             localDimension = Integer.parseInt(lineParts[1].trim());
                         }
                     }
 
-                    
+
 
                 }
                 String tourFile = path.replace(".tsp", ".opt.tour");
@@ -100,9 +103,9 @@ public class TSP {
                 JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei \n" + e, path, JOptionPane.ERROR_MESSAGE);
             } catch (Exception e) { //TODO mehr catchblöcke
                 JOptionPane.showMessageDialog(null, e.getMessage(), path, JOptionPane.ERROR_MESSAGE);
-            }      
+            }
         }
-        
+
         return Main.data;
     }
 
@@ -136,124 +139,122 @@ public class TSP {
     }
 
     public Route getOptTour(File file) {
-         
-         try {
-                Route optRoute = new Route();
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                while (reader.ready()) {
-                    String line = reader.readLine().trim();
-                    
-                    if (line.startsWith("TYPE")) {
-                        String lineParts[] = line.split(":");
-                        if (lineParts.length > 1) { 
-                            if (!lineParts[1].trim().equalsIgnoreCase("TOUR")) {
-                                throw new Exception("Die ausgewählte Datei enthält keine Tour");
-                            }
-                        }
-                    }
 
-                    if (line.startsWith("NAME")) {
-                        String lineParts[] = line.split(":");
-                        if (lineParts.length > 1) { 
-                            if (!lineParts[1].trim().equals(this.getName() + ".opt.tour")) {
-                                throw new Exception("Die optimale Tour passt nicht zu dem ausgewähtem TSP");
-                            }
-                        }
-                    }
+        try {
+            Route optRoute = new Route();
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while (reader.ready()) {
+                String line = reader.readLine().trim();
 
-                    if (line.startsWith("DIMENSION")) {
-                        String lineParts[] = line.split(":");
-                        if (lineParts.length > 1) { 
-                            if(Integer.parseInt(lineParts[1].trim()) != this.getCityListLength()) {
-                                throw new Exception("Die optimale Tour passt nicht zu dem ausgewähtem TSP");
-                            }
-                        }
-                    }
-                    
-                    if (line.equals("TOUR_SECTION")) {
-                        while (reader.ready()) {
-                            String numberLine = reader.readLine();
-                            if (!numberLine.equals("EOF")) {
-                                int number = Integer.parseInt(numberLine);
-                                if (number == -1) {
-                                    optRoute.addCity(optRoute.getRoute().get(0));
-                                    break;
-                                } else {
-                                    optRoute.addCity(this.getCity(number));
-                                }
-                            }
-
-                        }
-                        
-                        if ((optRoute.getRoute().size() -1) != Main.data.getCityListLength()) {
-                            throw new Exception("Die Länge der Route stimmt nicht mit der Anzahl der Städte des TSP überein!");
+                if (line.startsWith("TYPE")) {
+                    String lineParts[] = line.split(":");
+                    if (lineParts.length > 1) {
+                        if (!lineParts[1].trim().equalsIgnoreCase("TOUR")) {
+                            throw new Exception("Die ausgewählte Datei enthält keine Tour");
                         }
                     }
                 }
-                this.optimalRoute = optRoute;
-                return optRoute;
-            } catch (FileNotFoundException e) {
-                JOptionPane.showMessageDialog(null, "Die gewählte Datei wurde nicht gefunden \n" + e, file.getPath(), JOptionPane.ERROR_MESSAGE);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei \n" + e, file.getPath(), JOptionPane.ERROR_MESSAGE);
-            } catch (Exception e) { //TODO mehr catchblöcke
-                JOptionPane.showMessageDialog(null, e.getMessage(), file.getPath(), JOptionPane.ERROR_MESSAGE);
+
+                if (line.startsWith("NAME")) {
+                    String lineParts[] = line.split(":");
+                    if (lineParts.length > 1) {
+                        if (!lineParts[1].trim().equals(this.getName() + ".opt.tour")) {
+                            throw new Exception("Die optimale Tour passt nicht zu dem ausgewähtem TSP");
+                        }
+                    }
+                }
+
+                if (line.startsWith("DIMENSION")) {
+                    String lineParts[] = line.split(":");
+                    if (lineParts.length > 1) {
+                        if (Integer.parseInt(lineParts[1].trim()) != this.getCityListLength()) {
+                            throw new Exception("Die optimale Tour passt nicht zu dem ausgewähtem TSP");
+                        }
+                    }
+                }
+
+                if (line.equals("TOUR_SECTION")) {
+                    while (reader.ready()) {
+                        String numberLine = reader.readLine();
+                        if (!numberLine.equals("EOF")) {
+                            int number = Integer.parseInt(numberLine);
+                            if (number == -1) {
+                                optRoute.addCity(optRoute.getRoute().get(0));
+                                break;
+                            } else {
+                                optRoute.addCity(this.getCity(number));
+                            }
+                        }
+
+                    }
+
+                    if ((optRoute.getRoute().size() - 1) != Main.data.getCityListLength()) {
+                        throw new Exception("Die Länge der Route stimmt nicht mit der Anzahl der Städte des TSP überein!");
+                    }
+                }
             }
-         return null;
+            this.optimalRoute = optRoute;
+            return optRoute;
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Die gewählte Datei wurde nicht gefunden \n" + e, file.getPath(), JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei \n" + e, file.getPath(), JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) { //TODO mehr catchblöcke
+            JOptionPane.showMessageDialog(null, e.getMessage(), file.getPath(), JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
-    
-    
+
     public City getRandomCity() {
         int rd;
         do {
-            rd = new Random().nextInt(cityMap.lastKey()+1);
+            rd = new Random().nextInt(cityMap.lastKey() + 1);
         } while (!cityMap.keySet().contains(rd));
         return cityMap.get(rd);
     }
-    
-    
+
     public void solveTSP() {
         this.localBest = null;
         this.globalBest = null;
         this.initializePheromonData();
-        
-        for (int i = 0; i < this.iterations; i++ ) {
-            
+
+        for (int i = 0; i < this.iterations; i++) {
+
             for (int a = 0; a < this.ants; a++) {
                 //TODO random city übergeben
-                     
+
                 Ant ant = new Ant(this.getRandomCity());
                 do {
                     ant.nextCity();
                 } while (!ant.isFinished());
-                
+
                 ant.updatePheromon();
-                
+
                 if (localBest == null || ant.getRoute().getLength() < this.localBest.getLength()) {
                     localBest = ant.getRoute();
-                    
+
                     if (globalBest == null || localBest.getLength() < globalBest.getLength()) {
                         globalBest = localBest;
                     }
+                    Main.window.refreshPaintPanel();
                 }
-                Main.window.refreshPaintPanel();            
+                
             }
-            
+
             this.evaporatePheromon();
         }
-        
+
     }
 
-    
     public Collection<City> getCityCollection() {
         return ((TreeMap) cityMap.clone()).values();
     }
-    
+
     /**
      * @return the pheromonData
      */
     public double getPheromonData(int from, int to) {
-            return pheromonData.get(from).get(to);     
+        return pheromonData.get(from).get(to);
     }
 
     /**
@@ -261,7 +262,7 @@ public class TSP {
      */
     public double getDistanceData(int from, int to) {
         if (distanceData.get(from) != null) {
-            return distanceData.get(from).get(to);     
+            return distanceData.get(from).get(to);
         }
         return 0;
     }
@@ -276,14 +277,13 @@ public class TSP {
     //public City getCityByNumber(int number) {
     //    return (City) cityMap.get(number);
     //}
-    
     public int getCityListLength() {
         return cityMap.size();
     }
-    
+
     public void initializePheromonData() {
         pheromonData = new TreeMap();
-        
+
         for (City city : cityMap.values()) {
             pheromonData.put(city.getNumber(), new TreeMap());
             for (City innerCity : cityMap.values()) {
@@ -293,28 +293,38 @@ public class TSP {
             }
         }
     }
-    
+
     public void addCity(double x, double y) {
-        
-        //cityTable.put(new City(x, y, maxCityNumber++));
-        cityMap.put(maxCityNumber, new City(x, y, maxCityNumber++));
-        reCalculateDistanceData();
-        //TODO PHEROMON
-        
+
+        City newCity = new City(x, y, maxCityNumber);
+
+        cityMap.put(maxCityNumber, newCity);
+
+        checkMinMax(newCity);
+
+        addDistanceData(newCity);
+
+        maxCityNumber++;
+
     }
-    
+
     public void addCity(double x, double y, int number) {
         if (maxCityNumber < number) {
             maxCityNumber = number + 1;
         }
-        cityMap.put(number, new City(x, y, number));
-        reCalculateDistanceData();
+        City newCity = new City(x, y, number);
+
+        cityMap.put(number, newCity);
+
+        checkMinMax(newCity);
+
+        addDistanceData(newCity);
     }
-    
+
     public City getCityNearby(double x, double y, double rangeX, double rangeY) {
-        for(City city : cityMap.values()) {
-            if((x-(rangeX/2)) < city.getXPos() && city.getXPos() < (x+(rangeX/2)) 
-                    && (y-(rangeY/2)) < city.getYPos() &&  city.getYPos() < (y+(rangeY/2))) {
+        for (City city : cityMap.values()) {
+            if ((x - (rangeX / 2)) < city.getXPos() && city.getXPos() < (x + (rangeX / 2))
+                    && (y - (rangeY / 2)) < city.getYPos() && city.getYPos() < (y + (rangeY / 2))) {
                 return city;
             }
         }
@@ -322,43 +332,19 @@ public class TSP {
     }
 
     public double getMaxX() {
-        double max = Double.MIN_VALUE;
-        for (City city : cityMap.values()) {
-            if (max < city.getXPos()) {
-                max = city.getXPos();
-            }
-        }
-        return max;
+        return maxX;
     }
 
     public double getMaxY() {
-        double max = Double.MIN_VALUE;
-        for (City city : cityMap.values()) {
-            if (max < city.getYPos()) {
-                max = city.getYPos();
-            }
-        }
-        return max;
+        return maxY;
     }
 
     public double getMinX() {
-        double min = Double.MAX_VALUE;
-        for (City city : cityMap.values()) {
-            if (min > city.getXPos()) {
-                min = city.getXPos();
-            }
-        }
-        return min;
+        return minX;
     }
 
     public double getMinY() {
-        double min = Double.MAX_VALUE;
-        for (City city : cityMap.values()) {
-            if (min > city.getYPos()) {
-                min = city.getYPos();
-            }
-        }
-        return min;
+        return minY;
     }
 
     public Route getGlobalBest() {
@@ -404,7 +390,7 @@ public class TSP {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
+
     public void addComment(String comment) {
         this.comment += comment + " ";
     }
@@ -457,19 +443,29 @@ public class TSP {
     public void setAnts(int ants) {
         this.ants = ants;
     }
-    
-    
+
     public void reCalculateDistanceData() {
         distanceData = new TreeMap();
-        
+
         for (City city : cityMap.values()) {
             distanceData.put(city.getNumber(), new TreeMap());
             for (City innerCity : cityMap.values()) {
                 if (innerCity != city) {
                     double dx = city.getXPos() - innerCity.getXPos();
                     double dy = city.getYPos() - innerCity.getYPos();
-                    distanceData.get(city.getNumber()).put(innerCity.getNumber(), Math.sqrt(dx*dx+dy*dy));
+                    distanceData.get(city.getNumber()).put(innerCity.getNumber(), Math.sqrt(dx * dx + dy * dy));
                 }
+            }
+        }
+    }
+
+    public void addDistanceData(City newCity) {
+        distanceData.put(newCity.getNumber(), new TreeMap());
+        for (City city : cityMap.values()) {
+            if (city != newCity) {
+                double distance = this.calculateDistance(city, newCity);
+                distanceData.get(city.getNumber()).put(newCity.getNumber(), distance);
+                distanceData.get(newCity.getNumber()).put(city.getNumber(), distance);
             }
         }
     }
@@ -479,7 +475,7 @@ public class TSP {
      */
     public Route getOptimalRoute() {
         if (this.optimalRoute != null) {
-            if ((this.optimalRoute.getRoute().size() -1) == this.getCityListLength()) {
+            if ((this.optimalRoute.getRoute().size() - 1) == this.getCityListLength()) {
                 return this.optimalRoute;
             } else {
                 this.optimalRoute = null;
@@ -502,6 +498,12 @@ public class TSP {
      */
     public double getPheromon() {
         return pheromon;
+    }
+
+    public void moveCity(double dx, double dy, City city) {
+        city.moveCity(dx, dy);
+        this.recalculateMinMax();
+        this.addDistanceData(city);
     }
 
     /**
@@ -531,32 +533,66 @@ public class TSP {
     public double getPheromonUpdate() {
         return pheromonUpdate;
     }
-    
-    
-    /**
-     * updating the PheromonData
-     * @param from
-     * @param to
-     * @param update
-     */
+
     public void updatePheromonData(int from, int to, double update) {
         double localPhero = update + pheromonData.get(from).get(to);
-        
+
         pheromonData.get(from).put(to, localPhero);
         pheromonData.get(to).put(from, localPhero);
     }
-    
-    
+
+    private double calculateDistance(City from, City to) {
+        double dx = from.getXPos() - to.getXPos();
+        double dy = from.getYPos() - to.getYPos();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
     public void evaporatePheromon() {
         for (City city : cityMap.values()) {
             for (City innerCity : cityMap.values()) {
                 if (innerCity != city) {
                     double localPhero = pheromonData.get(city.getNumber()).get(innerCity.getNumber());
-                    localPhero = (localPhero * (1-this.evaporation));
-                    
+                    localPhero = (localPhero * (1 - this.evaporation));
+
                     pheromonData.get(city.getNumber()).put(innerCity.getNumber(), localPhero);
                     pheromonData.get(innerCity.getNumber()).put(city.getNumber(), localPhero);
                 }
+            }
+        }
+    }
+
+    private void checkMinMax(City newCity) {
+        if (minY > newCity.getYPos()) {
+            minY = newCity.getYPos();
+        }
+        if (minX > newCity.getXPos()) {
+            minX = newCity.getXPos();
+        }
+        if (maxX < newCity.getXPos()) {
+            maxX = newCity.getXPos();
+        }
+        if (maxY < newCity.getYPos()) {
+            maxY = newCity.getYPos();
+        }
+    }
+
+    private void recalculateMinMax() {
+        minX = Double.MAX_VALUE;
+        minY = Double.MAX_VALUE;
+        maxX = Double.MIN_VALUE;
+        maxY = Double.MIN_VALUE;
+        for (City city : cityMap.values()) {
+            if (minY > city.getYPos()) {
+                minY = city.getYPos();
+            }
+            if (minX > city.getXPos()) {
+                minX = city.getXPos();
+            }
+            if (maxX < city.getXPos()) {
+                maxX = city.getXPos();
+            }
+            if (maxY < city.getYPos()) {
+                maxY = city.getYPos();
             }
         }
     }
