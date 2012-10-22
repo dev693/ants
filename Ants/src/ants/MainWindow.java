@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -40,6 +41,8 @@ public class MainWindow extends javax.swing.JFrame {
     private boolean mousePressed = false;
     private City selectedCity = null; 
     private boolean moveCity = false;
+    private Thread solver = null;
+    private DecimalFormat formatter = new DecimalFormat("#0.00");
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +53,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        transparencyGroup = new javax.swing.ButtonGroup();
         progressPanel = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
         jPanel1 = new javax.swing.JPanel();
@@ -113,6 +117,15 @@ public class MainWindow extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         loadMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
+        showMenu = new javax.swing.JMenu();
+        showPheromonLevelMenuItem = new javax.swing.JCheckBoxMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        transparenceLevelCaptionMenuItem = new javax.swing.JMenuItem();
+        transparence80MenuItem = new javax.swing.JRadioButtonMenuItem();
+        transparence60MenuItem = new javax.swing.JRadioButtonMenuItem();
+        transparence40MenuItem = new javax.swing.JRadioButtonMenuItem();
+        transparence20MenuItem = new javax.swing.JRadioButtonMenuItem();
+        transparence00MenuItem = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
@@ -350,11 +363,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         pheromonSlider.setMaximum(100000);
         pheromonSlider.setToolTipText("<html>Pheromonwert (&#945;):<br>\nIntervall: &#945; > 0\n\n");
-        pheromonSlider.setValue(50000);
+        pheromonSlider.setValue(12000);
 
         localInformationSlider.setMaximum(100000);
         localInformationSlider.setToolTipText("<html>heusristischer Parameter für die lokale Information (&#946;):<br>\nIntervall: &#946; > 0");
-        localInformationSlider.setValue(50000);
+        localInformationSlider.setValue(15000);
 
         initialPheromonSlider.setMaximum(100000);
         initialPheromonSlider.setToolTipText("<html>Initiale Pheromonwerte (&#964;<sub>0</sub>):<br>\nIntervall: &#964;<sub>0</sub> &gt; 0\n");
@@ -362,7 +375,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         pheromonUpdateSlider.setMaximum(100000);
         pheromonUpdateSlider.setToolTipText("<html>Heuristischer Paramter für Pheromonupdate (Q):<br>\nInterval: Q &gt; 0");
-        pheromonUpdateSlider.setValue(50000);
+        pheromonUpdateSlider.setValue(10000);
 
         javax.swing.GroupLayout parameterPanelLayout = new javax.swing.GroupLayout(parameterPanel);
         parameterPanel.setLayout(parameterPanelLayout);
@@ -429,7 +442,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
@@ -438,10 +451,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         antsCaptionLabel.setText("Anzahl der Ameisen:");
 
-        iterationsText.setText("100");
+        iterationsText.setText("10");
         iterationsText.setInputVerifier(new IntegerInputVerifier());
 
-        antsText.setText("100");
+        antsText.setText("50");
         antsText.setInputVerifier(new IntegerInputVerifier());
 
         javax.swing.GroupLayout iterationPanelLayout = new javax.swing.GroupLayout(iterationPanel);
@@ -470,7 +483,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(antsCaptionLabel)
                     .addComponent(antsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Iterationen", iterationPanel);
@@ -483,7 +496,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         stopPanelLayout.setVerticalGroup(
             stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGap(0, 411, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Abbruch", stopPanel);
@@ -568,7 +581,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(infoPanelLayout.createSequentialGroup()
                 .addComponent(commentCaptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(commentScrollBar, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                .addComponent(commentScrollBar, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,7 +661,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, scorePanelLayout.createSequentialGroup()
                 .addComponent(scoreHeaderTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(scoreTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+                .addComponent(scoreTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
         );
         scorePanelLayout.setVerticalGroup(
             scorePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -667,7 +680,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scorePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+                    .addComponent(scorePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
                 .addContainerGap())
         );
         resultPanelLayout.setVerticalGroup(
@@ -710,6 +723,79 @@ public class MainWindow extends javax.swing.JFrame {
 
         mainMenuBar.add(fileMenu);
 
+        showMenu.setText("Ansicht");
+
+        showPheromonLevelMenuItem.setText("Pheromonlevel Anzeigen");
+        showPheromonLevelMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPheromonLevelMenuItemActionPerformed(evt);
+            }
+        });
+        showMenu.add(showPheromonLevelMenuItem);
+        showMenu.add(jSeparator1);
+
+        transparenceLevelCaptionMenuItem.setText("Transparenz der Linien");
+        transparenceLevelCaptionMenuItem.setEnabled(false);
+        transparenceLevelCaptionMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparencyLevelChanged(evt);
+            }
+        });
+        showMenu.add(transparenceLevelCaptionMenuItem);
+
+        transparencyGroup.add(transparence80MenuItem);
+        transparence80MenuItem.setSelected(true);
+        transparence80MenuItem.setText("    80 %");
+        transparence80MenuItem.setActionCommand("80");
+        transparence80MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparencyLevelChanged(evt);
+            }
+        });
+        showMenu.add(transparence80MenuItem);
+
+        transparencyGroup.add(transparence60MenuItem);
+        transparence60MenuItem.setText("    60 %");
+        transparence60MenuItem.setActionCommand("60");
+        transparence60MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparencyLevelChanged(evt);
+            }
+        });
+        showMenu.add(transparence60MenuItem);
+
+        transparencyGroup.add(transparence40MenuItem);
+        transparence40MenuItem.setText("    40 %");
+        transparence40MenuItem.setActionCommand("40");
+        transparence40MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparencyLevelChanged(evt);
+            }
+        });
+        showMenu.add(transparence40MenuItem);
+
+        transparencyGroup.add(transparence20MenuItem);
+        transparence20MenuItem.setText("    20 %");
+        transparence20MenuItem.setActionCommand("20");
+        transparence20MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparencyLevelChanged(evt);
+            }
+        });
+        showMenu.add(transparence20MenuItem);
+
+        transparencyGroup.add(transparence00MenuItem);
+        transparence00MenuItem.setText("      0 %");
+        transparence00MenuItem.setActionCommand("0");
+        transparence00MenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparencyLevelChanged(evt);
+            }
+        });
+        showMenu.add(transparence00MenuItem);
+
+        mainMenuBar.add(showMenu);
+
         setJMenuBar(mainMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -720,7 +806,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                    .addComponent(resultPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -870,23 +956,40 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_autoscaleChanged
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        this.setCursor( new Cursor(Cursor.WAIT_CURSOR));
-        try {
-            Main.data.setPheromon(Double.parseDouble(pheromonText.getText()));
-            Main.data.setLocalInformation(Double.parseDouble(localInformationText.getText()));
-            Main.data.setEvaporation(Double.parseDouble(evaporationText.getText()));
-            Main.data.setInitialPheromon(Double.parseDouble(initialPheromonText.getText()));
-            Main.data.setPheromonUpdate(Double.parseDouble(pheromonUpdateText.getText()));
-            Main.data.setIterations(Integer.parseInt(iterationsText.getText()));
-            Main.data.setAnts(Integer.parseInt(antsText.getText()));
-            Main.data.solveTSP();
+        if (solver == null) {
             
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Fehlerhafter Parameter:\n" + e.getMessage(), "Fehlerhafter Parameter", JOptionPane.ERROR_MESSAGE);
+            this.setCursor( new Cursor(Cursor.WAIT_CURSOR));
+            try {
+                solver = new Thread(Main.data);
+                this.startButton.setText("Stop");
+                Main.data.setPheromon(Double.parseDouble(pheromonText.getText()));
+                Main.data.setLocalInformation(Double.parseDouble(localInformationText.getText()));
+                Main.data.setEvaporation(Double.parseDouble(evaporationText.getText()));
+                Main.data.setInitialPheromon(Double.parseDouble(initialPheromonText.getText()));
+                Main.data.setPheromonUpdate(Double.parseDouble(pheromonUpdateText.getText()));
+                Main.data.setIterations(Integer.parseInt(iterationsText.getText()));
+                Main.data.setAnts(Integer.parseInt(antsText.getText()));
+                solver.start();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Fehlerhafter Parameter:\n" + e.getMessage(), "Fehlerhafter Parameter", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+        } else {
+            this.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
+            Main.data.stopRunning();
+            solver = null;
+            this.startButton.setText("Start");
+            
         }
-        this.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_startButtonActionPerformed
 
+    public void solverFinished() {
+        this.setCursor( new Cursor(Cursor.DEFAULT_CURSOR));
+        this.startButton.setText("Start");
+        solver = null;
+    }
+    
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("TSP-Speicherm");
@@ -909,12 +1012,32 @@ public class MainWindow extends javax.swing.JFrame {
         zoomSlider.setValue(100);
     }//GEN-LAST:event_zoomLabelMouseClicked
 
+    private void transparencyLevelChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparencyLevelChanged
+        try {
+            int percent = Integer.parseInt(evt.getActionCommand());
+            int transparency =  (int) ((100 - percent) * ((double) 255) / 100);
+            this.paintPanel.setTransparency(transparency);
+            this.paintPanel.refresh();
+        } catch (Exception e) {
+            
+        }
+    }//GEN-LAST:event_transparencyLevelChanged
+
+    private void showPheromonLevelMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPheromonLevelMenuItemActionPerformed
+        this.paintPanel.setShowPheromonLevel(this.showPheromonLevelMenuItem.isSelected());
+        Main.data.setShowPheromonLevel(this.showPheromonLevelMenuItem.isSelected());
+        this.paintPanel.refresh();
+    }//GEN-LAST:event_showPheromonLevelMenuItemActionPerformed
+
     private void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
         this.commentTextArea.setText(Main.data.getComment());
-        this.cityCountLabel.setText(Main.data.getCityListLength() + "");
+        this.cityCountLabel.setText(Main.data.getCityListLength() + " Städte");
         if (Main.data.getGlobalBest() != null) {
-            this.globalBestLabel.setText(Main.data.getGlobalBest().getLength() + "");
+            this.globalBestLabel.setText(formatter.format(Main.data.getGlobalBest().getLength()) + " km");
+        }
+        if (Main.data.getLocalBest() != null) {
+            this.localBestLabel.setText(formatter.format(Main.data.getLocalBest().getLength()) + " km");
         }
         this.scorePanel.repaint();
     }
@@ -992,6 +1115,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel iterationPanel;
     private javax.swing.JTextField iterationsText;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem loadMenuItem;
     private javax.swing.JLabel localAverageLabel;
@@ -1019,12 +1143,21 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel scoreHeaderTablePanel;
     private javax.swing.JPanel scorePanel;
     private javax.swing.JPanel scoreTablePanel;
+    private javax.swing.JMenu showMenu;
+    private javax.swing.JCheckBoxMenuItem showPheromonLevelMenuItem;
     private javax.swing.JButton startButton;
     private javax.swing.JPanel stopPanel;
     private javax.swing.JLabel thicknessLabel;
     private javax.swing.JSlider thicknessSlider;
     private javax.swing.JLabel timeCaptionLabel;
     private javax.swing.JLabel timeLabel;
+    private javax.swing.JRadioButtonMenuItem transparence00MenuItem;
+    private javax.swing.JRadioButtonMenuItem transparence20MenuItem;
+    private javax.swing.JRadioButtonMenuItem transparence40MenuItem;
+    private javax.swing.JRadioButtonMenuItem transparence60MenuItem;
+    private javax.swing.JRadioButtonMenuItem transparence80MenuItem;
+    private javax.swing.JMenuItem transparenceLevelCaptionMenuItem;
+    private javax.swing.ButtonGroup transparencyGroup;
     private javax.swing.JPanel viewPanel;
     private javax.swing.JLabel zoomLabel;
     private javax.swing.JLabel zoomLabel2;

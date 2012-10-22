@@ -2,6 +2,8 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="transparencyGroup">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="mainMenuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
@@ -37,6 +39,93 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Beenden"/>
               </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="showMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ansicht"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="showPheromonLevelMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pheromonlevel Anzeigen"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showPheromonLevelMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="transparenceLevelCaptionMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Transparenz der Linien"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transparencyLevelChanged"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="transparence80MenuItem">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="transparencyGroup"/>
+                </Property>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="    80 %"/>
+                <Property name="actionCommand" type="java.lang.String" value="80"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transparencyLevelChanged"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="transparence60MenuItem">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="transparencyGroup"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="    60 %"/>
+                <Property name="actionCommand" type="java.lang.String" value="60"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transparencyLevelChanged"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="transparence40MenuItem">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="transparencyGroup"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="    40 %"/>
+                <Property name="actionCommand" type="java.lang.String" value="40"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transparencyLevelChanged"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="transparence20MenuItem">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="transparencyGroup"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="    20 %"/>
+                <Property name="actionCommand" type="java.lang.String" value="20"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transparencyLevelChanged"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="transparence00MenuItem">
+              <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="transparencyGroup"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="      0 %"/>
+                <Property name="actionCommand" type="java.lang.String" value="0"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transparencyLevelChanged"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -80,7 +169,7 @@
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="paintPanel" max="32767" attributes="0"/>
-                  <Component id="resultPanel" alignment="1" pref="506" max="32767" attributes="0"/>
+                  <Component id="resultPanel" alignment="1" pref="483" max="32767" attributes="0"/>
                   <Component id="progressPanel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -413,7 +502,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="175" max="32767" attributes="0"/>
+                      <EmptySpace pref="130" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -557,14 +646,14 @@
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pheromonwert (&amp;#945;):&lt;br&gt;&#xa;Intervall: &amp;#945; &gt; 0&#xa;&#xa;"/>
-                <Property name="value" type="int" value="50000"/>
+                <Property name="value" type="int" value="12000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="localInformationSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;heusristischer Parameter f&#xfc;r die lokale Information (&amp;#946;):&lt;br&gt;&#xa;Intervall: &amp;#946; &gt; 0"/>
-                <Property name="value" type="int" value="50000"/>
+                <Property name="value" type="int" value="15000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="initialPheromonSlider">
@@ -578,7 +667,7 @@
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Heuristischer Paramter f&#xfc;r Pheromonupdate (Q):&lt;br&gt;&#xa;Interval: Q &amp;gt; 0"/>
-                <Property name="value" type="int" value="50000"/>
+                <Property name="value" type="int" value="10000"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -623,7 +712,7 @@
                           <Component id="antsCaptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="antsText" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="399" max="32767" attributes="0"/>
+                      <EmptySpace pref="354" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -641,7 +730,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="iterationsText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="100"/>
+                <Property name="text" type="java.lang.String" value="10"/>
                 <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new IntegerInputVerifier()" type="code"/>
                 </Property>
@@ -649,7 +738,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="antsText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="100"/>
+                <Property name="text" type="java.lang.String" value="50"/>
                 <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new IntegerInputVerifier()" type="code"/>
                 </Property>
@@ -674,7 +763,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="456" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="411" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -700,7 +789,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="infoPanel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="scorePanel" alignment="0" pref="474" max="32767" attributes="0"/>
+                      <Component id="scorePanel" alignment="0" pref="451" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -747,7 +836,7 @@
                   <Group type="102" attributes="0">
                       <Component id="commentCaptionLabel" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="commentScrollBar" pref="310" max="32767" attributes="0"/>
+                      <Component id="commentScrollBar" pref="287" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -933,7 +1022,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="scoreHeaderTablePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="scoreTablePanel" pref="310" max="32767" attributes="0"/>
+                      <Component id="scoreTablePanel" pref="287" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

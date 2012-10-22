@@ -53,7 +53,7 @@ public class Ant {
             City lastCity = null;
             for(City city : getRoute().getRoute()) {
                 if (lastCity != null) {
-                    double update = Main.data.getPheromonUpdate() / this.getRoute().getLength();
+                    double update = (Main.data.getPheromonUpdate() * Main.data.getGlobalBest().getLength() )/ this.getRoute().getLength();
                     Main.data.updatePheromonData(lastCity.getNumber(), city.getNumber(), update);
                 }
                 lastCity = city;
