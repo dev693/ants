@@ -26,6 +26,7 @@ public class Ant {
                     double tau = Main.data.getPheromonData(currentCity.getNumber(), city.getNumber());
                     double eta = 1 / Main.data.getDistanceData(currentCity.getNumber(), city.getNumber());
                     sum += (Math.pow(tau, alpha) * Math.pow(eta, beta));
+                    //TODO sum wird infinity z.B. bei Herz.tsp
                 }
 
                 for (City city : cityPool) {
