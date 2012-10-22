@@ -25,7 +25,11 @@ public class Ant {
                 for (City city : cityPool) {
                     double tau = Main.data.getPheromonData(currentCity.getNumber(), city.getNumber());
                     double eta = 1 / Main.data.getDistanceData(currentCity.getNumber(), city.getNumber());
-                    sum += (Math.pow(tau, alpha) * Math.pow(eta, beta));
+
+                    if (!Double.isInfinite(tau) && !Double.isInfinite(eta)) {
+                        sum += (Math.pow(tau, alpha) * Math.pow(eta, beta));
+                    }
+                    
                 }
 
                 for (City city : cityPool) {
