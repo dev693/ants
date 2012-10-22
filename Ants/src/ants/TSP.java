@@ -119,26 +119,27 @@ public class TSP implements Runnable {
         if (this.comment == null) {
             this.comment = JOptionPane.showInputDialog(Main.window, "Bitte geben Sie einen Kommentar ein: ", "Kommentar", JOptionPane.QUESTION_MESSAGE);
         }
+        
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
-            writer.write("NAME: " + file.getName().subSequence(0, file.getName().lastIndexOf(".")));
-            writer.newLine();
-            writer.write("TYPE: TSP");
-            writer.newLine();
-            writer.write("COMMENT: " + this.comment);
-            writer.newLine();
-            writer.write("DIMENSION: " + this.getCityListLength());
-            writer.newLine();
-            writer.write("EDGE_WEIGHT_TYPE: EUC_2D");
-            writer.newLine();
-            writer.write("NODE_COORD_SECTION");
-            writer.newLine();
-            for (City city : cityMap.values()) {
-                writer.write(city.getNumber() + " " + city.getXPos() + " " + city.getYPos());
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
+                writer.write("NAME: " + file.getName().subSequence(0, file.getName().lastIndexOf(".")));
                 writer.newLine();
+                writer.write("TYPE: TSP");
+                writer.newLine();
+                writer.write("COMMENT: " + this.comment);
+                writer.newLine();
+                writer.write("DIMENSION: " + this.getCityListLength());
+                writer.newLine();
+                writer.write("EDGE_WEIGHT_TYPE: EUC_2D");
+                writer.newLine();
+                writer.write("NODE_COORD_SECTION");
+                writer.newLine();
+                for (City city : cityMap.values()) {
+                    writer.write(city.getNumber() + " " + city.getXPos() + " " + city.getYPos());
+                    writer.newLine();
+                }
+                writer.write("EOF");
             }
-            writer.write("EOF");
-            writer.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -218,18 +219,14 @@ public class TSP implements Runnable {
         } while (!cityMap.keySet().contains(rd));
         return cityMap.get(rd);
     }
-
-    public void resetTSP() {
+    
+    public void solveTSP() {
         this.stop = false;
         this.localBest = null;
         this.globalBest = null;
         this.averageGlobalRoute = 0;
         this.averageLocalRoute = 0;
         this.initializePheromonData();
-    }
-    
-    public void solveTSP() {
-        resetTSP();
 
         for (int i = 0; i < this.iterations; i++) {
             for (int a = 0; a < this.ants; a++) {
@@ -345,8 +342,8 @@ public class TSP implements Runnable {
     
     public void addCity(double x, double y) {
         
-        resetTSP();
-        
+        this.globalBest = null;
+        this.localBest = null;
         
         City newCity = new City(x, y, maxCityNumber);
 
@@ -362,7 +359,8 @@ public class TSP implements Runnable {
 
     public void addCity(double x, double y, int number) {
         
-        resetTSP();
+        this.globalBest = null;
+        this.localBest = null;
         
         if (maxCityNumber < number) {
             maxCityNumber = number + 1;
@@ -557,7 +555,8 @@ public class TSP implements Runnable {
 
     public void moveCity(double dx, double dy, City city) {
         
-        resetTSP();
+        this.globalBest = null;
+        this.localBest = null;
         
         city.moveCity(dx, dy);
         this.recalculateMinMax();
