@@ -116,7 +116,7 @@ public class TSP implements Runnable {
     }
 
     public void saveToFile(File file) {
-        if (this.comment == null || this.comment.isEmpty()) {
+        if (this.comment == null) {
             this.comment = JOptionPane.showInputDialog(Main.window, "Bitte geben Sie einen Kommentar ein: ", "Kommentar", JOptionPane.QUESTION_MESSAGE);
         }
         try {
@@ -229,7 +229,6 @@ public class TSP implements Runnable {
     }
     
     public void solveTSP() {
-        //try {
         resetTSP();
 
         for (int i = 0; i < this.iterations; i++) {
@@ -271,10 +270,6 @@ public class TSP implements Runnable {
                 Main.window.refreshPaintPanel();
             }
         }
-        
-        //} catch (Exception e) {
-        //    JOptionPane.showMessageDialog(Main.window, "Während er Berechnung ist ein schwerwiegender Fehler aufgetreten.\n" + e.getMessage(), "Fehler!", JOptionPane.ERROR_MESSAGE);
-        //}
         Main.window.solverFinished();
     }
 
