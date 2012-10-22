@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Random;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
@@ -32,6 +33,7 @@ public class TSP implements Runnable {
     private Route optimalRoute = null;
     private double averageLocalRoute = 0;
     private double averageGlobalRoute = 0;
+    private long progress = 0;
     private int maxCityNumber = 1;
     private double minX = Double.MAX_VALUE;
     private double minY = Double.MAX_VALUE;
@@ -40,6 +42,8 @@ public class TSP implements Runnable {
     private double maxPheromon = 1;
     private boolean showPheromonLevel = false;
     private boolean stop = false;
+    private long startTime = 0;
+    private long stopTime = 0;
     
     public TSP() {
     }
@@ -221,20 +225,23 @@ public class TSP implements Runnable {
     }
     
     public void solveTSP() {
+        this.startTime = System.currentTimeMillis();
         this.stop = false;
         this.localBest = null;
         this.globalBest = null;
         this.averageGlobalRoute = 0;
         this.averageLocalRoute = 0;
+        this.progress = 0;
         this.initializePheromonData();
 
         for (int i = 0; i < this.iterations; i++) {
+            this.averageLocalRoute = 0;
             for (int a = 0; a < this.ants; a++) {
                 if (stop) {
                     return;
                 }
                 
-
+                this.progress++;
                 Ant ant = new Ant(this.getRandomCity());
                 do {
                     ant.nextCity();
@@ -256,17 +263,24 @@ public class TSP implements Runnable {
                 
                 ant.updatePheromon();
                 this.evaporatePheromon();
+                this.averageLocalRoute = ((a * this.getAverageLocalRoute()) + ant.getRoute().getLength()) / (a+1);
+                this.averageGlobalRoute = ((i * this.getAverageGlobalRoute() ) + ant.getRoute().getLength()) / (i+1);
                 
                 if (this.showPheromonLevel) {
                     Main.window.refreshPaintPanel();
                 }
-            }
+                this.stopTime = System.currentTimeMillis();
+                Main.window.refreshTSPInfos();
 
+            }
+            
             this.randomisePheromonData();
             if (this.showPheromonLevel) {
                 Main.window.refreshPaintPanel();
             }
         }
+        
+        this.stopTime = System.currentTimeMillis();
         Main.window.solverFinished();
     }
 
@@ -685,5 +699,37 @@ public class TSP implements Runnable {
     @Override
     public void run() {
         solveTSP();
+    }
+
+    /**
+     * @return the averageLocalRoute
+     */
+    public double getAverageLocalRoute() {
+        return averageLocalRoute;
+    }
+
+    /**
+     * @return the averageGlobalRoute
+     */
+    public double getAverageGlobalRoute() {
+        return averageGlobalRoute;
+    }
+
+    public long getAntCount() {
+        return this.progress;
+    }
+    
+    public long getDuration() {
+        return stopTime - startTime;
+    }
+    
+    /**
+     * @return the progress
+     */
+    public int getProgress() {
+        if (this.iterations * this.ants == 0) {
+            return 0;
+        }
+        return (int) (progress * 100) / (this.iterations * this.ants);
     }
 }

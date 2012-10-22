@@ -132,9 +132,9 @@ public class MainWindow extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 255, 0));
         setMinimumSize(new java.awt.Dimension(735, 680));
         setName("MainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(735, 655));
 
         progressBar.setValue(35);
+        progressBar.setString("");
         progressBar.setStringPainted(true);
 
         javax.swing.GroupLayout progressPanelLayout = new javax.swing.GroupLayout(progressPanel);
@@ -960,8 +960,10 @@ public class MainWindow extends javax.swing.JFrame {
             
             this.setCursor( new Cursor(Cursor.WAIT_CURSOR));
             try {
+                
                 solver = new Thread(Main.data);
                 this.startButton.setText("Stop");
+                
                 Main.data.setPheromon(Double.parseDouble(pheromonText.getText()));
                 Main.data.setLocalInformation(Double.parseDouble(localInformationText.getText()));
                 Main.data.setEvaporation(Double.parseDouble(evaporationText.getText()));
@@ -1029,7 +1031,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.paintPanel.refresh();
     }//GEN-LAST:event_showPheromonLevelMenuItemActionPerformed
 
-    private void refreshTSPInfos() {
+    public void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
         this.commentTextArea.setText(Main.data.getComment());
         this.cityCountLabel.setText(Main.data.getCityListLength() + " Städte");
@@ -1039,7 +1041,14 @@ public class MainWindow extends javax.swing.JFrame {
         if (Main.data.getLocalBest() != null) {
             this.localBestLabel.setText(formatter.format(Main.data.getLocalBest().getLength()) + " km");
         }
-        this.scorePanel.repaint();
+        this.globalAverageLabel.setText(formatter.format(Main.data.getAverageGlobalRoute()) + " km");
+        this.localAverageLabel.setText(formatter.format(Main.data.getAverageLocalRoute()) + " km");
+        this.timeLabel.setText(formatter.format(Main.data.getDuration() / ((double) 1000)) + " s");
+        this.progressBar.setValue(Main.data.getProgress());
+        this.progressBar.setString(Main.data.getProgress() + " % (" + Main.data.getAntCount() + " Ameisen)");
+        this.resultPanel.repaint();
+        this.progressBar.repaint();
+        //this.progressBar.update(progressBar.getGraphics());
     }
     
     public int getZoom() {
