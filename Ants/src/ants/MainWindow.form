@@ -142,9 +142,6 @@
       <Dimension value="[780, 620]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="MainFrame" noResource="true"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[780, 620]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mainMenuBar"/>
@@ -289,7 +286,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="566" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -508,7 +505,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="418" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -543,7 +540,7 @@
                 <Property name="maximum" type="int" value="10001"/>
                 <Property name="minimum" type="int" value="1"/>
                 <Property name="minorTickSpacing" type="int" value="1"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Verdunstungsfaktor (&amp;#961;): &lt;br&gt;&#xa;Intervall: 0 &amp;lt; &amp;#961; &amp;le; 1"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Verdunstungsfaktor (&amp;#961;): &lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#961; &amp;le; 1&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Der Verdunstungsfaktor bestimmt den prozentualen Grad&lt;br&gt;&#xa;der Verdunstung der Pheromone auf allen Strecken.&lt;br&gt;&#xa;Immer, wenn eine Ameise ihre Route abschlie&#xdf;t, werden Pheromone verdunstet.&lt;br&gt;&#xa;&lt;b&gt;Beispiel:&lt;/b&gt; Ein Wert von 0.2 bedeutet, dass 20% der Pheromone&lt;br&gt;&#xa;auf jeder Strecke Verdunsten.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 0.1"/>
                 <Property name="value" type="int" value="250"/>
               </Properties>
             </Component>
@@ -651,28 +648,28 @@
             <Component class="javax.swing.JSlider" name="pheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Pheromonwert (&amp;#945;):&lt;br&gt;&#xa;Intervall: &amp;#945; &gt; 0&#xa;&#xa;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Pheromongewichtung (&amp;#945;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#945; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Pheromongewichtung bestimmt die Auswirkung&lt;br&gt;&#xa;der Pheromone bei der Auswahl der als n&#xe4;chstes zu besuchenden Stadt&lt;br&gt;&#xa;auf der Route einer Ameise. Ein hoher Wert f&#xfc;r &amp;#945; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r Pheromone.&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 1&#xa;&#xa;"/>
                 <Property name="value" type="int" value="12000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="localInformationSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;heusristischer Parameter f&#xfc;r die lokale Information (&amp;#946;):&lt;br&gt;&#xa;Intervall: &amp;#946; &gt; 0"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Distanzgewichtung (&amp;#946;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#946; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Distanzgewichtung bestimmt den Grad der Bevorzugung&lt;br&gt;&#xa;von St&#xe4;dten mit einer geringeren Entfernung zum aktuellen Standort&lt;br&gt;&#xa;einer Ameise gegen&#xfc;ber St&#xe4;dten mit einer gr&#xf6;&#xdf;eren Entfernung.&lt;br&gt;&#xa;Ein hoher Wert f&#xfc;r &amp;#946; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r geringen Distanzen bei der Stadtwahl.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 5"/>
                 <Property name="value" type="int" value="100000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="initialPheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Initiale Pheromonwerte (&amp;#964;&lt;sub&gt;0&lt;/sub&gt;):&lt;br&gt;&#xa;Intervall: &amp;#964;&lt;sub&gt;0&lt;/sub&gt; &amp;gt; 0&#xa;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Initiale Pheromonwerte (&amp;#964;&lt;sub&gt;0&lt;/sub&gt;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;lt; &amp;#964;&lt;sub&gt;0&lt;/sub&gt;&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Zu Beginn jeder Iteration werden zuf&#xe4;llige Pheromonwerte&lt;br&gt;&#xa;auf den Strecken verteilt. Die zuf&#xe4;lligen Werte liegen zwischen 0 und &amp;#964;&lt;sub&gt;0&lt;/sub&gt;.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 10"/>
                 <Property name="value" type="int" value="500000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="pheromonUpdateSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Heuristischer Paramter f&#xfc;r Pheromonupdate (Q):&lt;br&gt;&#xa;Interval: Q &amp;gt; 0"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Pheromonupdate (Q):&lt;br&gt;&#xa;Interval:&lt;/b&gt; 0 &amp;lt; Q&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Nach jeder gelaufenen Route einer Ameise&lt;br&gt;&#xa;verteilt diese Pheromone den Strecken dieser Route. Die Pheromone&lt;br&gt;&#xa;werden zu den vorhanden hinzuaddiert. Der addierte Wert wird bestimmt aus:&lt;br&gt;&#xa;&lt;b&gt;Q * (L&#xe4;nge der global besten Route / L&#xe4;nge der Route der Ameise)&lt;/b&gt;&lt;br&gt;&#xa;Eine Route, die k&#xfc;rzer als die global beste Route ist,&lt;br&gt;&#xa;erh&#xe4;lt auf die Weise mehr Pheromone hinzuaddiert.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 10"/>
                 <Property name="value" type="int" value="100000"/>
               </Properties>
             </Component>
@@ -698,6 +695,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="gammaText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -707,7 +709,9 @@
                       <Component id="iterations" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="stopCondition" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="gammaText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="424" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -762,11 +766,13 @@
                 <Component class="javax.swing.JLabel" name="iterationCaptionLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Anzahl der Iterationen:"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Die Anzahl der Iterationen legt fest, wird viele Berechnenungen&lt;br&gt;&#xa;in einem Durchgang durchgef&#xfc;hrt werden sollen."/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="antsCaptionLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Anzahl der Ameisen:"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Die Anzahl der Ameisen bestimmt, wie viele Ameisen&lt;br&gt;&#xa;pro Iteration das Feld durchlaufen. Eine Ameise startet&lt;br&gt;&#xa;an einer zuf&#xe4;llig gew&#xe4;hlten Stadt und sucht anhand der Parameter&lt;br&gt;&#xa;immer eine n&#xe4;chste Stadt, bis alle St&#xe4;dte einmal besucht wurden&lt;br&gt;&#xa;und die Anfangsstadt wieder erreicht wurde."/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="iterationsText">
@@ -776,6 +782,9 @@
                       <Connection code="new IntegerInputVerifier()" type="code"/>
                     </Property>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="iterationCaptionLabel" sourcePath="${toolTipText}" target="iterationsText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="antsText">
                   <Properties>
@@ -784,6 +793,9 @@
                       <Connection code="new IntegerInputVerifier()" type="code"/>
                     </Property>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="antsCaptionLabel" sourcePath="${toolTipText}" target="antsText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
               </SubComponents>
             </Container>
@@ -794,6 +806,7 @@
                     <TitledBorder title="Abbruchbedingungen:"/>
                   </Border>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Die zuerst eintretende Abbruchbedingungen&lt;br&gt;&#xa;stoppt die Berechnung (ODER-Verkn&#xfc;pfung).&lt;br&gt;&#xa;Sollte keine Abbruchbedingungen eintreten,&lt;br&gt;&#xa;wird l&#xe4;uft die Berechnung bis alle Iterationen abgearbeiten sind."/>
               </Properties>
 
               <Layout>
@@ -852,12 +865,18 @@
                     <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;Route&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;le"/>
                     <Property name="actionCommand" type="java.lang.String" value="   Route       &lt;"/>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="stopCondition" sourcePath="${toolTipText}" target="bestStopCheckBox" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="averageStopCheckBox">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;Oslash; Route&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;le"/>
                     <Property name="actionCommand" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;Oslash; Route     "/>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="stopCondition" sourcePath="${toolTipText}" target="averageStopCheckBox" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="bestStopText">
                   <Properties>
@@ -866,6 +885,9 @@
                       <Connection code="new IntegerInputVerifier(true)" type="code"/>
                     </Property>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="stopCondition" sourcePath="${toolTipText}" target="bestStopText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bestStopTextActionPerformed"/>
                   </Events>
@@ -877,26 +899,43 @@
                       <Connection code="new IntegerInputVerifier(true)" type="code"/>
                     </Property>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="stopCondition" sourcePath="${toolTipText}" target="averageStopText" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="optStopCheckBox">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;optimale L&#xf6;sung"/>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="stopCondition" sourcePath="${toolTipText}" target="optStopCheckBox" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="optStopLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="5000 km"/>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="toolTipText" source="stopCondition" sourcePath="${toolTipText}" target="optStopLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
+                  </BindingProperties>
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JTextField" name="gammaText">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gammaTextActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="stopPanel">
+        <Container class="javax.swing.JPanel" name="instructionPanel">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Abbruch">
-                <Property name="tabTitle" type="java.lang.String" value="Abbruch"/>
+              <JTabbedPaneConstraints tabName="Anleitung">
+                <Property name="tabTitle" type="java.lang.String" value="Anleitung"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -905,30 +944,27 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                      <Component id="gammaText" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <Component id="instructionLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                      <Component id="gammaText" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="183" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="instructionLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="gammaText">
+            <Component class="javax.swing.JLabel" name="instructionLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;b&gt;1.  Einleitung:&lt;/b&gt;&lt;br&gt;&#xa;Diese Software dient zur Berechnung der besten&lt;br&gt;&#xa;Roundroute &#xfc;ber eine Auswahl von St&#xe4;dten.&lt;br&gt;&#xa;(Travelling Salesman Problem - TSP)&lt;br&gt;&#xa;Jede Stadt soll dabei genau einmal besucht werden.&lt;br&gt;&#xa;Die Route soll so kurz wie m&#xf6;glich sein.&lt;br&gt;&#xa;Die Software unterst&#xfc;tzt das tsp-Dateiformat.&lt;br&gt;&#xa;Es k&#xf6;nnen Dateien geladen und speichert werden.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.  Bedienung:&lt;/b&gt;&lt;br&gt;&#xa;Im folgenden werden die f&#xfc;r die Bedienung&lt;br&gt;&#xa;relevanten Funktionen beschrieben.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.1. Dateien laden:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Laden...&quot; aufgerufen werden.&lt;br&gt;&#xa;Es erscheint ein Dialog zum Ausw&#xe4;hlen einer tsp-Datei.&lt;br&gt;&#xa;Das wei&#xdf;e Anzeigefeld sollte nun die St&#xe4;dte der Datei darstellen&lt;br&gt;&#xa;Sollte sich im selben Verzeichnis eine zugeh&#xf6;rige opt.tour-Datei&lt;br&gt;&#xa;befinden, wird nun die optimale Route in gr&#xfc;n gezeichnet.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.2. TSP modifizieren:&lt;/b&gt;&lt;br&gt;&#xa;Durch Linksklick auf das wei&#xdf;e Anzeigefeld kann eine Stadt&lt;br&gt;&#xa;an der Zeigerposition hinzugef&#xfc;gt werden.&lt;br&gt;&#xa;Durch Rechtklick auf eine Stadt kann die markiert werden (rote Farbe).&lt;br&gt;&#xa;Eine markierte Stadt kann durch gehaltenen Rechtklick mit der Maus bewegt werden.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.3. TSP selbst erstellen:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber das Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Neu&quot; aufgerufen werden.&lt;br&gt;&#xa;Das wei&#xdf;e Anzeigefeld wird komplett gel&#xf6;scht. Nun kann man analog&lt;br&gt;&#xa;zu &lt;b&gt;2.2.&lt;/b&gt; eigene St&#xe4;dte auf das Feld setzen.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.4. TSP speichern:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber das Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Speichern&quot; aufgerufen werden.&lt;br&gt;&#xa;Anschlie&#xdf;end kann ein Speicherort gew&#xe4;hlt werden.&lt;br&gt;&#xa;Das aktuell angezeigt TSP wird dann dort als tsp-Datei gespeichert.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.5. Parameter einstellen:&lt;/b&gt;&lt;br&gt;&#xa;Im Tab &quot;Parameter&quot; k&#xf6;nnen die Parameter f&#xfc;r die Berechnung&lt;br&gt;&#xa;mit den Schiebereglern eingestellt werden. Die Tooltips&lt;br&gt;&#xa;erkl&#xe4;ren jeden Paramameter und geben eine Wertempfehlung an.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.6. Ablauf festelegen:&lt;/b&gt;&lt;br&gt;&#xa;Im Tab &quot;Ablauf&quot; kann der Ablauf der Berechnung gesteuert werden.&lt;br&gt;&#xa;Die Tooltips erkl&#xe4;ren die Funktion der einzelnen Elemente.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.7. Berechnung starten:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber den Button &quot;Start&quot; kann die Berechnung gestartet werden.&lt;br&gt;&#xa;Der Fortschrittsbalken und das Ergebnis-Panel zeigen wichtige Informationen an."/>
+                <Property name="name" type="java.lang.String" value="instructionLabel" noResource="true"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gammaTextActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1194,8 +1230,8 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>
-                <Property name="rows" type="int" value="0"/>
                 <Property name="verticalGap" type="int" value="2"/>
+                <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="bestRouteCaptionLabel">

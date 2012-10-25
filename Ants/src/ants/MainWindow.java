@@ -6,20 +6,16 @@ package ants;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.List;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.Painter;
+import javax.swing.JScrollBar;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.synth.SynthPainter;
+
 /**
  *
  * @author user
@@ -43,8 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         initComponents();
-        this.commentTextArea.setBackground(new Color(238, 238, 238));
-        
+        this.commentTextArea.setBackground(new Color(238, 238, 238));        
     }
     private int pressedX = 0;
     private int pressedY = 0;
@@ -106,8 +101,9 @@ public class MainWindow extends javax.swing.JFrame {
         averageStopText = new javax.swing.JTextField();
         optStopCheckBox = new javax.swing.JCheckBox();
         optStopLabel = new javax.swing.JLabel();
-        stopPanel = new javax.swing.JPanel();
         gammaText = new javax.swing.JTextField();
+        instructionPanel = new javax.swing.JPanel();
+        instructionLabel = new javax.swing.JLabel();
         resultPanel = new javax.swing.JPanel();
         infoPanel = new javax.swing.JPanel();
         cityCountLabel = new javax.swing.JLabel();
@@ -151,7 +147,6 @@ public class MainWindow extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 255, 0));
         setMinimumSize(new java.awt.Dimension(780, 620));
         setName("MainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(780, 620));
 
         progressBar.setString("0 % (0 Ameisen)");
         progressBar.setStringPainted(true);
@@ -220,7 +215,7 @@ public class MainWindow extends javax.swing.JFrame {
         paintPanel.setLayout(paintPanelLayout);
         paintPanelLayout.setHorizontalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
         );
         paintPanelLayout.setVerticalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,7 +328,7 @@ public class MainWindow extends javax.swing.JFrame {
         evaporationSlider.setMaximum(10001);
         evaporationSlider.setMinimum(1);
         evaporationSlider.setMinorTickSpacing(1);
-        evaporationSlider.setToolTipText("<html>Verdunstungsfaktor (&#961;): <br>\nIntervall: 0 &lt; &#961; &le; 1");
+        evaporationSlider.setToolTipText("<html><b>Verdunstungsfaktor (&#961;): <br>\nIntervall:</b> 0 &le; &#961; &le; 1<br>\n<b>Funktion:</b> Der Verdunstungsfaktor bestimmt den prozentualen Grad<br>\nder Verdunstung der Pheromone auf allen Strecken.<br>\nImmer, wenn eine Ameise ihre Route abschließt, werden Pheromone verdunstet.<br>\n<b>Beispiel:</b> Ein Wert von 0.2 bedeutet, dass 20% der Pheromone<br>\nauf jeder Strecke Verdunsten.<br>\n<b>Wertempfehlung:</b> 0.1");
         evaporationSlider.setValue(250);
 
         initialPheromonLabel.setText("<html>initiale Pheromone &#964;:");
@@ -387,19 +382,19 @@ public class MainWindow extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         pheromonSlider.setMaximum(100000);
-        pheromonSlider.setToolTipText("<html>Pheromonwert (&#945;):<br>\nIntervall: &#945; > 0\n\n");
+        pheromonSlider.setToolTipText("<html><b>Pheromongewichtung (&#945;):<br>\nIntervall:</b> 0 &le; &#945; &le; 10<br>\n<b>Funktion:</b> Die Pheromongewichtung bestimmt die Auswirkung<br>\nder Pheromone bei der Auswahl der als nächstes zu besuchenden Stadt<br>\nauf der Route einer Ameise. Ein hoher Wert für &#945; verstärkt die Sensitivität für Pheromone.\n<b>Wertempfehlung:</b> 1\n\n");
         pheromonSlider.setValue(12000);
 
         localInformationSlider.setMaximum(100000);
-        localInformationSlider.setToolTipText("<html>heusristischer Parameter für die lokale Information (&#946;):<br>\nIntervall: &#946; > 0");
+        localInformationSlider.setToolTipText("<html><b>Distanzgewichtung (&#946;):<br>\nIntervall:</b> 0 &le; &#946; &le; 10<br>\n<b>Funktion:</b> Die Distanzgewichtung bestimmt den Grad der Bevorzugung<br>\nvon Städten mit einer geringeren Entfernung zum aktuellen Standort<br>\neiner Ameise gegenüber Städten mit einer größeren Entfernung.<br>\nEin hoher Wert für &#946; verstärkt die Sensitivität für geringen Distanzen bei der Stadtwahl.<br>\n<b>Wertempfehlung:</b> 5");
         localInformationSlider.setValue(100000);
 
         initialPheromonSlider.setMaximum(100000);
-        initialPheromonSlider.setToolTipText("<html>Initiale Pheromonwerte (&#964;<sub>0</sub>):<br>\nIntervall: &#964;<sub>0</sub> &gt; 0\n");
+        initialPheromonSlider.setToolTipText("<html><b>Initiale Pheromonwerte (&#964;<sub>0</sub>):<br>\nIntervall:</b> 0 &lt; &#964;<sub>0</sub><br>\n<b>Funktion:</b> Zu Beginn jeder Iteration werden zufällige Pheromonwerte<br>\nauf den Strecken verteilt. Die zufälligen Werte liegen zwischen 0 und &#964;<sub>0</sub>.<br>\n<b>Wertempfehlung:</b> 10");
         initialPheromonSlider.setValue(500000);
 
         pheromonUpdateSlider.setMaximum(100000);
-        pheromonUpdateSlider.setToolTipText("<html>Heuristischer Paramter für Pheromonupdate (Q):<br>\nInterval: Q &gt; 0");
+        pheromonUpdateSlider.setToolTipText("<html><b>Pheromonupdate (Q):<br>\nInterval:</b> 0 &lt; Q<br>\n<b>Funktion:</b> Nach jeder gelaufenen Route einer Ameise<br>\nverteilt diese Pheromone den Strecken dieser Route. Die Pheromone<br>\nwerden zu den vorhanden hinzuaddiert. Der addierte Wert wird bestimmt aus:<br>\n<b>Q * (Länge der global besten Route / Länge der Route der Ameise)</b><br>\nEine Route, die kürzer als die global beste Route ist,<br>\nerhält auf die Weise mehr Pheromone hinzuaddiert.<br>\n<b>Wertempfehlung:</b> 10");
         pheromonUpdateSlider.setValue(100000);
 
         javax.swing.GroupLayout parameterPanelLayout = new javax.swing.GroupLayout(parameterPanel);
@@ -467,7 +462,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(pheromonUpdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pheromonUpdateSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(418, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Parameter", parameterPanel);
@@ -475,14 +470,22 @@ public class MainWindow extends javax.swing.JFrame {
         iterations.setBorder(javax.swing.BorderFactory.createTitledBorder("Iterationen:"));
 
         iterationCaptionLabel.setText("Anzahl der Iterationen:");
+        iterationCaptionLabel.setToolTipText("<html>Die Anzahl der Iterationen legt fest, wird viele Berechnenungen<br>\nin einem Durchgang durchgeführt werden sollen.");
 
         antsCaptionLabel.setText("Anzahl der Ameisen:");
+        antsCaptionLabel.setToolTipText("<html>Die Anzahl der Ameisen bestimmt, wie viele Ameisen<br>\npro Iteration das Feld durchlaufen. Eine Ameise startet<br>\nan einer zufällig gewählten Stadt und sucht anhand der Parameter<br>\nimmer eine nächste Stadt, bis alle Städte einmal besucht wurden<br>\nund die Anfangsstadt wieder erreicht wurde.");
 
         iterationsText.setText("10");
         iterationsText.setInputVerifier(new IntegerInputVerifier());
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, iterationCaptionLabel, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), iterationsText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         antsText.setText("100");
         antsText.setInputVerifier(new IntegerInputVerifier());
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, antsCaptionLabel, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), antsText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout iterationsLayout = new javax.swing.GroupLayout(iterations);
         iterations.setLayout(iterationsLayout);
@@ -514,15 +517,26 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         stopCondition.setBorder(javax.swing.BorderFactory.createTitledBorder("Abbruchbedingungen:"));
+        stopCondition.setToolTipText("<html>Die zuerst eintretende Abbruchbedingungen<br>\nstoppt die Berechnung (ODER-Verknüpfung).<br>\nSollte keine Abbruchbedingungen eintreten,<br>\nwird läuft die Berechnung bis alle Iterationen abgearbeiten sind.");
 
         bestStopCheckBox.setText("<html>&nbsp;&nbsp;&nbsp;Route&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le");
         bestStopCheckBox.setActionCommand("   Route       <");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stopCondition, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), bestStopCheckBox, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         averageStopCheckBox.setText("<html>&nbsp;&nbsp;&nbsp;&Oslash; Route&nbsp;&nbsp;&nbsp;&nbsp;&le");
         averageStopCheckBox.setActionCommand("<html>&nbsp;&nbsp;&nbsp;&Oslash; Route     ");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stopCondition, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), averageStopCheckBox, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         bestStopText.setText("5000 km");
         bestStopText.setInputVerifier(new IntegerInputVerifier(true));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stopCondition, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), bestStopText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         bestStopText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bestStopTextActionPerformed(evt);
@@ -532,9 +546,18 @@ public class MainWindow extends javax.swing.JFrame {
         averageStopText.setText("5000 km");
         averageStopText.setInputVerifier(new IntegerInputVerifier(true));
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stopCondition, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), averageStopText, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         optStopCheckBox.setText("<html>&nbsp;&nbsp;&nbsp;optimale Lösung");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stopCondition, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), optStopCheckBox, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
+
         optStopLabel.setText("5000 km");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, stopCondition, org.jdesktop.beansbinding.ELProperty.create("${toolTipText}"), optStopLabel, org.jdesktop.beansbinding.BeanProperty.create("toolTipText"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout stopConditionLayout = new javax.swing.GroupLayout(stopCondition);
         stopCondition.setLayout(stopConditionLayout);
@@ -575,6 +598,13 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        gammaText.setText("1");
+        gammaText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gammaTextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout iterationPanelLayout = new javax.swing.GroupLayout(iterationPanel);
         iterationPanel.setLayout(iterationPanelLayout);
         iterationPanelLayout.setHorizontalGroup(
@@ -585,6 +615,10 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(iterations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stopCondition, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(iterationPanelLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(gammaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         iterationPanelLayout.setVerticalGroup(
             iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -593,36 +627,33 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(iterations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(stopCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gammaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(424, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ablauf", iterationPanel);
 
-        gammaText.setText("jTextField1");
-        gammaText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gammaTextActionPerformed(evt);
-            }
-        });
+        instructionLabel.setText("<html>\n<b>1.  Einleitung:</b><br>\nDiese Software dient zur Berechnung der besten<br>\nRoundroute über eine Auswahl von Städten.<br>\n(Travelling Salesman Problem - TSP)<br>\nJede Stadt soll dabei genau einmal besucht werden.<br>\nDie Route soll so kurz wie möglich sein.<br>\nDie Software unterstützt das tsp-Dateiformat.<br>\nEs können Dateien geladen und speichert werden.<br><br>\n<b>2.  Bedienung:</b><br>\nIm folgenden werden die für die Bedienung<br>\nrelevanten Funktionen beschrieben.<br><br>\n<b>2.1. Dateien laden:</b><br>\nÜber Menü \"Datei\" kann die Funktion \"Laden...\" aufgerufen werden.<br>\nEs erscheint ein Dialog zum Auswählen einer tsp-Datei.<br>\nDas weiße Anzeigefeld sollte nun die Städte der Datei darstellen<br>\nSollte sich im selben Verzeichnis eine zugehörige opt.tour-Datei<br>\nbefinden, wird nun die optimale Route in grün gezeichnet.<br><br>\n<b>2.2. TSP modifizieren:</b><br>\nDurch Linksklick auf das weiße Anzeigefeld kann eine Stadt<br>\nan der Zeigerposition hinzugefügt werden.<br>\nDurch Rechtklick auf eine Stadt kann die markiert werden (rote Farbe).<br>\nEine markierte Stadt kann durch gehaltenen Rechtklick mit der Maus bewegt werden.<br><br>\n<b>2.3. TSP selbst erstellen:</b><br>\nÜber das Menü \"Datei\" kann die Funktion \"Neu\" aufgerufen werden.<br>\nDas weiße Anzeigefeld wird komplett gelöscht. Nun kann man analog<br>\nzu <b>2.2.</b> eigene Städte auf das Feld setzen.<br><br>\n<b>2.4. TSP speichern:</b><br>\nÜber das Menü \"Datei\" kann die Funktion \"Speichern\" aufgerufen werden.<br>\nAnschließend kann ein Speicherort gewählt werden.<br>\nDas aktuell angezeigt TSP wird dann dort als tsp-Datei gespeichert.<br><br>\n<b>2.5. Parameter einstellen:</b><br>\nIm Tab \"Parameter\" können die Parameter für die Berechnung<br>\nmit den Schiebereglern eingestellt werden. Die Tooltips<br>\nerklären jeden Paramameter und geben eine Wertempfehlung an.<br><br>\n<b>2.6. Ablauf festelegen:</b><br>\nIm Tab \"Ablauf\" kann der Ablauf der Berechnung gesteuert werden.<br>\nDie Tooltips erklären die Funktion der einzelnen Elemente.<br><br>\n<b>2.7. Berechnung starten:</b><br>\nÜber den Button \"Start\" kann die Berechnung gestartet werden.<br>\nDer Fortschrittsbalken und das Ergebnis-Panel zeigen wichtige Informationen an.");
+        instructionLabel.setName("instructionLabel"); // NOI18N
 
-        javax.swing.GroupLayout stopPanelLayout = new javax.swing.GroupLayout(stopPanel);
-        stopPanel.setLayout(stopPanelLayout);
-        stopPanelLayout.setHorizontalGroup(
-            stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(stopPanelLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(gammaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+        javax.swing.GroupLayout instructionPanelLayout = new javax.swing.GroupLayout(instructionPanel);
+        instructionPanel.setLayout(instructionPanelLayout);
+        instructionPanelLayout.setHorizontalGroup(
+            instructionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(instructionPanelLayout.createSequentialGroup()
+                .addComponent(instructionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        stopPanelLayout.setVerticalGroup(
-            stopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(stopPanelLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(gammaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+        instructionPanelLayout.setVerticalGroup(
+            instructionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, instructionPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(instructionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Abbruch", stopPanel);
+        jTabbedPane1.addTab("Anleitung", instructionPanel);
 
         resultPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ergebnisse:"));
         resultPanel.setPreferredSize(new java.awt.Dimension(566, 180));
@@ -1291,6 +1322,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel initialPheromonLabel;
     private javax.swing.JSlider initialPheromonSlider;
     private javax.swing.JTextField initialPheromonText;
+    private javax.swing.JLabel instructionLabel;
+    private javax.swing.JPanel instructionPanel;
     private javax.swing.JLabel iterationCaptionLabel;
     private javax.swing.JPanel iterationPanel;
     private javax.swing.JPanel iterations;
@@ -1329,7 +1362,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem showPheromonLevelMenuItem;
     private javax.swing.JButton startButton;
     private javax.swing.JPanel stopCondition;
-    private javax.swing.JPanel stopPanel;
     private javax.swing.JLabel thicknessLabel;
     private javax.swing.JSlider thicknessSlider;
     private javax.swing.JLabel timeCaptionLabel;
