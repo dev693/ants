@@ -15,11 +15,11 @@ import javax.swing.JPanel;
  *
  * @author user
  */
-public class PaintPanel extends JPanel {
+public class PaintPanel extends JPanel implements Runnable {
 
     private double relation = 1;
     private int thickness = 8;
-    private int borderOffset = 10;
+    private int borderOffset = 16;
     private int xOffset = 0;
     private int yOffset = 0;
     private int xBaseOffset = 0;
@@ -40,27 +40,35 @@ public class PaintPanel extends JPanel {
     private BasicStroke normalline = new BasicStroke(2.0f);          
     private BasicStroke smallline = new BasicStroke(1.0f);    
     private BasicStroke bigline = new BasicStroke(5.0f);
+    private Thread painter = null;
+    private Object lock = new Object();
+    private boolean running = false;
     
     
     @Override
     protected void paintComponent(Graphics g) {
+            paintGraph(g);
+    }
+    
+    private void paintGraph(Graphics g) {
         
         if (!java.beans.Beans.isDesignTime()) {
             if (buffer != null) {
                 g.drawImage(buffer, 0, 0, buffer.getWidth(), buffer.getHeight(), null);
             }
             
-            backBuffer = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2D = (Graphics2D) backBuffer.getGraphics();
+            buffer = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2D = (Graphics2D) buffer.getGraphics();
             
             calcRelation();
             
+            g2D.setColor(new Color(238,238,238));
+            g2D.fillRect(0, 0, this.getWidth(), this.getHeight());    
             g2D.setColor(Color.white);
-            g2D.fillRect(0, 0, this.getWidth(), this.getHeight());          
-            
+            g2D.fillRoundRect(5, 5, this.getWidth()- 10, this.getHeight() - 10, 15, 15);
             if (this.showPheromonLevel) {
                 g2D.setStroke(this.normalline);
-                drawPheromonLevels(g2D, transparency / 2);
+                drawPheromonLevels(g2D);
             }
             
             //g2D.setColor(Color.green);
@@ -85,8 +93,8 @@ public class PaintPanel extends JPanel {
                 drawCity(g2D, city);
             }
             
-            g.drawImage(backBuffer, 0, 0, null);
-            buffer = backBuffer;
+            g.drawImage(buffer, 0, 0, null);
+            //buffer = backBuffer;
         }
     }
 
@@ -102,15 +110,15 @@ public class PaintPanel extends JPanel {
         return (y + yOffset - borderOffset) / getRelation();
     }
     
-    private void drawPheromonLevels(Graphics2D g, int alpha) {
+    private void drawPheromonLevels(Graphics2D g) {
         for (City city : Main.data.getCityCollection()) {
             for (City innerCity : Main.data.getCityCollection()) {
                 if (innerCity != city) {
                     
                     double pheromon = Main.data.getPheromonData(city.getNumber(), innerCity.getNumber());
                     double max = Main.data.getMaxPheromon();
-                    int color = (255 - (int) ((pheromon / max + 0.00001) * 255)) % 256;
-                    g.setColor(new Color(color, color, color, alpha));
+                    int alpha = ((int) ((pheromon / max + 0.00001) * 255)) % 256;
+                    g.setColor(new Color(125, 125, 125, alpha));
                     
                     g.drawLine((borderOffset) - getxOffset() + (int) (innerCity.getXPos() * getRelation()),
                             (borderOffset) - getyOffset() + (int) (innerCity.getYPos() * getRelation()),
@@ -251,6 +259,53 @@ public class PaintPanel extends JPanel {
             this.transparency = 255;
         } else {
             this.transparency = transparency;
+        }
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            try {
+                if (running) {
+                    this.paintGraph(this.getGraphics());
+                } else {
+                    return;
+                }
+            } catch (Exception e) {
+                System.out.println("Thread crashed! " + e.getMessage());
+                painter = null;
+                return;
+            }
+        }
+    }
+    
+    public void startPainterThread() {
+            if (painter == null) {
+                painter = new Thread(this);
+                painter.start();
+            }
+    }
+    
+    public void refreshPainterThread() {
+        
+            if (painter != null) {
+                synchronized (painter) {
+                    painter.notify();
+                }
+            }
+        
+    }
+    
+    public void stopPainterThread() {
+        if (painter != null) {
+            try {
+                this.running = false;
+                painter.notify();
+                painter.join(1000);
+                painter = null;
+            } catch (Exception e) {
+                System.out.println("joining PainterThread: " + e.getMessage());
+            }
         }
     }
 }

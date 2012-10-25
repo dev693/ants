@@ -139,9 +139,12 @@
       <Color blue="0" green="ff" red="0" type="rgb"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[735, 680]"/>
+      <Dimension value="[780, 620]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="MainFrame" noResource="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[780, 620]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mainMenuBar"/>
@@ -163,18 +166,16 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="paintPanel" max="32767" attributes="0"/>
-                  <Component id="resultPanel" alignment="1" pref="483" max="32767" attributes="0"/>
+                  <Component id="resultPanel" alignment="1" max="32767" attributes="0"/>
                   <Component id="progressPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="paintPanel" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="viewPanel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="buttonPanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="viewPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTabbedPane1" min="-2" pref="250" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -182,17 +183,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="paintPanel" max="32767" attributes="0"/>
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                  <Component id="paintPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="viewPanel" max="32767" attributes="0"/>
                   <Component id="resultPanel" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="buttonPanel" max="32767" attributes="0"/>
                   <Component id="progressPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -206,7 +206,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="progressBar" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <Component id="progressBar" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -221,21 +225,21 @@
       <SubComponents>
         <Component class="javax.swing.JProgressBar" name="progressBar">
           <Properties>
-            <Property name="value" type="int" value="35"/>
-            <Property name="string" type="java.lang.String" value=""/>
+            <Property name="string" type="java.lang.String" value="0 % (0 Ameisen)"/>
             <Property name="stringPainted" type="boolean" value="true"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="buttonPanel">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="startButton" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <Component id="startButton" pref="240" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -270,6 +274,10 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="paintPanelMouseReleased"/>
@@ -306,9 +314,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="thicknessSlider" max="32767" attributes="0"/>
-                      <Component id="zoomSlider" alignment="0" max="32767" attributes="0"/>
-                      <Component id="autoscaleSwitch" alignment="0" max="32767" attributes="0"/>
+                      <Component id="zoomSlider" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="autoscaleSwitch" alignment="0" pref="218" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="zoomLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -318,6 +325,7 @@
                           <Component id="thicknessLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="thicknessSlider" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -428,9 +436,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="initialPheromonSlider" pref="227" max="32767" attributes="0"/>
-                          <Component id="pheromonUpdateSlider" alignment="1" pref="0" max="32767" attributes="0"/>
-                          <Component id="pheromonSlider" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="initialPheromonSlider" pref="225" max="32767" attributes="0"/>
+                          <Component id="pheromonUpdateSlider" alignment="1" max="32767" attributes="0"/>
+                          <Component id="pheromonSlider" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="pheromonLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -455,8 +463,8 @@
                                   <Component id="initialPheromonText" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="localInformationSlider" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="evaporationSlider" alignment="1" pref="0" max="32767" attributes="0"/>
+                          <Component id="localInformationSlider" alignment="0" max="32767" attributes="0"/>
+                          <Component id="evaporationSlider" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -500,7 +508,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pheromonUpdateSlider" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="130" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -508,7 +516,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="pheromonLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pheromon:"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Pheromon  &amp;alpha;:"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="toolTipText" source="pheromonSlider" sourcePath="${toolTipText}" target="pheromonLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
@@ -516,7 +524,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="localInformationLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="lokale Information"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;lokale Information &amp;beta;:"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="toolTipText" source="localInformationSlider" sourcePath="${toolTipText}" target="localInformationLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
@@ -524,7 +532,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="evaporationLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Verdunstunsfaktor:"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Verdunstunsfaktor &amp;#961;:"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="toolTipText" source="evaporationSlider" sourcePath="${toolTipText}" target="evaporationLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
@@ -536,12 +544,12 @@
                 <Property name="minimum" type="int" value="1"/>
                 <Property name="minorTickSpacing" type="int" value="1"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Verdunstungsfaktor (&amp;#961;): &lt;br&gt;&#xa;Intervall: 0 &amp;lt; &amp;#961; &amp;le; 1"/>
-                <Property name="value" type="int" value="1000"/>
+                <Property name="value" type="int" value="250"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="initialPheromonLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="initiale Pheromone:"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;initiale Pheromone &amp;#964;:"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="toolTipText" source="initialPheromonSlider" sourcePath="${toolTipText}" target="initialPheromonLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
@@ -549,7 +557,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="pheromonUpdateLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pheromon-Update:"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;Pheromon-Update Q:"/>
               </Properties>
               <BindingProperties>
                 <BindingProperty name="toolTipText" source="pheromonUpdateSlider" sourcePath="${toolTipText}" target="pheromonUpdateLabel" targetPath="toolTipText" updateStrategy="0" immediately="false"/>
@@ -651,21 +659,21 @@
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;heusristischer Parameter f&#xfc;r die lokale Information (&amp;#946;):&lt;br&gt;&#xa;Intervall: &amp;#946; &gt; 0"/>
-                <Property name="value" type="int" value="15000"/>
+                <Property name="value" type="int" value="100000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="initialPheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Initiale Pheromonwerte (&amp;#964;&lt;sub&gt;0&lt;/sub&gt;):&lt;br&gt;&#xa;Intervall: &amp;#964;&lt;sub&gt;0&lt;/sub&gt; &amp;gt; 0&#xa;"/>
-                <Property name="value" type="int" value="50000"/>
+                <Property name="value" type="int" value="500000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="pheromonUpdateSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
                 <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Heuristischer Paramter f&#xfc;r Pheromonupdate (Q):&lt;br&gt;&#xa;Interval: Q &amp;gt; 0"/>
-                <Property name="value" type="int" value="10000"/>
+                <Property name="value" type="int" value="100000"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -673,8 +681,8 @@
         <Container class="javax.swing.JPanel" name="iterationPanel">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Iterationen">
-                <Property name="tabTitle" type="java.lang.String" value="Iterationen"/>
+              <JTabbedPaneConstraints tabName="Ablauf">
+                <Property name="tabTitle" type="java.lang.String" value="Ablauf"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -685,13 +693,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="iterationCaptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="antsCaptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="46" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="antsText" pref="69" max="32767" attributes="0"/>
-                          <Component id="iterationsText" max="32767" attributes="0"/>
+                          <Component id="iterations" alignment="0" max="32767" attributes="0"/>
+                          <Component id="stopCondition" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -701,47 +704,192 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="iterationCaptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="iterationsText" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="antsCaptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="antsText" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="354" max="32767" attributes="0"/>
+                      <Component id="iterations" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="stopCondition" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="iterationCaptionLabel">
+            <Container class="javax.swing.JPanel" name="iterations">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Anzahl der Iterationen:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="antsCaptionLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Anzahl der Ameisen:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="iterationsText">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="10"/>
-                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new IntegerInputVerifier()" type="code"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Iterationen:"/>
+                  </Border>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="antsText">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="iterationCaptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="antsCaptionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="14" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="antsText" max="32767" attributes="0"/>
+                              <Component id="iterationsText" min="-2" pref="69" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="iterationCaptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="iterationsText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="antsCaptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="antsText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="iterationCaptionLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Anzahl der Iterationen:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="antsCaptionLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Anzahl der Ameisen:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="iterationsText">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="10"/>
+                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new IntegerInputVerifier()" type="code"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="antsText">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="100"/>
+                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new IntegerInputVerifier()" type="code"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="stopCondition">
               <Properties>
-                <Property name="text" type="java.lang.String" value="50"/>
-                <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new IntegerInputVerifier()" type="code"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Abbruchbedingungen:"/>
+                  </Border>
                 </Property>
               </Properties>
-            </Component>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="bestStopCheckBox" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="averageStopCheckBox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="optStopCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="averageStopText" max="32767" attributes="0"/>
+                              <Component id="bestStopText" pref="71" max="32767" attributes="0"/>
+                              <Component id="optStopLabel" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="bestStopCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bestStopText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="averageStopCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="averageStopText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="optStopCheckBox" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="optStopLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="bestStopCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;Route&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;le"/>
+                    <Property name="actionCommand" type="java.lang.String" value="   Route       &lt;"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="averageStopCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;Oslash; Route&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;le"/>
+                    <Property name="actionCommand" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;Oslash; Route     "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="bestStopText">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="5000 km"/>
+                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new IntegerInputVerifier(true)" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bestStopTextActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="averageStopText">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="5000 km"/>
+                    <Property name="inputVerifier" type="javax.swing.InputVerifier" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new IntegerInputVerifier(true)" type="code"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="optStopCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;optimale L&#xf6;sung"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="optStopLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="5000 km"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="stopPanel">
@@ -756,15 +904,33 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="247" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                      <Component id="gammaText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="411" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <Component id="gammaText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="183" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextField" name="gammaText">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jTextField1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gammaTextActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
@@ -787,7 +953,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="infoPanel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="scorePanel" alignment="0" pref="451" max="32767" attributes="0"/>
+                      <Component id="scorePanel" alignment="0" pref="534" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -834,7 +1000,7 @@
                   <Group type="102" attributes="0">
                       <Component id="commentCaptionLabel" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="commentScrollBar" pref="287" max="32767" attributes="0"/>
+                      <Component id="commentScrollBar" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -867,15 +1033,6 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="cityCountLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="52"/>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="null"/>
-                </Property>
-                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="null"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="commentCaptionLabel">
               <Properties>
@@ -947,9 +1104,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="timeLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="5 s"/>
-              </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="commentScrollBar">
               <Properties>
@@ -1001,7 +1155,6 @@
             </Container>
             <Component class="javax.swing.JLabel" name="nameLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Berlin52"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
               </Properties>
             </Component>
@@ -1020,7 +1173,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="scoreHeaderTablePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="scoreTablePanel" pref="287" max="32767" attributes="0"/>
+                      <Component id="scoreTablePanel" pref="370" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1063,22 +1216,22 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="globalBestLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="16000 km"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="globalAverageLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18000 km"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="localBestLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="20000 km"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="localAverageLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel1"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
               </SubComponents>

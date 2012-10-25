@@ -14,12 +14,25 @@ import javax.swing.JTextField;
  * @author user
  */
 public class IntegerInputVerifier extends InputVerifier{
-
+    
+    boolean km = false;
+    public IntegerInputVerifier() {
+        this.km = false;
+    }
+    
+    public IntegerInputVerifier(boolean km) {
+        this.km = km;
+    }
+    
     @Override
     public boolean verify(JComponent input) {
         JTextField field = (JTextField) input;
         try {
-            Integer.parseInt(field.getText());
+            if (km) {
+                Integer.parseInt(field.getText().replace("km", "").trim());
+            } else {
+                Integer.parseInt(field.getText().trim());
+            }
             field.setBackground(Color.white);
             return true;
         } catch(Exception e) {

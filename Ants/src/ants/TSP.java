@@ -13,6 +13,7 @@ import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 public class TSP implements Runnable {
+    
 
     
     private String name;
@@ -43,6 +44,12 @@ public class TSP implements Runnable {
     private boolean stop = false;
     private long startTime = 0;
     private long stopTime = 0;
+    private double averageStop = Double.POSITIVE_INFINITY;
+    private boolean averageStopAktiv = false;
+    private double bestStop = Double.POSITIVE_INFINITY;
+    private boolean bestStopAktiv = false;
+    private boolean optStopAktiv = false;
+    private double gamma = 0;
     
     public TSP() {
     }
@@ -224,63 +231,83 @@ public class TSP implements Runnable {
     }
     
     public void solveTSP() {
-        this.startTime = System.currentTimeMillis();
-        this.stop = false;
-        this.localBest = null;
-        this.globalBest = null;
-        this.averageGlobalRoute = 0;
-        this.averageLocalRoute = 0;
-        this.progress = 0;
-        this.initializePheromonData();
-
-        for (int i = 0; i < this.iterations; i++) {
+        try {
+            this.startTime = System.currentTimeMillis();
+            this.stop = false;
+            this.localBest = null;
+            this.globalBest = null;
+            this.averageGlobalRoute = 0;
             this.averageLocalRoute = 0;
-            for (int a = 0; a < this.ants; a++) {
-                if (stop) {
-                    return;
-                }
-                
-                this.progress++;
-                Ant ant = new Ant(this.getRandomCity());
-                do {
-                    ant.nextCity();
-                } while (!ant.isFinished());
+            this.progress = 0;
+            this.initializePheromonData();
 
+            Main.window.startPainterThread();
 
-
-                if (localBest == null || ant.getRoute().getLength() < this.localBest.getLength()) {
-                    localBest = ant.getRoute();
-
-                    if (globalBest == null || localBest.getLength() < globalBest.getLength()) {
-                        globalBest = localBest;
+            for (int i = 0; i < this.iterations; i++) {
+                this.averageLocalRoute = 0;
+                for (int a = 0; a < this.ants; a++) {
+                    if (stop || 
+                       (this.averageStopAktiv && this.averageGlobalRoute <=  averageStop) || 
+                       (this.bestStopAktiv && this.globalBest != null && this.globalBest.getLength() <= bestStop) ||
+                       (this.optStopAktiv && this.optimalRoute != null && this.optimalRoute.getLength() >= this.globalBest.getLength())) {
+                        //Main.window.stopPainterThread();
+                        //Main.window.solverFinished();
+                        return;
                     }
-                    if (!this.showPheromonLevel) {
-                        Main.window.refreshPaintPanel();
+
+                    this.progress++;
+                    City randomCity = this.getRandomCity();
+                    Ant ant = new Ant(randomCity);
+                    do {
+                        ant.nextCity();
+                    } while (!ant.isFinished());
+
+
+
+                    if (localBest == null || ant.getRoute().getLength() < this.localBest.getLength()) {
+                        localBest = ant.getRoute();
+
+                        if (globalBest == null || localBest.getLength() < globalBest.getLength()) {
+                            globalBest = localBest;
+                        }
+                        if (!this.showPheromonLevel) {
+                            //Main.window.refreshPaintPanel();
+                            //Main.window.refreshPainterThread();
+                            //Main.window.repaint();
+                        }
+
                     }
-                    
+
+                    ant.updatePheromon();
+                    this.evaporatePheromon();
+                    this.averageLocalRoute = ((a * this.getAverageLocalRoute()) + ant.getRoute().getLength()) / (a+1);
+                    this.averageGlobalRoute = ((i * this.getAverageGlobalRoute() ) + ant.getRoute().getLength()) / (i+1);
+
+                    if (this.showPheromonLevel) {
+                       //Main.window.refreshPaintPanel();
+                       //Main.window.repaint();
+                       //Main.window.refreshPainterThread();
+                       //Main.window.repaint();
+                    }
+                    this.stopTime = System.currentTimeMillis();
+                    Main.window.refreshTSPInfos();
+
                 }
-                
-                ant.updatePheromon();
-                this.evaporatePheromon();
-                this.averageLocalRoute = ((a * this.getAverageLocalRoute()) + ant.getRoute().getLength()) / (a+1);
-                this.averageGlobalRoute = ((i * this.getAverageGlobalRoute() ) + ant.getRoute().getLength()) / (i+1);
-                
+
+                this.randomisePheromonData();
                 if (this.showPheromonLevel) {
-                    Main.window.refreshPaintPanel();
+                    //Main.window.refreshPaintPanel();
+                    //Main.window.repaint();
+                    //Main.window.refreshPainterThread();
+                    //Main.window.repaint();
                 }
-                this.stopTime = System.currentTimeMillis();
-                Main.window.refreshTSPInfos();
+            }
 
-            }
-            
-            this.randomisePheromonData();
-            if (this.showPheromonLevel) {
-                Main.window.refreshPaintPanel();
-            }
+            this.stopTime = System.currentTimeMillis();
+            Main.window.solverFinished();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(Main.window, "Bei der Berechnung des TSP trat ein Schwerwiegender Fehler auf: " + e, "Fehler!", JOptionPane.ERROR_MESSAGE);
         }
-        
-        this.stopTime = System.currentTimeMillis();
-        Main.window.solverFinished();
     }
 
     public Collection<City> getCityCollection() {
@@ -730,5 +757,54 @@ public class TSP implements Runnable {
             return 0;
         }
         return (int) (progress * 100) / (this.iterations * this.ants);
+    }
+
+    /**
+     * @param averageStop the averageStop to set
+     */
+    public void setAverageStop(double averageStop) {
+        this.averageStop = averageStop;
+    }
+
+    /**
+     * @param averageStopAktiv the averageStopAktiv to set
+     */
+    public void setAverageStopAktiv(boolean averageStopAktiv) {
+        this.averageStopAktiv = averageStopAktiv;
+    }
+
+    /**
+     * @param bestStop the bestStop to set
+     */
+    public void setBestStop(double bestStop) {
+        this.bestStop = bestStop;
+    }
+
+    /**
+     * @param bestStopAktiv the bestStopAktiv to set
+     */
+    public void setBestStopAktiv(boolean bestStopAktiv) {
+        this.bestStopAktiv = bestStopAktiv;
+    }
+
+    /**
+     * @param optStopAktiv the optStopAktiv to set
+     */
+    public void setOptStopAktiv(boolean optStopAktiv) {
+        this.optStopAktiv = optStopAktiv;
+    }
+
+    /**
+     * @param gamma the gamma to set
+     */
+    public void setGamma(double gamma) {
+        this.gamma = gamma;
+    }
+
+    /**
+     * @return the gamma
+     */
+    public double getGamma() {
+        return gamma;
     }
 }
