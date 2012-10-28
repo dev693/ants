@@ -656,7 +656,7 @@
             <Component class="javax.swing.JSlider" name="pheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Pheromongewichtung (&amp;#945;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#945; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Pheromongewichtung bestimmt die Auswirkung&lt;br&gt;&#xa;der Pheromone bei der Auswahl der als n&#xe4;chstes zu besuchenden Stadt&lt;br&gt;&#xa;auf der Route einer Ameise. Ein hoher Wert f&#xfc;r &amp;#945; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r Pheromone.&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 1.2&#xa;&#xa;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Pheromongewichtung (&amp;#945;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#945; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Pheromongewichtung bestimmt die Auswirkung&lt;br&gt;&#xa;der Pheromone bei der Auswahl der als n&#xe4;chstes zu besuchenden Stadt&lt;br&gt;&#xa;auf der Route einer Ameise. Ein hoher Wert f&#xfc;r &amp;#945; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r Pheromone.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 1.2&#xa;&#xa;"/>
                 <Property name="value" type="int" value="12000"/>
               </Properties>
             </Component>

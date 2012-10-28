@@ -392,7 +392,7 @@ public class MainWindow extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         pheromonSlider.setMaximum(100000);
-        pheromonSlider.setToolTipText("<html><b>Pheromongewichtung (&#945;):<br>\nIntervall:</b> 0 &le; &#945; &le; 10<br>\n<b>Funktion:</b> Die Pheromongewichtung bestimmt die Auswirkung<br>\nder Pheromone bei der Auswahl der als nächstes zu besuchenden Stadt<br>\nauf der Route einer Ameise. Ein hoher Wert für &#945; verstärkt die Sensitivität für Pheromone.\n<b>Wertempfehlung:</b> 1.2\n\n");
+        pheromonSlider.setToolTipText("<html><b>Pheromongewichtung (&#945;):<br>\nIntervall:</b> 0 &le; &#945; &le; 10<br>\n<b>Funktion:</b> Die Pheromongewichtung bestimmt die Auswirkung<br>\nder Pheromone bei der Auswahl der als nächstes zu besuchenden Stadt<br>\nauf der Route einer Ameise. Ein hoher Wert für &#945; verstärkt die Sensitivität für Pheromone.<br>\n<b>Wertempfehlung:</b> 1.2\n\n");
         pheromonSlider.setValue(12000);
 
         localInformationSlider.setMaximum(100000);
