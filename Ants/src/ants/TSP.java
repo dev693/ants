@@ -244,6 +244,7 @@ public class TSP implements Runnable {
             Main.window.startPainterThread();
 
             for (int i = 0; i < this.iterations; i++) {
+                this.localBest = null;
                 this.averageLocalRoute = 0;
                 for (int a = 0; a < this.ants; a++) {
                     if (stop || 
