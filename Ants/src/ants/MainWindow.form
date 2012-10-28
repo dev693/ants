@@ -545,7 +545,7 @@
                 <Property name="maximum" type="int" value="10001"/>
                 <Property name="minimum" type="int" value="1"/>
                 <Property name="minorTickSpacing" type="int" value="1"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Verdunstungsfaktor (&amp;#961;): &lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#961; &amp;le; 1&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Der Verdunstungsfaktor bestimmt den prozentualen Grad&lt;br&gt;&#xa;der Verdunstung der Pheromone auf allen Strecken.&lt;br&gt;&#xa;Immer, wenn eine Ameise ihre Route abschlie&#xdf;t, werden Pheromone verdunstet.&lt;br&gt;&#xa;&lt;b&gt;Beispiel:&lt;/b&gt; Ein Wert von 0.2 bedeutet, dass 20% der Pheromone&lt;br&gt;&#xa;auf jeder Strecke Verdunsten.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 0.1"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Verdunstungsfaktor (&amp;#961;): &lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#961; &amp;le; 1&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Der Verdunstungsfaktor bestimmt den prozentualen Grad&lt;br&gt;&#xa;der Verdunstung der Pheromone auf allen Strecken.&lt;br&gt;&#xa;Immer, wenn eine Ameise ihre Route abschlie&#xdf;t, werden Pheromone verdunstet.&lt;br&gt;&#xa;&lt;b&gt;Beispiel:&lt;/b&gt; Ein Wert von 0.2 bedeutet, dass 20% der Pheromone&lt;br&gt;&#xa;auf jeder Strecke Verdunsten.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 0.025"/>
                 <Property name="value" type="int" value="250"/>
               </Properties>
             </Component>
@@ -653,14 +653,14 @@
             <Component class="javax.swing.JSlider" name="pheromonSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Pheromongewichtung (&amp;#945;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#945; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Pheromongewichtung bestimmt die Auswirkung&lt;br&gt;&#xa;der Pheromone bei der Auswahl der als n&#xe4;chstes zu besuchenden Stadt&lt;br&gt;&#xa;auf der Route einer Ameise. Ein hoher Wert f&#xfc;r &amp;#945; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r Pheromone.&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 1&#xa;&#xa;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Pheromongewichtung (&amp;#945;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#945; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Pheromongewichtung bestimmt die Auswirkung&lt;br&gt;&#xa;der Pheromone bei der Auswahl der als n&#xe4;chstes zu besuchenden Stadt&lt;br&gt;&#xa;auf der Route einer Ameise. Ein hoher Wert f&#xfc;r &amp;#945; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r Pheromone.&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 1.2&#xa;&#xa;"/>
                 <Property name="value" type="int" value="12000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSlider" name="localInformationSlider">
               <Properties>
                 <Property name="maximum" type="int" value="100000"/>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Distanzgewichtung (&amp;#946;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#946; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Distanzgewichtung bestimmt den Grad der Bevorzugung&lt;br&gt;&#xa;von St&#xe4;dten mit einer geringeren Entfernung zum aktuellen Standort&lt;br&gt;&#xa;einer Ameise gegen&#xfc;ber St&#xe4;dten mit einer gr&#xf6;&#xdf;eren Entfernung.&lt;br&gt;&#xa;Ein hoher Wert f&#xfc;r &amp;#946; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r geringen Distanzen bei der Stadtwahl.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 5"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&lt;b&gt;Distanzgewichtung (&amp;#946;):&lt;br&gt;&#xa;Intervall:&lt;/b&gt; 0 &amp;le; &amp;#946; &amp;le; 10&lt;br&gt;&#xa;&lt;b&gt;Funktion:&lt;/b&gt; Die Distanzgewichtung bestimmt den Grad der Bevorzugung&lt;br&gt;&#xa;von St&#xe4;dten mit einer geringeren Entfernung zum aktuellen Standort&lt;br&gt;&#xa;einer Ameise gegen&#xfc;ber St&#xe4;dten mit einer gr&#xf6;&#xdf;eren Entfernung.&lt;br&gt;&#xa;Ein hoher Wert f&#xfc;r &amp;#946; verst&#xe4;rkt die Sensitivit&#xe4;t f&#xfc;r geringen Distanzen bei der Stadtwahl.&lt;br&gt;&#xa;&lt;b&gt;Wertempfehlung:&lt;/b&gt; 10"/>
                 <Property name="value" type="int" value="100000"/>
               </Properties>
             </Component>
@@ -1240,8 +1240,8 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>
-                <Property name="rows" type="int" value="0"/>
                 <Property name="verticalGap" type="int" value="2"/>
+                <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="bestRouteCaptionLabel">

@@ -330,7 +330,7 @@ public class MainWindow extends javax.swing.JFrame {
         evaporationSlider.setMaximum(10001);
         evaporationSlider.setMinimum(1);
         evaporationSlider.setMinorTickSpacing(1);
-        evaporationSlider.setToolTipText("<html><b>Verdunstungsfaktor (&#961;): <br>\nIntervall:</b> 0 &le; &#961; &le; 1<br>\n<b>Funktion:</b> Der Verdunstungsfaktor bestimmt den prozentualen Grad<br>\nder Verdunstung der Pheromone auf allen Strecken.<br>\nImmer, wenn eine Ameise ihre Route abschließt, werden Pheromone verdunstet.<br>\n<b>Beispiel:</b> Ein Wert von 0.2 bedeutet, dass 20% der Pheromone<br>\nauf jeder Strecke Verdunsten.<br>\n<b>Wertempfehlung:</b> 0.1");
+        evaporationSlider.setToolTipText("<html><b>Verdunstungsfaktor (&#961;): <br>\nIntervall:</b> 0 &le; &#961; &le; 1<br>\n<b>Funktion:</b> Der Verdunstungsfaktor bestimmt den prozentualen Grad<br>\nder Verdunstung der Pheromone auf allen Strecken.<br>\nImmer, wenn eine Ameise ihre Route abschließt, werden Pheromone verdunstet.<br>\n<b>Beispiel:</b> Ein Wert von 0.2 bedeutet, dass 20% der Pheromone<br>\nauf jeder Strecke Verdunsten.<br>\n<b>Wertempfehlung:</b> 0.025");
         evaporationSlider.setValue(250);
 
         initialPheromonLabel.setText("<html>initiale Pheromone &#964;:");
@@ -384,11 +384,11 @@ public class MainWindow extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         pheromonSlider.setMaximum(100000);
-        pheromonSlider.setToolTipText("<html><b>Pheromongewichtung (&#945;):<br>\nIntervall:</b> 0 &le; &#945; &le; 10<br>\n<b>Funktion:</b> Die Pheromongewichtung bestimmt die Auswirkung<br>\nder Pheromone bei der Auswahl der als nächstes zu besuchenden Stadt<br>\nauf der Route einer Ameise. Ein hoher Wert für &#945; verstärkt die Sensitivität für Pheromone.\n<b>Wertempfehlung:</b> 1\n\n");
+        pheromonSlider.setToolTipText("<html><b>Pheromongewichtung (&#945;):<br>\nIntervall:</b> 0 &le; &#945; &le; 10<br>\n<b>Funktion:</b> Die Pheromongewichtung bestimmt die Auswirkung<br>\nder Pheromone bei der Auswahl der als nächstes zu besuchenden Stadt<br>\nauf der Route einer Ameise. Ein hoher Wert für &#945; verstärkt die Sensitivität für Pheromone.\n<b>Wertempfehlung:</b> 1.2\n\n");
         pheromonSlider.setValue(12000);
 
         localInformationSlider.setMaximum(100000);
-        localInformationSlider.setToolTipText("<html><b>Distanzgewichtung (&#946;):<br>\nIntervall:</b> 0 &le; &#946; &le; 10<br>\n<b>Funktion:</b> Die Distanzgewichtung bestimmt den Grad der Bevorzugung<br>\nvon Städten mit einer geringeren Entfernung zum aktuellen Standort<br>\neiner Ameise gegenüber Städten mit einer größeren Entfernung.<br>\nEin hoher Wert für &#946; verstärkt die Sensitivität für geringen Distanzen bei der Stadtwahl.<br>\n<b>Wertempfehlung:</b> 5");
+        localInformationSlider.setToolTipText("<html><b>Distanzgewichtung (&#946;):<br>\nIntervall:</b> 0 &le; &#946; &le; 10<br>\n<b>Funktion:</b> Die Distanzgewichtung bestimmt den Grad der Bevorzugung<br>\nvon Städten mit einer geringeren Entfernung zum aktuellen Standort<br>\neiner Ameise gegenüber Städten mit einer größeren Entfernung.<br>\nEin hoher Wert für &#946; verstärkt die Sensitivität für geringen Distanzen bei der Stadtwahl.<br>\n<b>Wertempfehlung:</b> 10");
         localInformationSlider.setValue(100000);
 
         initialPheromonSlider.setMaximum(100000);
