@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class PaintPanel extends JPanel implements Runnable {
 
     private double relation = 1;
+    private int lineOffset = 0;
     private int thickness = 8;
     private int borderOffset = 16;
     private int xOffset = 0;
@@ -71,17 +72,19 @@ public class PaintPanel extends JPanel implements Runnable {
                 drawPheromonLevels(g2D);
             }
             
+            lineOffset = 2;
             //g2D.setColor(Color.green);
-            g2D.setColor(new Color(0,255,0,transparency)); // Green
-            g2D.setStroke(this.bigline);
+            g2D.setColor(new Color(0,200,0,transparency)); // Green
+            g2D.setStroke(this.normalline);
             drawRoute(g2D, Main.data.getOptimalRoute());
 
-
+            lineOffset = -2;
             //g2D.setColor(Color.blue);
             g2D.setColor(new Color(0,0,255,transparency)); // Blue
             g2D.setStroke(this.normalline);
             drawRoute(g2D, Main.data.getLocalBest());
-
+            
+            lineOffset = 0;
             //g2D.setColor(Color.red);
             g2D.setColor(new Color(255,0,0,transparency)); // Red
             g2D.setStroke(this.normalline);
@@ -162,10 +165,10 @@ public class PaintPanel extends JPanel implements Runnable {
         if (route != null) {
             for (City city : route.getRoute()) {
                 if (lastCity != null) {
-                    g.drawLine((borderOffset) - getxOffset() + (int) (lastCity.getXPos() * getRelation()),
-                            (borderOffset) - getyOffset() + (int) (lastCity.getYPos() * getRelation()),
-                            (borderOffset) - getxOffset() + (int) (city.getXPos() * getRelation()),
-                            (borderOffset) - getyOffset() + (int) (city.getYPos() * getRelation()));
+                    g.drawLine(lineOffset + (borderOffset) - getxOffset() + (int) (lastCity.getXPos() * getRelation()),
+                            (lineOffset + borderOffset) - getyOffset() + (int) (lastCity.getYPos() * getRelation()),
+                            (lineOffset + borderOffset) - getxOffset() + (int) (city.getXPos() * getRelation()),
+                            (lineOffset + borderOffset) - getyOffset() + (int) (city.getYPos() * getRelation()));
                 }
                 lastCity = city;
             }
