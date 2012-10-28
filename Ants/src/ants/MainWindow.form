@@ -235,7 +235,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="startButton" pref="240" max="32767" attributes="0"/>
+                  <Component id="startButton" pref="300" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -303,6 +303,9 @@
             <TitledBorder title="Ansicht"/>
           </Border>
         </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[300, 166]"/>
+        </Property>
       </Properties>
 
       <Layout>
@@ -312,7 +315,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="zoomSlider" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="autoscaleSwitch" alignment="0" pref="218" max="32767" attributes="0"/>
+                      <Component id="autoscaleSwitch" alignment="0" pref="268" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="zoomLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -928,7 +931,7 @@
             </Container>
             <Component class="javax.swing.JTextField" name="gammaText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1"/>
+                <Property name="text" type="java.lang.String" value="0"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gammaTextActionPerformed"/>
@@ -948,10 +951,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="285" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" alignment="0" pref="295" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -965,13 +965,22 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <Properties>
+                <Property name="horizontalScrollBar" type="javax.swing.JScrollBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="null"/>
+                </Property>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="instructionLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;b&gt;1.  Einleitung:&lt;/b&gt;&lt;br&gt;&#xa;Diese Software dient zur Berechnung der besten&lt;br&gt;&#xa;Roundroute &#xfc;ber eine Auswahl von St&#xe4;dten.&lt;br&gt;&#xa;(Travelling Salesman Problem - TSP)&lt;br&gt;&#xa;Jede Stadt soll dabei genau einmal besucht werden.&lt;br&gt;&#xa;Die Route soll so kurz wie m&#xf6;glich sein.&lt;br&gt;&#xa;Die Software unterst&#xfc;tzt das tsp-Dateiformat.&lt;br&gt;&#xa;Es k&#xf6;nnen Dateien geladen und speichert werden.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.  Bedienung:&lt;/b&gt;&lt;br&gt;&#xa;Im folgenden werden die f&#xfc;r die Bedienung&lt;br&gt;&#xa;relevanten Funktionen beschrieben.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.1. Dateien laden:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Laden...&quot; aufgerufen werden.&lt;br&gt;&#xa;Es erscheint ein Dialog zum Ausw&#xe4;hlen einer tsp-Datei.&lt;br&gt;&#xa;Das wei&#xdf;e Anzeigefeld sollte nun die St&#xe4;dte der Datei darstellen&lt;br&gt;&#xa;Sollte sich im selben Verzeichnis eine zugeh&#xf6;rige opt.tour-Datei&lt;br&gt;&#xa;befinden, wird nun die optimale Route in gr&#xfc;n gezeichnet.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.2. TSP modifizieren:&lt;/b&gt;&lt;br&gt;&#xa;Durch Linksklick auf das wei&#xdf;e Anzeigefeld kann eine Stadt&lt;br&gt;&#xa;an der Zeigerposition hinzugef&#xfc;gt werden.&lt;br&gt;&#xa;Durch Rechtklick auf eine Stadt kann die markiert werden (rote Farbe).&lt;br&gt;&#xa;Eine markierte Stadt kann durch gehaltenen Rechtklick mit der Maus bewegt werden.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.3. TSP selbst erstellen:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber das Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Neu&quot; aufgerufen werden.&lt;br&gt;&#xa;Das wei&#xdf;e Anzeigefeld wird komplett gel&#xf6;scht. Nun kann man analog&lt;br&gt;&#xa;zu &lt;b&gt;2.2.&lt;/b&gt; eigene St&#xe4;dte auf das Feld setzen.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.4. TSP speichern:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber das Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Speichern&quot; aufgerufen werden.&lt;br&gt;&#xa;Anschlie&#xdf;end kann ein Speicherort gew&#xe4;hlt werden.&lt;br&gt;&#xa;Das aktuell angezeigt TSP wird dann dort als tsp-Datei gespeichert.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.5. Parameter einstellen:&lt;/b&gt;&lt;br&gt;&#xa;Im Tab &quot;Parameter&quot; k&#xf6;nnen die Parameter f&#xfc;r die Berechnung&lt;br&gt;&#xa;mit den Schiebereglern eingestellt werden. Die Tooltips&lt;br&gt;&#xa;erkl&#xe4;ren jeden Paramameter und geben eine Wertempfehlung an.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.6. Ablauf festelegen:&lt;/b&gt;&lt;br&gt;&#xa;Im Tab &quot;Ablauf&quot; kann der Ablauf der Berechnung gesteuert werden.&lt;br&gt;&#xa;Die Tooltips erkl&#xe4;ren die Funktion der einzelnen Elemente.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.7. Berechnung starten:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber den Button &quot;Start&quot; kann die Berechnung gestartet werden.&lt;br&gt;&#xa;Der Fortschrittsbalken und das Ergebnis-Panel zeigen&lt;br&gt;&#xa;wichtige Informationen an."/>
+                    <Property name="horizontalAlignment" type="int" value="11"/>
+                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;b&gt;1.  Einleitung:&lt;/b&gt;&lt;br&gt;&#xa;Diese Software dient zur Berechnung der besten&#xa;Roundroute &#xfc;ber eine Auswahl von St&#xe4;dten.&#xa;(Travelling Salesman Problem - TSP)&#xa;Jede Stadt soll dabei genau einmal besucht werden.&#xa;Die Route soll so kurz wie m&#xf6;glich sein.&#xa;Die Software unterst&#xfc;tzt das tsp-Dateiformat.&#xa;Es k&#xf6;nnen Dateien geladen und speichert werden.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.  Bedienung:&lt;/b&gt;&lt;br&gt;&#xa;Im folgenden werden die f&#xfc;r die Bedienung&#xa;relevanten Funktionen beschrieben.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.1. Dateien laden:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Laden...&quot; aufgerufen werden.&#xa;Es erscheint ein Dialog zum Ausw&#xe4;hlen einer tsp-Datei.&#xa;Das wei&#xdf;e Anzeigefeld sollte nun die St&#xe4;dte der Datei darstellen&#xa;Sollte sich im selben Verzeichnis eine zugeh&#xf6;rige opt.tour-Datei&#xa;befinden, wird nun die optimale Route in gr&#xfc;n gezeichnet.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.2. TSP modifizieren:&lt;/b&gt;&lt;br&gt;&#xa;Durch Linksklick auf das wei&#xdf;e Anzeigefeld kann eine Stadt&#xa;an der Zeigerposition hinzugef&#xfc;gt werden.&#xa;Durch Rechtklick auf eine Stadt kann die markiert werden (rote Farbe).&#xa;Eine markierte Stadt kann durch gehaltenen Rechtklick mit der Maus bewegt werden.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.3. TSP selbst erstellen:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber das Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Neu&quot; aufgerufen werden.&#xa;Das wei&#xdf;e Anzeigefeld wird komplett gel&#xf6;scht. Nun kann man analog&#xa;zu &lt;b&gt;2.2.&lt;/b&gt; eigene St&#xe4;dte auf das Feld setzen.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.4. TSP speichern:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber das Men&#xfc; &quot;Datei&quot; kann die Funktion &quot;Speichern&quot; aufgerufen werden.&#xa;Anschlie&#xdf;end kann ein Speicherort gew&#xe4;hlt werden.&#xa;Das aktuell angezeigt TSP wird dann dort als tsp-Datei gespeichert.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.5. Parameter einstellen:&lt;/b&gt;&lt;br&gt;&#xa;Im Tab &quot;Parameter&quot; k&#xf6;nnen die Parameter f&#xfc;r die Berechnung&#xa;mit den Schiebereglern eingestellt werden. Die Tooltips&#xa;erkl&#xe4;ren jeden Paramameter und geben eine Wertempfehlung an.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.6. Ablauf festelegen:&lt;/b&gt;&lt;br&gt;&#xa;Im Tab &quot;Ablauf&quot; kann der Ablauf der Berechnung gesteuert werden.&#xa;Die Tooltips erkl&#xe4;ren die Funktion der einzelnen Elemente.&lt;br&gt;&lt;br&gt;&#xa;&lt;b&gt;2.7. Berechnung starten:&lt;/b&gt;&lt;br&gt;&#xa;&#xdc;ber den Button &quot;Start&quot; kann die Berechnung gestartet werden.&#xa;Der Fortschrittsbalken und das Ergebnis-Panel zeigen&#xa;wichtige Informationen an."/>
                     <Property name="name" type="java.lang.String" value="instructionLabel" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[270, 1000]"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>

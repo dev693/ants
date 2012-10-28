@@ -4,13 +4,17 @@
  */
 package ants;
 
+import com.sun.imageio.plugins.png.PNGImageReader;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.text.DecimalFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
@@ -20,12 +24,12 @@ import javax.swing.plaf.ColorUIResource;
  * @author user
  */
 public class MainWindow extends javax.swing.JFrame {
-    //TODO scrollpane horizontalscroll
-    /**
+     /**
      * Creates new form NewJFrame
      */
+    
     public MainWindow() {
-        try {
+       try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -38,7 +42,10 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         initComponents();
-        this.commentTextArea.setBackground(new Color(238, 238, 238));        
+        this.commentTextArea.setBackground(new Color(238, 238, 238));
+        this.setIconImage(new ImageIcon("src/ants/ant-icon.png").getImage());
+        ToolTipManager.sharedInstance().setDismissDelay(30000);
+        
     }
     private int pressedX = 0;
     private int pressedY = 0;
@@ -183,7 +190,7 @@ public class MainWindow extends javax.swing.JFrame {
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 .addGap(5, 5, 5))
         );
         buttonPanelLayout.setVerticalGroup(
@@ -223,6 +230,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         viewPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ansicht"));
+        viewPanel.setPreferredSize(new java.awt.Dimension(300, 166));
 
         autoscaleSwitch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         autoscaleSwitch.setSelected(true);
@@ -281,7 +289,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(zoomSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(autoscaleSwitch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                    .addComponent(autoscaleSwitch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewPanelLayout.createSequentialGroup()
                         .addComponent(zoomLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -600,7 +608,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        gammaText.setText("1");
+        gammaText.setText("0");
         gammaText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gammaTextActionPerformed(evt);
@@ -636,17 +644,19 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ablauf", iterationPanel);
 
-        instructionLabel.setText("<html>\n<b>1.  Einleitung:</b><br>\nDiese Software dient zur Berechnung der besten<br>\nRoundroute über eine Auswahl von Städten.<br>\n(Travelling Salesman Problem - TSP)<br>\nJede Stadt soll dabei genau einmal besucht werden.<br>\nDie Route soll so kurz wie möglich sein.<br>\nDie Software unterstützt das tsp-Dateiformat.<br>\nEs können Dateien geladen und speichert werden.<br><br>\n<b>2.  Bedienung:</b><br>\nIm folgenden werden die für die Bedienung<br>\nrelevanten Funktionen beschrieben.<br><br>\n<b>2.1. Dateien laden:</b><br>\nÜber Menü \"Datei\" kann die Funktion \"Laden...\" aufgerufen werden.<br>\nEs erscheint ein Dialog zum Auswählen einer tsp-Datei.<br>\nDas weiße Anzeigefeld sollte nun die Städte der Datei darstellen<br>\nSollte sich im selben Verzeichnis eine zugehörige opt.tour-Datei<br>\nbefinden, wird nun die optimale Route in grün gezeichnet.<br><br>\n<b>2.2. TSP modifizieren:</b><br>\nDurch Linksklick auf das weiße Anzeigefeld kann eine Stadt<br>\nan der Zeigerposition hinzugefügt werden.<br>\nDurch Rechtklick auf eine Stadt kann die markiert werden (rote Farbe).<br>\nEine markierte Stadt kann durch gehaltenen Rechtklick mit der Maus bewegt werden.<br><br>\n<b>2.3. TSP selbst erstellen:</b><br>\nÜber das Menü \"Datei\" kann die Funktion \"Neu\" aufgerufen werden.<br>\nDas weiße Anzeigefeld wird komplett gelöscht. Nun kann man analog<br>\nzu <b>2.2.</b> eigene Städte auf das Feld setzen.<br><br>\n<b>2.4. TSP speichern:</b><br>\nÜber das Menü \"Datei\" kann die Funktion \"Speichern\" aufgerufen werden.<br>\nAnschließend kann ein Speicherort gewählt werden.<br>\nDas aktuell angezeigt TSP wird dann dort als tsp-Datei gespeichert.<br><br>\n<b>2.5. Parameter einstellen:</b><br>\nIm Tab \"Parameter\" können die Parameter für die Berechnung<br>\nmit den Schiebereglern eingestellt werden. Die Tooltips<br>\nerklären jeden Paramameter und geben eine Wertempfehlung an.<br><br>\n<b>2.6. Ablauf festelegen:</b><br>\nIm Tab \"Ablauf\" kann der Ablauf der Berechnung gesteuert werden.<br>\nDie Tooltips erklären die Funktion der einzelnen Elemente.<br><br>\n<b>2.7. Berechnung starten:</b><br>\nÜber den Button \"Start\" kann die Berechnung gestartet werden.<br>\nDer Fortschrittsbalken und das Ergebnis-Panel zeigen<br>\nwichtige Informationen an.");
+        jScrollPane1.setHorizontalScrollBar(null);
+
+        instructionLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        instructionLabel.setText("<html>\n<b>1.  Einleitung:</b><br>\nDiese Software dient zur Berechnung der besten\nRoundroute über eine Auswahl von Städten.\n(Travelling Salesman Problem - TSP)\nJede Stadt soll dabei genau einmal besucht werden.\nDie Route soll so kurz wie möglich sein.\nDie Software unterstützt das tsp-Dateiformat.\nEs können Dateien geladen und speichert werden.<br><br>\n<b>2.  Bedienung:</b><br>\nIm folgenden werden die für die Bedienung\nrelevanten Funktionen beschrieben.<br><br>\n<b>2.1. Dateien laden:</b><br>\nÜber Menü \"Datei\" kann die Funktion \"Laden...\" aufgerufen werden.\nEs erscheint ein Dialog zum Auswählen einer tsp-Datei.\nDas weiße Anzeigefeld sollte nun die Städte der Datei darstellen\nSollte sich im selben Verzeichnis eine zugehörige opt.tour-Datei\nbefinden, wird nun die optimale Route in grün gezeichnet.<br><br>\n<b>2.2. TSP modifizieren:</b><br>\nDurch Linksklick auf das weiße Anzeigefeld kann eine Stadt\nan der Zeigerposition hinzugefügt werden.\nDurch Rechtklick auf eine Stadt kann die markiert werden (rote Farbe).\nEine markierte Stadt kann durch gehaltenen Rechtklick mit der Maus bewegt werden.<br><br>\n<b>2.3. TSP selbst erstellen:</b><br>\nÜber das Menü \"Datei\" kann die Funktion \"Neu\" aufgerufen werden.\nDas weiße Anzeigefeld wird komplett gelöscht. Nun kann man analog\nzu <b>2.2.</b> eigene Städte auf das Feld setzen.<br><br>\n<b>2.4. TSP speichern:</b><br>\nÜber das Menü \"Datei\" kann die Funktion \"Speichern\" aufgerufen werden.\nAnschließend kann ein Speicherort gewählt werden.\nDas aktuell angezeigt TSP wird dann dort als tsp-Datei gespeichert.<br><br>\n<b>2.5. Parameter einstellen:</b><br>\nIm Tab \"Parameter\" können die Parameter für die Berechnung\nmit den Schiebereglern eingestellt werden. Die Tooltips\nerklären jeden Paramameter und geben eine Wertempfehlung an.<br><br>\n<b>2.6. Ablauf festelegen:</b><br>\nIm Tab \"Ablauf\" kann der Ablauf der Berechnung gesteuert werden.\nDie Tooltips erklären die Funktion der einzelnen Elemente.<br><br>\n<b>2.7. Berechnung starten:</b><br>\nÜber den Button \"Start\" kann die Berechnung gestartet werden.\nDer Fortschrittsbalken und das Ergebnis-Panel zeigen\nwichtige Informationen an.");
         instructionLabel.setName("instructionLabel"); // NOI18N
+        instructionLabel.setPreferredSize(new java.awt.Dimension(270, 1000));
         jScrollPane1.setViewportView(instructionLabel);
 
         javax.swing.GroupLayout instructionPanelLayout = new javax.swing.GroupLayout(instructionPanel);
         instructionPanel.setLayout(instructionPanelLayout);
         instructionPanelLayout.setHorizontalGroup(
             instructionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(instructionPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
         );
         instructionPanelLayout.setVerticalGroup(
             instructionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
