@@ -788,10 +788,10 @@ public class MainWindow extends javax.swing.JFrame {
         scoreTablePanel.add(localAverageLabel);
 
         globalCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        globalCaptionLabel.setText("Gesamt:");
+        globalCaptionLabel.setText("Gesamt (blau):");
 
         localCaptionLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        localCaptionLabel.setText("Iteration:");
+        localCaptionLabel.setText("Iteration (rot):");
 
         javax.swing.GroupLayout scoreHeaderTablePanelLayout = new javax.swing.GroupLayout(scoreHeaderTablePanel);
         scoreHeaderTablePanel.setLayout(scoreHeaderTablePanelLayout);

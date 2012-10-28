@@ -73,17 +73,17 @@ public class PaintPanel extends JPanel implements Runnable {
             
             //g2D.setColor(Color.green);
             g2D.setColor(new Color(0,255,0,transparency)); // Green
-            g2D.setStroke(this.normalline);
+            g2D.setStroke(this.bigline);
             drawRoute(g2D, Main.data.getOptimalRoute());
 
 
             //g2D.setColor(Color.blue);
-            g2D.setColor(new Color(0,0,255,transparency)); // Green
+            g2D.setColor(new Color(0,0,255,transparency)); // Blue
             g2D.setStroke(this.normalline);
             drawRoute(g2D, Main.data.getLocalBest());
 
             //g2D.setColor(Color.red);
-            g2D.setColor(new Color(255,0,0,transparency)); // Green
+            g2D.setColor(new Color(255,0,0,transparency)); // Red
             g2D.setStroke(this.normalline);
             drawRoute(g2D, Main.data.getGlobalBest());
 
