@@ -139,9 +139,12 @@
       <Color blue="0" green="ff" red="0" type="rgb"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[780, 620]"/>
+      <Dimension value="[790, 650]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="MainFrame" noResource="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[790, 650]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="mainMenuBar"/>
@@ -164,7 +167,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="resultPanel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="resultPanel" alignment="1" pref="485" max="32767" attributes="0"/>
                   <Component id="progressPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="paintPanel" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -184,7 +187,7 @@
                   <Component id="paintPanel" max="32767" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="viewPanel" max="32767" attributes="0"/>
+                  <Component id="viewPanel" pref="167" max="32767" attributes="0"/>
                   <Component id="resultPanel" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -192,7 +195,7 @@
                   <Component id="buttonPanel" max="32767" attributes="0"/>
                   <Component id="progressPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -286,7 +289,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="566" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="485" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -420,7 +423,7 @@
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[300, 469]"/>
+          <Dimension value="null"/>
         </Property>
       </Properties>
 
@@ -712,7 +715,7 @@
                       <Component id="iterations" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="stopCondition" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -941,10 +944,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="441" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" alignment="0" pref="319" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -993,7 +993,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="infoPanel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="scorePanel" alignment="0" pref="534" max="32767" attributes="0"/>
+                      <Component id="scorePanel" alignment="0" pref="453" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -1213,7 +1213,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="scoreHeaderTablePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="scoreTablePanel" pref="370" max="32767" attributes="0"/>
+                      <Component id="scoreTablePanel" pref="289" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1234,8 +1234,8 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>
-                <Property name="verticalGap" type="int" value="2"/>
                 <Property name="rows" type="int" value="0"/>
+                <Property name="verticalGap" type="int" value="2"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="bestRouteCaptionLabel">

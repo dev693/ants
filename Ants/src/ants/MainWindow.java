@@ -151,8 +151,9 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
         setBackground(new java.awt.Color(0, 255, 0));
-        setMinimumSize(new java.awt.Dimension(780, 620));
+        setMinimumSize(new java.awt.Dimension(790, 650));
         setName("MainFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(790, 650));
 
         progressBar.setString("0 % (0 Ameisen)");
         progressBar.setStringPainted(true);
@@ -221,7 +222,7 @@ public class MainWindow extends javax.swing.JFrame {
         paintPanel.setLayout(paintPanelLayout);
         paintPanelLayout.setHorizontalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
         paintPanelLayout.setVerticalGroup(
             paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +318,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(300, 469));
+        jTabbedPane1.setPreferredSize(null);
 
         pheromonLabel.setText("<html>Pheromon  &alpha;:");
 
@@ -625,7 +626,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(iterations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(stopCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                .addGap(14, 14, 14))
         );
 
         jTabbedPane1.addTab("Ablauf", iterationPanel);
@@ -646,9 +647,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         instructionPanelLayout.setVerticalGroup(
             instructionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(instructionPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Anleitung", instructionPanel);
@@ -806,7 +805,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, scorePanelLayout.createSequentialGroup()
                 .addComponent(scoreHeaderTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(scoreTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
+                .addComponent(scoreTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
         );
         scorePanelLayout.setVerticalGroup(
             scorePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -825,7 +824,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scorePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
+                    .addComponent(scorePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
                 .addContainerGap())
         );
         resultPanelLayout.setVerticalGroup(
@@ -949,7 +948,7 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -964,13 +963,13 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                     .addComponent(resultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(progressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -1002,36 +1001,38 @@ public class MainWindow extends javax.swing.JFrame {
 
     
     private void paintPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON1) { // LEFT CLICK
-            Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
-            paintPanel.refresh();
-        }
-        //TODO rechtsklick ins leere --> nullpointerexception
-        if (evt.getButton() == MouseEvent.BUTTON3) { // RIGHT CLICK
-            City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()),paintPanel.getThickness() / paintPanel.getRelation(),paintPanel.getThickness() / paintPanel.getRelation());
-            if (nearestCity != null) {
-                if (selectedCity != null) {
-                    selectedCity.setColor(Color.BLACK);
-
-                }
-                if (selectedCity == nearestCity) {
-                    selectedCity = null;
-                    paintPanel.refresh();
-                } else {
-                    nearestCity.setColor(Color.red);
-                    selectedCity = nearestCity;
-                    paintPanel.refresh();
-                }
-
-            } else {
-                selectedCity.setColor(Color.BLACK);
-                selectedCity = null;
+        if (solver == null) {
+            if (evt.getButton() == MouseEvent.BUTTON1) { // LEFT CLICK
+                Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
                 paintPanel.refresh();
             }
+            //TODO rechtsklick ins leere --> nullpointerexception
+            if (evt.getButton() == MouseEvent.BUTTON3) { // RIGHT CLICK
+                City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()),paintPanel.getThickness() / paintPanel.getRelation(),paintPanel.getThickness() / paintPanel.getRelation());
+                if (nearestCity != null) {
+                    if (selectedCity != null) {
+                        selectedCity.setColor(Color.BLACK);
+
+                    }
+                    if (selectedCity == nearestCity) {
+                        selectedCity = null;
+                        paintPanel.refresh();
+                    } else {
+                        nearestCity.setColor(Color.red);
+                        selectedCity = nearestCity;
+                        paintPanel.refresh();
+                    }
+
+                } else {
+                    selectedCity.setColor(Color.BLACK);
+                    selectedCity = null;
+                    paintPanel.refresh();
+                }
+            }
+
+
+            refreshTSPInfos();
         }
-       
-            
-        refreshTSPInfos();
     }//GEN-LAST:event_paintPanelMouseClicked
 
     private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
@@ -1110,11 +1111,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         if (solver == null) {
-            
-            
             try {
-                
-                
                 if (this.averageStopCheckBox.isSelected()) {
                     Main.data.setAverageStopAktiv(true);
                     Main.data.setAverageStop(Double.parseDouble(this.averageStopText.getText().replace("km", "").trim()));
