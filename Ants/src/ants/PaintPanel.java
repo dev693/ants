@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author user
  */
-public class PaintPanel extends JPanel implements Runnable {
+public class PaintPanel extends JPanel {
 
     private double relation = 1;
     private int lineOffset = 0;
@@ -262,53 +262,6 @@ public class PaintPanel extends JPanel implements Runnable {
             this.transparency = 255;
         } else {
             this.transparency = transparency;
-        }
-    }
-
-    @Override
-    public void run() {
-        while(true) {
-            try {
-                if (running) {
-                    this.paintGraph(this.getGraphics());
-                } else {
-                    return;
-                }
-            } catch (Exception e) {
-                System.out.println("Thread crashed! " + e.getMessage());
-                painter = null;
-                return;
-            }
-        }
-    }
-    
-    public void startPainterThread() {
-            if (painter == null) {
-                painter = new Thread(this);
-                painter.start();
-            }
-    }
-    
-    public void refreshPainterThread() {
-        
-            if (painter != null) {
-                synchronized (painter) {
-                    painter.notify();
-                }
-            }
-        
-    }
-    
-    public void stopPainterThread() {
-        if (painter != null) {
-            try {
-                this.running = false;
-                painter.notify();
-                painter.join(1000);
-                painter = null;
-            } catch (Exception e) {
-                System.out.println("joining PainterThread: " + e.getMessage());
-            }
         }
     }
 }

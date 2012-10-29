@@ -1004,7 +1004,6 @@ public class MainWindow extends javax.swing.JFrame {
                 Main.data.addCity(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()));
                 paintPanel.refresh();
             }
-            //TODO rechtsklick ins leere --> nullpointerexception
             if (evt.getButton() == MouseEvent.BUTTON3) { // RIGHT CLICK
                 City nearestCity = Main.data.getCityNearby(paintPanel.XPixel2Coord(evt.getX()), paintPanel.YPixel2Coord(evt.getY()),paintPanel.getThickness() / paintPanel.getRelation(),paintPanel.getThickness() / paintPanel.getRelation());
                 if (nearestCity != null) {
@@ -1234,18 +1233,6 @@ public class MainWindow extends javax.swing.JFrame {
     
     public boolean getAutoscale() {
         return autoscaleSwitch.isSelected();
-    }
-    
-    public void startPainterThread() {
-        this.paintPanel.startPainterThread();
-    }
-    
-    public void refreshPainterThread() {
-        this.paintPanel.refreshPainterThread();
-    }
-    
-    public void stopPainterThread() {
-        this.paintPanel.stopPainterThread();
     }
     /** 
      * @param args the command line arguments

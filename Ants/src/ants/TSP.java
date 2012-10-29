@@ -241,8 +241,6 @@ public class TSP implements Runnable {
             this.progress = 0;
             this.initializePheromonData();
 
-            Main.window.startPainterThread();
-
             for (int i = 0; i < this.iterations; i++) {
                 this.localBest = null;
                 this.averageLocalRoute = 0;
@@ -251,7 +249,6 @@ public class TSP implements Runnable {
                        (this.averageStopAktiv && this.averageGlobalRoute <=  averageStop) || 
                        (this.bestStopAktiv && this.globalBest != null && this.globalBest.getLength() <= bestStop) ||
                        (this.optStopAktiv && this.optimalRoute != null && this.optimalRoute.getLength() >= this.globalBest.getLength())) {
-                        Main.window.stopPainterThread();
                         Main.window.solverFinished();
                         return;
                     }
@@ -273,8 +270,6 @@ public class TSP implements Runnable {
                         }
                         if (!this.showPheromonLevel) {
                             Main.window.refreshPaintPanel();
-                            Main.window.refreshPainterThread();
-                            Main.window.repaint();
                         }
 
                     }
@@ -286,9 +281,6 @@ public class TSP implements Runnable {
 
                     if (this.showPheromonLevel) {
                        Main.window.refreshPaintPanel();
-                       Main.window.repaint();
-                       Main.window.refreshPainterThread();
-                       Main.window.repaint();
                     }
                     this.stopTime = System.currentTimeMillis();
                     Main.window.refreshTSPInfos();
@@ -298,9 +290,6 @@ public class TSP implements Runnable {
                 this.randomisePheromonData();
                 if (this.showPheromonLevel) {
                     Main.window.refreshPaintPanel();
-                    Main.window.repaint();
-                    Main.window.refreshPainterThread();
-                    Main.window.repaint();
                 }
             }
 
@@ -308,6 +297,7 @@ public class TSP implements Runnable {
             this.localBest = null;
             Main.window.refreshPaintPanel();
             Main.window.solverFinished();
+            //Main.window.stopPainterThread();
         } catch (Exception e){
             JOptionPane.showMessageDialog(Main.window, "Bei der Berechnung des TSP trat ein Schwerwiegender Fehler auf: " + e, "Fehler!", JOptionPane.ERROR_MESSAGE);
             Main.window.solverFinished();
