@@ -18,11 +18,9 @@ public class Ant {
             if (!cityPool.isEmpty()) {
                 City bestCity = null;
                 City currentCity = getRoute().getLastCity();
-                City firstCity = route.getRoute().get(0);
                 double bestProbability = 0;
                 double alpha = Main.data.getPheromon();
                 double beta = Main.data.getLocalInformation();
-                double gamma = Main.data.getGamma();
                 double sum = 0;
                 for (City city : cityPool) {
                     double tau = Main.data.getPheromonData(currentCity.getNumber(), city.getNumber());
@@ -36,9 +34,7 @@ public class Ant {
                 for (City city : cityPool) {
                     double tau = Main.data.getPheromonData(currentCity.getNumber(), city.getNumber());
                     double eta = 1 / Main.data.getDistanceData(currentCity.getNumber(), city.getNumber());
-                    double home = (firstCity != currentCity)? (1/Main.data.getDistanceData(currentCity.getNumber(), firstCity.getNumber())):1;
-                    double factor = (firstCity != currentCity)? (route.getRoute().size() / (Main.data.getCityListLength())):1;
-                    double probability = ((Math.pow(tau, alpha) * Math.pow(eta, beta) * Math.pow(factor * home, gamma)) / sum);
+                    double probability = ((Math.pow(tau, alpha) * Math.pow(eta, beta)) / sum);
                     if (probability >= bestProbability) {
                         bestProbability = probability;
                         bestCity = city;

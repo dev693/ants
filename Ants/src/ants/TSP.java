@@ -126,7 +126,7 @@ public class TSP implements Runnable {
     }
 
     public void saveToFile(File file) {
-        if (this.comment == null) {
+        if (this.comment == null || this.comment.equals("")) {
             this.comment = JOptionPane.showInputDialog(Main.window, "Bitte geben Sie einen Kommentar ein: ", "Kommentar", JOptionPane.QUESTION_MESSAGE);
         }
         
@@ -251,8 +251,8 @@ public class TSP implements Runnable {
                        (this.averageStopAktiv && this.averageGlobalRoute <=  averageStop) || 
                        (this.bestStopAktiv && this.globalBest != null && this.globalBest.getLength() <= bestStop) ||
                        (this.optStopAktiv && this.optimalRoute != null && this.optimalRoute.getLength() >= this.globalBest.getLength())) {
-                        //Main.window.stopPainterThread();
-                        //Main.window.solverFinished();
+                        Main.window.stopPainterThread();
+                        Main.window.solverFinished();
                         return;
                     }
 
@@ -272,9 +272,9 @@ public class TSP implements Runnable {
                             globalBest = localBest;
                         }
                         if (!this.showPheromonLevel) {
-                            //Main.window.refreshPaintPanel();
-                            //Main.window.refreshPainterThread();
-                            //Main.window.repaint();
+                            Main.window.refreshPaintPanel();
+                            Main.window.refreshPainterThread();
+                            Main.window.repaint();
                         }
 
                     }
@@ -285,10 +285,10 @@ public class TSP implements Runnable {
                     this.averageGlobalRoute = ((i * this.getAverageGlobalRoute() ) + ant.getRoute().getLength()) / (i+1);
 
                     if (this.showPheromonLevel) {
-                       //Main.window.refreshPaintPanel();
-                       //Main.window.repaint();
-                       //Main.window.refreshPainterThread();
-                       //Main.window.repaint();
+                       Main.window.refreshPaintPanel();
+                       Main.window.repaint();
+                       Main.window.refreshPainterThread();
+                       Main.window.repaint();
                     }
                     this.stopTime = System.currentTimeMillis();
                     Main.window.refreshTSPInfos();
@@ -297,10 +297,10 @@ public class TSP implements Runnable {
 
                 this.randomisePheromonData();
                 if (this.showPheromonLevel) {
-                    //Main.window.refreshPaintPanel();
-                    //Main.window.repaint();
-                    //Main.window.refreshPainterThread();
-                    //Main.window.repaint();
+                    Main.window.refreshPaintPanel();
+                    Main.window.repaint();
+                    Main.window.refreshPainterThread();
+                    Main.window.repaint();
                 }
             }
 

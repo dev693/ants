@@ -107,7 +107,6 @@ public class MainWindow extends javax.swing.JFrame {
         averageStopText = new javax.swing.JTextField();
         optStopCheckBox = new javax.swing.JCheckBox();
         optStopLabel = new javax.swing.JLabel();
-        gammaText = new javax.swing.JTextField();
         instructionPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         instructionLabel = new javax.swing.JLabel();
@@ -608,13 +607,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        gammaText.setText("0");
-        gammaText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gammaTextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout iterationPanelLayout = new javax.swing.GroupLayout(iterationPanel);
         iterationPanel.setLayout(iterationPanelLayout);
         iterationPanelLayout.setHorizontalGroup(
@@ -625,10 +617,6 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(iterations, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stopCondition, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(iterationPanelLayout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(gammaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         iterationPanelLayout.setVerticalGroup(
             iterationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,9 +625,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(iterations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(stopCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gammaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(197, 197, 197))
         );
 
         jTabbedPane1.addTab("Ablauf", iterationPanel);
@@ -1155,7 +1141,6 @@ public class MainWindow extends javax.swing.JFrame {
                 Main.data.setPheromonUpdate(Double.parseDouble(pheromonUpdateText.getText()));
                 Main.data.setIterations(Integer.parseInt(iterationsText.getText()));
                 Main.data.setAnts(Integer.parseInt(antsText.getText()));
-                Main.data.setGamma(Double.parseDouble(gammaText.getText()));
                 solver = new Thread(Main.data);
                 solver.start();
                 this.startButton.setText("Stop");
@@ -1182,7 +1167,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("TSP-Speicherm");
+        chooser.setDialogTitle("TSP-Speichern");
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         if (Main.data.getName() != null) {
             chooser.setSelectedFile(new File(System.getProperty("user.dir") + "/" + Main.data.getName() + ".tsp"));
@@ -1190,8 +1175,8 @@ public class MainWindow extends javax.swing.JFrame {
             chooser.setSelectedFile(new File(System.getProperty("user.dir") + "/Neu.tsp"));    
         }     
         chooser.setFileFilter(new FileNameExtensionFilter("TSP-Datei", "tsp"));
-        chooser.showSaveDialog(this);
-        if (chooser.getSelectedFile() != null) {
+        
+        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile() != null) {
             Main.data.saveToFile(chooser.getSelectedFile());
             refreshTSPInfos();
         }
@@ -1222,10 +1207,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void bestStopTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bestStopTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bestStopTextActionPerformed
-
-    private void gammaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gammaTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gammaTextActionPerformed
 
     public void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
@@ -1327,7 +1308,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField evaporationText;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JTextField gammaText;
     private javax.swing.JLabel globalAverageLabel;
     private javax.swing.JLabel globalBestLabel;
     private javax.swing.JLabel globalCaptionLabel;
