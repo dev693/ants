@@ -4,10 +4,8 @@
  */
 package ants;
 
-import com.sun.imageio.plugins.png.PNGImageReader;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.text.DecimalFormat;
