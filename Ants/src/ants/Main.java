@@ -44,6 +44,16 @@ public class Main{
         localRoute.addCity(Main.data.getCity(6));
         
         Main.data.setLocalBest(localRoute);
+        
+        localRoute = new Route();
+        localRoute.addCity(Main.data.getCity(3));
+        localRoute.addCity(Main.data.getCity(2));
+        localRoute.addCity(Main.data.getCity(1));
+        localRoute.addCity(Main.data.getCity(4));
+        localRoute.addCity(Main.data.getCity(6));
+        localRoute.addCity(Main.data.getCity(5));
+        localRoute.addCity(Main.data.getCity(3));
+        Main.data.setOptimalRoute(localRoute);
         /*
         Main.data = TSP.loadFromFile("test/ants/berlin52.tsp");
         Route optRoute = Main.data.getOptTour("test/ants/berlin52.opt.tour");
