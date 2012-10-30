@@ -30,20 +30,7 @@ public class PaintPanel extends JPanel {
     private boolean showPheromonLevel = false;
     private int transparency = 100;
     private BufferedImage buffer = null;
-    private BufferedImage backBuffer = null;
-    private BasicStroke dashedline = new BasicStroke(
-                                    2.0f,                      // Width
-                                    BasicStroke.CAP_SQUARE,    // End cap
-                                    BasicStroke.JOIN_MITER,    // Join style
-                                    10.0f,                     // Miter limit
-                                    new float[] {4.0f,8.0f}, // Dash pattern
-                                    0.0f);                     // Dash phase
     private BasicStroke normalline = new BasicStroke(2.0f);          
-    private BasicStroke smallline = new BasicStroke(1.0f);    
-    private BasicStroke bigline = new BasicStroke(5.0f);
-    private Thread painter = null;
-    private Object lock = new Object();
-    private boolean running = false;
     private boolean showLocalBest = true;
     private boolean showGlobalBest = true;
     private boolean showOptTour = true;

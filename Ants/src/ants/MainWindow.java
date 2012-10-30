@@ -1006,24 +1006,26 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadMenuItemActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("TSP Laden");
-        chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-        chooser.setFileFilter(new FileNameExtensionFilter("TSP-Datei", "tsp"));
-        chooser.showOpenDialog(this);
-        if (chooser.getSelectedFile() != null) {
-            TSP.loadFromFile(chooser.getSelectedFile().getPath());
-            refreshTSPInfos();
-            if (Main.data.getOptimalRoute() == null) {
-                this.optStopCheckBox.setEnabled(false);
-                this.optStopLabel.setEnabled(false);
-                this.optStopLabel.setText("");
-            } else {
-                this.optStopCheckBox.setEnabled(true);
-                this.optStopLabel.setEnabled(true);
-                this.optStopLabel.setText(formatter.format(Main.data.getOptimalRoute().getLength()) + " km");
+        if (solver == null) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("TSP Laden");
+            chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+            chooser.setFileFilter(new FileNameExtensionFilter("TSP-Datei", "tsp"));
+            chooser.showOpenDialog(this);
+            if (chooser.getSelectedFile() != null) {
+                TSP.loadFromFile(chooser.getSelectedFile().getPath());
+                refreshTSPInfos();
+                if (Main.data.getOptimalRoute() == null) {
+                    this.optStopCheckBox.setEnabled(false);
+                    this.optStopLabel.setEnabled(false);
+                    this.optStopLabel.setText("");
+                } else {
+                    this.optStopCheckBox.setEnabled(true);
+                    this.optStopLabel.setEnabled(true);
+                    this.optStopLabel.setText(formatter.format(Main.data.getOptimalRoute().getLength()) + " km");
+                }
+
             }
-            
         }
     }//GEN-LAST:event_loadMenuItemActionPerformed
 
@@ -1063,14 +1065,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_paintPanelMouseClicked
 
     private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
-
-        autoscaleSwitch.setSelected(false);
-        paintPanel.setAutoscale(false);
-        zoomSlider.setValue(100);
-        paintPanel.resetOffset();
-        Main.data = new TSP();
-        paintPanel.refresh();
-        refreshTSPInfos();
+        if (solver == null) {
+            autoscaleSwitch.setSelected(false);
+            paintPanel.setAutoscale(false);
+            zoomSlider.setValue(100);
+            paintPanel.resetOffset();
+            Main.data = new TSP();
+            paintPanel.refresh();
+            refreshTSPInfos();
+        }
     }//GEN-LAST:event_newMenuItemActionPerformed
 
     private void paintPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paintPanelMousePressed
@@ -1234,14 +1237,17 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void showOptTourMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOptTourMenuItemActionPerformed
         paintPanel.setShowOptTour(showOptTourMenuItem.isSelected());
+        paintPanel.refresh();
     }//GEN-LAST:event_showOptTourMenuItemActionPerformed
 
     private void showLocalBestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLocalBestMenuItemActionPerformed
         paintPanel.setShowLocalBest(showLocalBestMenuItem.isSelected());
+        paintPanel.refresh();
     }//GEN-LAST:event_showLocalBestMenuItemActionPerformed
 
     private void showGlobalBestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGlobalBestMenuItemActionPerformed
         paintPanel.setShowGlobalBest(showGlobalBestMenuItem.isSelected());
+        paintPanel.refresh();
     }//GEN-LAST:event_showGlobalBestMenuItemActionPerformed
 
     public void refreshTSPInfos() {
