@@ -44,7 +44,9 @@ public class PaintPanel extends JPanel {
     private Thread painter = null;
     private Object lock = new Object();
     private boolean running = false;
-    
+    private boolean showLocalBest = true;
+    private boolean showGlobalBest = true;
+    private boolean showOptTour = true;
     
     @Override
     protected void paintComponent(Graphics g) {
@@ -72,23 +74,29 @@ public class PaintPanel extends JPanel {
                 drawPheromonLevels(g2D);
             }
             
-            lineOffset = 2;
-            //g2D.setColor(Color.green);
-            g2D.setColor(new Color(0,200,0,transparency)); // Green
-            g2D.setStroke(this.normalline);
-            drawRoute(g2D, Main.data.getOptimalRoute());
-
-            lineOffset = -2;
-            //g2D.setColor(Color.blue);
-            g2D.setColor(new Color(0,0,255,transparency)); // Blue
-            g2D.setStroke(this.normalline);
-            drawRoute(g2D, Main.data.getLocalBest());
+            if (showOptTour) {
+                lineOffset = 2;
+                //g2D.setColor(Color.green);
+                g2D.setColor(new Color(0,200,0,transparency)); // Green
+                g2D.setStroke(this.normalline);
+                drawRoute(g2D, Main.data.getOptimalRoute());
+            }
             
-            lineOffset = 0;
-            //g2D.setColor(Color.red);
-            g2D.setColor(new Color(255,0,0,transparency)); // Red
-            g2D.setStroke(this.normalline);
-            drawRoute(g2D, Main.data.getGlobalBest());
+            if (showLocalBest) {
+                lineOffset = -2;
+                //g2D.setColor(Color.blue);
+                g2D.setColor(new Color(0,0,255,transparency)); // Blue
+                g2D.setStroke(this.normalline);
+                drawRoute(g2D, Main.data.getLocalBest());
+            }
+            
+            if (showGlobalBest) {
+                lineOffset = 0;
+                //g2D.setColor(Color.red);
+                g2D.setColor(new Color(255,0,0,transparency)); // Red
+                g2D.setStroke(this.normalline);
+                drawRoute(g2D, Main.data.getGlobalBest());
+            }
 
 
             //Städte Anzeigen
@@ -97,7 +105,6 @@ public class PaintPanel extends JPanel {
             }
             
             g.drawImage(buffer, 0, 0, null);
-            //buffer = backBuffer;
         }
     }
 
@@ -258,5 +265,26 @@ public class PaintPanel extends JPanel {
         } else {
             this.transparency = transparency;
         }
+    }
+
+    /**
+     * @param showLocalBest the showLocalBest to set
+     */
+    public void setShowLocalBest(boolean showLocalBest) {
+        this.showLocalBest = showLocalBest;
+    }
+
+    /**
+     * @param showGlobalBest the showGlobalBest to set
+     */
+    public void setShowGlobalBest(boolean showGlobalBest) {
+        this.showGlobalBest = showGlobalBest;
+    }
+
+    /**
+     * @param showOptTour the showOptTour to set
+     */
+    public void setShowOptTour(boolean showOptTour) {
+        this.showOptTour = showOptTour;
     }
 }

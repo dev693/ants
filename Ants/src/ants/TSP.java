@@ -249,6 +249,8 @@ public class TSP implements Runnable {
                        (this.averageStopAktiv && this.averageGlobalRoute <=  averageStop) || 
                        (this.bestStopAktiv && this.globalBest != null && this.globalBest.getLength() <= bestStop) ||
                        (this.optStopAktiv && this.optimalRoute != null && this.optimalRoute.getLength() >= this.globalBest.getLength())) {
+                        this.localBest = null;
+                        Main.window.refreshPaintPanel();
                         Main.window.solverFinished();
                         return;
                     }
@@ -298,6 +300,8 @@ public class TSP implements Runnable {
             Main.window.refreshPaintPanel();
             Main.window.solverFinished();
         } catch (Exception e){
+            this.localBest = null;
+            Main.window.refreshPaintPanel();
             JOptionPane.showMessageDialog(Main.window, "Bei der Berechnung des TSP trat ein Schwerwiegender Fehler auf: " + e, "Fehler!", JOptionPane.ERROR_MESSAGE);
             Main.window.solverFinished();
         }

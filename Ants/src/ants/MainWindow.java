@@ -145,6 +145,10 @@ public class MainWindow extends javax.swing.JFrame {
         transparence40MenuItem = new javax.swing.JRadioButtonMenuItem();
         transparence20MenuItem = new javax.swing.JRadioButtonMenuItem();
         transparence00MenuItem = new javax.swing.JRadioButtonMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        showOptTourMenuItem = new javax.swing.JCheckBoxMenuItem();
+        showLocalBestMenuItem = new javax.swing.JCheckBoxMenuItem();
+        showGlobalBestMenuItem = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ant Colony Optimization");
@@ -315,8 +319,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(thicknessSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        jTabbedPane1.setPreferredSize(null);
 
         pheromonLabel.setText("<html>Pheromon  &alpha;:");
 
@@ -935,6 +937,34 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         showMenu.add(transparence00MenuItem);
+        showMenu.add(jSeparator2);
+
+        showOptTourMenuItem.setSelected(true);
+        showOptTourMenuItem.setText("optimale Route Anzeigen");
+        showOptTourMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showOptTourMenuItemActionPerformed(evt);
+            }
+        });
+        showMenu.add(showOptTourMenuItem);
+
+        showLocalBestMenuItem.setSelected(true);
+        showLocalBestMenuItem.setText("lokale beste Route Anzeigen");
+        showLocalBestMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showLocalBestMenuItemActionPerformed(evt);
+            }
+        });
+        showMenu.add(showLocalBestMenuItem);
+
+        showGlobalBestMenuItem.setSelected(true);
+        showGlobalBestMenuItem.setText("global beste Route Anzeigen");
+        showGlobalBestMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showGlobalBestMenuItemActionPerformed(evt);
+            }
+        });
+        showMenu.add(showGlobalBestMenuItem);
 
         mainMenuBar.add(showMenu);
 
@@ -958,7 +988,7 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1)
                     .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
@@ -1202,6 +1232,18 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_bestStopTextActionPerformed
 
+    private void showOptTourMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOptTourMenuItemActionPerformed
+        paintPanel.setShowOptTour(showOptTourMenuItem.isSelected());
+    }//GEN-LAST:event_showOptTourMenuItemActionPerformed
+
+    private void showLocalBestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLocalBestMenuItemActionPerformed
+        paintPanel.setShowLocalBest(showLocalBestMenuItem.isSelected());
+    }//GEN-LAST:event_showLocalBestMenuItemActionPerformed
+
+    private void showGlobalBestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGlobalBestMenuItemActionPerformed
+        paintPanel.setShowGlobalBest(showGlobalBestMenuItem.isSelected());
+    }//GEN-LAST:event_showGlobalBestMenuItemActionPerformed
+
     public void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
         this.commentTextArea.setText(Main.data.getComment());
@@ -1305,6 +1347,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField iterationsText;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem loadMenuItem;
     private javax.swing.JLabel localAverageLabel;
@@ -1334,7 +1377,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel scoreHeaderTablePanel;
     private javax.swing.JPanel scorePanel;
     private javax.swing.JPanel scoreTablePanel;
+    private javax.swing.JCheckBoxMenuItem showGlobalBestMenuItem;
+    private javax.swing.JCheckBoxMenuItem showLocalBestMenuItem;
     private javax.swing.JMenu showMenu;
+    private javax.swing.JCheckBoxMenuItem showOptTourMenuItem;
     private javax.swing.JCheckBoxMenuItem showPheromonLevelMenuItem;
     private javax.swing.JButton startButton;
     private javax.swing.JPanel stopCondition;
