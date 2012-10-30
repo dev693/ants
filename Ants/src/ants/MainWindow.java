@@ -863,6 +863,11 @@ public class MainWindow extends javax.swing.JFrame {
         fileMenu.add(loadMenuItem);
 
         exitMenuItem.setText("Beenden");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(exitMenuItem);
 
         mainMenuBar.add(fileMenu);
@@ -1249,6 +1254,10 @@ public class MainWindow extends javax.swing.JFrame {
         paintPanel.setShowGlobalBest(showGlobalBestMenuItem.isSelected());
         paintPanel.refresh();
     }//GEN-LAST:event_showGlobalBestMenuItemActionPerformed
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     public void refreshTSPInfos() {
         this.nameLabel.setText(Main.data.getName());
