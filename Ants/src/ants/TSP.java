@@ -297,7 +297,6 @@ public class TSP implements Runnable {
             this.localBest = null;
             Main.window.refreshPaintPanel();
             Main.window.solverFinished();
-            //Main.window.stopPainterThread();
         } catch (Exception e){
             JOptionPane.showMessageDialog(Main.window, "Bei der Berechnung des TSP trat ein Schwerwiegender Fehler auf: " + e, "Fehler!", JOptionPane.ERROR_MESSAGE);
             Main.window.solverFinished();

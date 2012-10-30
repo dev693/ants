@@ -204,15 +204,10 @@ public class PaintPanel extends JPanel {
     }
 
     public void shiftX(int dx) {
-        //this.xBaseOffset = ((xOffset - borderOffset + this.getWidth() / 2) * 100) / zoom - this.getWidth() / 2 + borderOffset;
-        //System.out.println("dx / relation: " + (dx / relation));
         this.xBaseOffset += (int) (dx / relation);
     }
     
     public void shiftY(int dy) {
-        //System.out.println(  (yOffset - borderOffset + this.getHeight() /(double) 2) / ( zoom /(double) 100 ) - this.getHeight() / 2 + borderOffset);
-        //this. yBaseOffset = ((yOffset - borderOffset + this.getHeight() / 2) * 100) / zoom - this.getHeight() / 2 + borderOffset;
-        //System.out.println("dy / relation: " + (dy / relation));
         this.yBaseOffset += (int) (dy / relation);
     }
 
