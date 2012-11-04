@@ -1,0 +1,118 @@
+% template for producing IEEE-format articles using LaTeX2e.
+% written by Matthew Ward, CS Department, Worcester Polytechnic Institute.
+% adapted to LaTeX2e and latex8.sty by Felix Gartner, TUD.
+%
+% This file can be used for producing german articles.
+%
+\documentclass[10pt,twocolumn]{article}
+\usepackage{latex8}% use IEEE document style
+\usepackage{times}% use Postscript fonts
+\usepackage{epsfig}% enable EPS figures
+\usepackage{german}% German language
+\pagestyle{empty}% omit page numbers (in final version)
+%
+\begin{document}
+
+
+\title{Mein toller Artikel im IEEE-Format}
+
+%for single author 
+\author{E. I. N. Author \\
+  Mein Fachbereich \\
+  Meine Uni \\
+  Meine Stadt}
+ 
+%for two authors (just remove % characters)
+%\author{\begin{tabular}[t]{c@{\extracolsep{8em}}c}
+%  I. M. Author	& M. Y. Coauthor \\
+% \\
+%  My Department & Coauthor Department \\
+%  My Institute & Coauthor Institute \\
+%  City, ST~~zipcode	& City, ST~~zipcode
+%\end{tabular}}
+
+\maketitle
+
+\thispagestyle{empty}% omit page number on first page (in final version)
+
+
+
+\begin{abstract}
+  
+  Dies ist die Kurzzusammenfassung (der ``abstract''). Es ist
+  ein Absatz von etwa 100 bis 150 W"ortern und wird normalerweise
+  kursiv gesetzt. Er enth"alt den Inhalt der Arbeit in Kurzform.
+
+\end{abstract}
+
+% latex8.sty uses \Section, \SubSection instead of \section, \subsection
+\Section{Einleitung}
+
+Dies ist die Einleitung. Hier wird ein wenig dar"uber erz"ahlt, was man
+beschreiben will und warum das wichtig und interessant ist.
+
+\SubSection{Verwandte Arbeiten}
+
+Dies ist ein Unterabschnitt. Man kann generell auch Eintr"age im
+Literaturverzeichnis referenzieren. Zum Beispiel die Arbeit
+\cite{key:foo} oder \cite{foo:baz}. \LaTeX\ sorgt daf"ur, da"s die
+Nummern richtig im Text erscheinen.  Die Nummern basieren auf der
+Reihenfolge, in der die Eintr"age im Literaturverzeichnis stehen.
+
+\LaTeX\ setzt eckicke Klammern um die Referenzzahlen. Falls 
+statt einer Referenzzahl pl"otzlich Fragezeichen (``??'') im Text
+erscheinen, mu"s man \LaTeX\ zweimal "uber den Text r"uberlaufen
+lassen.
+
+\Section{Hauptteil}
+\label{sec:main}
+
+Dies ist ein normaler Abschnitt, der den Hauptteil des Textes
+enthalten kann. Man kann auch Abbildungen benutzen, die als
+EPS-Dateien vorliegen m"ussen. Man kann Abbildungen und Abschnitte
+auch referenzieren, zum Beispiel die Abbildung \ref{fig:sample} in
+Abschnitt \ref{sec:main}.
+
+\begin{figure}
+  \begin{center}
+    \leavevmode
+    % this is where the EPS file is included:
+    \epsfig{file=sample.eps,width=6cm}
+    \caption{Eine Beispielabbildung.}
+    \label{fig:sample}
+  \end{center}
+\end{figure}
+
+
+\Section{Zusammenfassung}
+
+Dieser Rahmen wird vermutlich ausreichend sein, um die ersten
+Klippen von \LaTeX\ zu umschiffen. Bei der weiteren Arbeit w"unschen
+wir viel Gl"uck!
+
+
+%this is how to do an unnumbered subsection
+\subsection*{Danksagungen}
+
+So kann man einen unnumerierten Absatz erzeugen. In ihm kann man
+zum Beispiel Danksagungen unterbringen.
+
+
+
+\bibliographystyle{latex8}
+\begin{thebibliography}{9}
+
+\bibitem{key:foo}
+I. M. Author, 
+``Some Related Article I Wrote,''
+{\em Some Fine Journal}, Vol. 17, Seiten 1-100, 1987.
+
+\bibitem{foo:baz}
+A. N. Expert, 
+{\em A Book He Wrote,}
+His Publisher, 1989.
+
+\end{thebibliography}
+
+\end{document}
+
